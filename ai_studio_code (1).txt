@@ -1,0 +1,139 @@
+# 🛸 IPTV_PROGRAM_A_SPEC.md (A程序系统设计与技术规格说明书)
+
+# 全网电视直播源寻源、清洗与动态解析服务器（Program A）技术规格书
+
+本文档用于指导开发团队（或大语言模型）理解和实现 **IPTV 项目 A 程序（代号：“数据发动机”）**。A 程序是整个系统的核心数据和解析中枢，与客户端（B 程序）完全解耦。
+
+---
+
+## 1. 系统定位与“双星解耦”架构
+
+本项目采用前后端彻底解耦的设计模式，将系统划分为两个独立运行、独立维护的程序：
+
+*   **B 程序（客户端：“电视接收机”）**：基于 Electron + HTML5 + Hls.js 构建的极简无状态播放客户端。它不包含任何硬编码的节目源，不进行复杂的网络爬取和全量测速。它启动 30 秒后拉取 A 程序生成的 JSON 数据，通过 5 秒一次的后台“水滴滴灌”测速，将延迟记录在 `localStorage` 中。
+*   **A 程序（服务器：“数据发动机”）**：部署在云端服务器（或本地开发机上作为独立后台运行）的数据生产与实时解析服务。它负责全网搜集、清洗、去重和测试数千个电视直播源，并为 B 端提供高内聚的结构化 JSON 数据，同时针对防盗链直播平台（如 B站、抖音、快手等）提供 302 动态跳转解析。
+
+### 核心设计原则：0 带宽成本（302 重定向机制）
+A 程序在解析 B站、抖音、快手、虎牙等平台的临时防盗链流时，**绝不通过自身服务器中转音视频流量** [1.2.1]。A 程序通过抓包算法获取到实时、带有时效性 Token 的 `.m3u8` 地址后，通过 **`HTTP 302 Found` 重定向响应** 将播放地址扔给客户端 [1.2.1]。**视频流量直接从平台极速 CDN 流向用户设备，A 程序只消耗微弱的文本解析请求带宽，运营成本几乎为 0**！
+
+---
+
+## 2. A 程序核心功能组件
+
+A 程序由两大核心功能组件构成：
+
+```text
+┌────────────────────────────────────────────────────────────────────────┐
+│                        A 程序（“数据发动机”）                          │
+├────────────────────────────────────┬───────────────────────────────────┤
+│    组件 1：全网生血与自动化清洗器  │    组件 2：动态流媒体解析API服务  │
+│  （定时抓取/测速/去重并发布 JSON）  │  （实时解析抖音、B站等防盗链Token）│
+└────────────────────────────────────┴───────────────────────────────────┘
+3. 组件 1 规格说明：全网生血、自动过滤与多线测速
+该组件负责定时自动运行，从全网抓取原始数据，经过“黑名单硬过滤”、“智能分类”、“高并发测速”后，将结果整理成 B 端所需的精品 channels.json [1.2.1]。
+3.1 目标抓取源（15 大黄金源）
+脚本需支持并发（带有网络异常容错）下载以下 15 个公开维护的 IPTV 直播源列表，设置 5 秒超时，失败则自动跳过该源：
+ChinaIPTV: https://raw.githubusercontent.com/hujingguang/ChinaIPTV/main/cnTV_AutoUpdate.m3u
+Ftindy 重庆: https://raw.githubusercontent.com/Ftindy/IPTV-URL/main/cqyx.m3u
+Ftindy 浙江温州: https://raw.githubusercontent.com/Ftindy/IPTV-URL/main/yqgd.m3u
+Ftindy 湖北: https://raw.githubusercontent.com/Ftindy/IPTV-URL/main/hbgd.m3u
+Ftindy 民生: https://raw.githubusercontent.com/Ftindy/IPTV-URL/main/msp.m3u
+FHWWC 地方台: https://raw.githubusercontent.com/FHWWC/FCLiveTool/main/直播源/国内地方台.m3u
+Guovin 精选: https://raw.githubusercontent.com/Guovin/TV/gd/output/result.m3u
+fanmingming 稳定IPv6: https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u
+CCSH 顶级聚合: https://raw.githubusercontent.com/CCSH/IPTV/main/live.m3u
+jia070310 组播转换: https://raw.githubusercontent.com/jia070310/4K-IPTV-M3U/main/iptv.m3u
+best-fan 每日有效: https://raw.githubusercontent.com/best-fan/iptv-sources/main/cn_all.m3u8
+vbskycn 兼容: https://raw.githubusercontent.com/vbskycn/iptv/master/iptv.m3u
+billy21 台湾: https://raw.githubusercontent.com/billy21/Tvlist-awesome-m3u-m3u8/master/m3u/Taiwan.m3u
+billy21 香港: https://raw.githubusercontent.com/billy21/Tvlist-awesome-m3u-m3u8/master/m3u/HongKong.m3u
+followheart 高清补全: https://raw.githubusercontent.com/followheart/IPTV2/main/IPTV.m3u
+3.2 强力过滤（硬性黑名单）
+许多直播源是第三方 App（如 CatVOD）或提供商（如 epg.pw）为了引流搭建的。如果用户没有使用对应的 App，服务器会返回 200 OK 且包含数据，但视频画面其实是静态循环广告海报，或者循环播放“信号中断请扫码”的视频 [1.2.2]。
+黑名单拦截规则：凡是播放 URL（或发生重定向后的 URL）中包含以下任意敏感关键字（忽略大小写），必须直接拦截并剔除：
+catvod, catod, fongmi, ok.bkpcp.top, epg.pw
+重命名清洗：去除频道名中多余的标签（如 [CN], [Backup], IPV6, HD, FHD, 4K）及多余空格。
+3.3 智能分类规则
+脚本需对清洗后的频道名称进行自动关键字匹配，赋予标准的 group-title 分类：
+「央视频道」：名称含 "CCTV", "cctv", "中央", "CNTV" 的。
+「卫视频道」：名称含 "卫视" 且不属于央视的。
+「港澳频道」：名称含 "翡翠台", "TVB", "凤凰", "莲花卫视", "澳门", "明珠台", "美亚" 的。
+「体育竞技」：名称含 "体育", "足球", "英超", "高尔夫", "风云足球", "五星体育", "劲爆" 的。
+「戏曲文艺」：名称含 "戏曲", "剧院", "豫剧", "秦腔", "梨园", "京剧" 的。
+「纪实科教」：名称含 "纪录", "纪实", "地理", "科教", "探索", "求索" 的。
+「各省地方台」：根据名字中的省份名称，智能归类至“广东地方台”、“湖南地方台”等。不匹配的，统一放入“其它地方台”分组。
+3.4 50 线程并发测速与多线路保存
+使用 ThreadPoolExecutor 开启 50 个并发线程。每个请求 Timeout 限制为 3 秒。
+多线路去重机制：对完全同名的频道（如“湖南卫视”），按连接延迟从低到高排序。
+每个频道最多保留 3 个测速响应成功的可用链接。合并后，若一个同名频道的 3 条线全部失效，该频道从精品数据库中剔除。
+4. 组件 2 规格说明：动态直播流解析服务器（B站、抖音、快手等）
+由于 B站、抖音、快手、虎牙等平台的 HLS 直播源带有严格的时间戳防盗链 Token，链接有效期只有几小时，必须进行动态实时解析 [1.2.2]。
+4.1 动态解析工作原理（302 Redirect）
+B 客户端请求：http://[Your-Server-IP]/api/bilibili/605 [1.2.1, 1.2.3]
+A 程序（本服务器）拦截该请求，利用后台 Node.js/Python 脚本实时模拟浏览器发起对 Bilibili Room 605 官方 API 的请求，提取出当前最新的、带的时效性 Token 的 m3u8 播放网址 [1.2.1, 1.2.3]。
+A 程序通过 HTTP 响应状态码 302 Found，在 Response Header 中设置 Location: [真实的 m3u8 地址] [1.2.1]。
+B 端播放器接收到 302，自动转向直接播放真实的 Bilibili CDN 视频流。
+4.2 接口设计规范 (API Endpoint Specifications)
+1. Bilibili 直播解析接口
+请求路径：GET /api/bilibili/:room_id
+实现逻辑：
+模拟移动端浏览器发送 GET 请求至 https://api.live.bilibili.com/xlive/web-room/v1/playUrl/playUrl?cid=[room_id]&qn=10000&platform=h5
+从返回的 JSON 中解析出 durl 或 playurl_info 下的 m3u8 地址。
+HTTP 302 重定向至该地址。
+2. 抖音直播解析接口
+请求路径：GET /api/douyin/:room_id
+实现逻辑：
+抖音直播可以通过请求 https://live.douyin.com/[room_id] 并在 H5 页面中截取 __INIT_PROPS__ 的 JSON 数据。
+从中提取出高清晰度的 hls_pull_url_map 下的 m3u8 地址。
+HTTP 302 重定向。
+3. 快手直播解析接口
+请求路径：GET /api/kuaishou/:room_id
+实现逻辑：
+通过请求快手直播网页或官方 H5 接口，在返回的页面数据中提取播放列表。
+HTTP 302 重定向。
+5. 数据契约与接口规范 (Data Contract)
+A 程序必须生成并提供符合以下精确格式的数据文件，供 B 程序拉取。
+5.1 结构化精品数据 channels.json
+当组件 1 运行完毕，或者云端发布时，应生成以下 JSON 数据：
+code
+JSON
+[
+  {
+    "name": "湖南卫视 [4K极清]",
+    "group": "卫视频道",
+    "urls": [
+      "http://hlsal-ldvt.qing.mgtv.com/.../HNWSZGST.m3u8",
+      "http://118.81.195.79:9003/hls/26/index.m3u8",
+      "http://39.134.115.163:8080/PLTV/88888910/224/3221225703/index.m3u8"
+    ],
+    "delay_ms": 109.0
+  },
+  {
+    "name": "B站经典电影 [24H轮播]",
+    "group": "★ 24H 轮播",
+    "urls": [
+      "http://[Your-Server-IP]/api/bilibili/605"
+    ],
+    "delay_ms": 10.0
+  }
+]
+字段约束：
+name: 必须是清洗翻译后的干净中文频道名。
+group: 分类字段，必须严格匹配上文定义的 2D 分组名称。
+urls: 数组格式，存储最多 3 个按延迟从低到高排序的可用 URL。如果包含了群视频，则直接写入本 A 程序的 API 解析接口路径。
+delay_ms: 测速得出的最小延迟数值，用于卡片前端直观显示。
+6. 后续开发建议与高级演进方向（酒店 IP 扫描器）
+当 A 程序的上述基础框架（抓取、清洗、解析 API）稳定运行后，可以开发以下高级功能：
+6.1 酒店 IPTV 盲扫模块 (Hotel Port Scanner)
+许多省份的广电/运营商酒店 IPTV 专用服务器，使用的都是行业内标准的开源或商用模板系统（如“秒开ITV”、“U点”、“捷佳”）。
+这些系统往往暴露在公网上，默认端口多为 8001、9901、8080、8000 [1.1.4, 1.2.3]。
+扫描逻辑：
+在云端编写轻量级扫描模块，通过 Shodan、Censys 或国内的 FOFA 等网络空间搜索引擎，监控带有 "秒开"、"ITV" 等特定关键字特征的公网 IP 和端口。
+对扫描出的在线服务器，自动请求其 /itv/ 或 /playlist.m3u 接口，将批量拉下来的高带宽、高码率直播源，并入合并队列中 [1.2.3, 1.2.4]。
+7. A 程序技术栈推荐与部署方案
+推荐语言/框架：
+Node.js (Express / Fastify)：极其推荐！因为 Electron 本身也是 Node 环境，且 Node.js 处理异步高并发 API 请求（如抖音、B站解析）的吞吐率非常惊人，开发难度也是最低的 [1.2.1]。
+Python (FastAPI / Flask)：也可以使用 Python 来写合并逻辑，并用 FastAPI 挂载 API 服务。
+云端免费部署方案：
+GitHub Actions：用于每天自动运行一次组件 1 的抓取、测速和清洗脚本，生成 channels.json 并将其自动发布到免费的 GitHub Pages。
+Vercel / Render / Cloudflare Workers：用于免费部署组件 2 的“抖音/B站动态解析服务” [1.2.3]。

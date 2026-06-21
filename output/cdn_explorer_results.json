@@ -1,0 +1,13 @@
+{
+  "_meta": {
+    "version": "2.0",
+    "method": "method_1_probe",
+    "generated_at": "2026-06-21T16:34:42",
+    "elapsed_seconds": 0.8,
+    "total_probe_tasks": 60,
+    "alive_urls": 0,
+    "provinces_covered": 0,
+    "province_stats": {}
+  },
+  "channels": []
+}

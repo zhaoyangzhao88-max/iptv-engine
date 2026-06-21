@@ -1,0 +1,20 @@
+[
+  {
+    "name": "爱体育",
+    "urls": [
+      "http://hwltc.tv.cdn.zj.chinamobile.com/PLTV/88888888/224/3221230103/index.m3u8"
+    ]
+  },
+  {
+    "name": "NewTV 精品体育",
+    "urls": [
+      "http://hwltc.tv.cdn.zj.chinamobile.com/PLTV/88888888/224/3221236300/index.m3u8"
+    ]
+  },
+  {
+    "name": "NewTV 动作电影",
+    "urls": [
+      "http://hwltc.tv.cdn.zj.chinamobile.com/PLTV/88888888/224/3221236183/index.m3u8"
+    ]
+  }
+]

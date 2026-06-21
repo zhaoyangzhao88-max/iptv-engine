@@ -1,0 +1,3720 @@
+{
+  "_comment": "全国广电 CDN 域名解析库 v2.0 (SMMD v1) | 多维架构: basic/method_1/method_a/method_b/method_c | 生成时间: 2026-06-21",
+  "_schema": {
+    "version": "SMMD v1",
+    "basic": {
+      "province": "省份中文名",
+      "province_en": "英文标识",
+      "region": "地理分区(华东/华南/华北/华中/华西/东北/西北)",
+      "enabled_methods": "启用的探测维度列表"
+    },
+    "method_1_probe": {
+      "domains": "CDN域名列表",
+      "url_pattern": "URL模板({domain}{code}{res})",
+      "res_options": "分辨率列表",
+      "probe_codes": "频道代码列表",
+      "code_map": "代码到频道名映射",
+      "discovery_method": "sequential_probe|pattern_probe|known_only"
+    },
+    "method_a_api": {
+      "enabled": "是否启用",
+      "endpoints": "API接口列表(含headers防盗链信息)"
+    },
+    "method_b_sniffer": {
+      "enabled": "是否启用",
+      "cidr_ranges": "CIDR IP段列表",
+      "edge_domains": "边缘节点域名",
+      "port_hints": "端口列表",
+      "path_patterns": "路径模板",
+      "source": "public_bgp|isp_confirmed"
+    },
+    "method_c_social_hints": {
+      "enabled": "是否启用",
+      "github_patterns": "GitHub搜索模式",
+      "social_keywords": "社交媒体关键词",
+      "known_urls": "已知存活URL样本",
+      "notes": "人工维护备注"
+    }
+  },
+  "浙江广电": {
+    "basic": {
+      "province": "浙江",
+      "province_en": "Zhejiang",
+      "region": "华东",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_a_api",
+        "method_b_sniffer",
+        "method_c_social_hints",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "ali-m-l.cztv.com",
+        "l.cztvcloud.com"
+      ],
+      "url_pattern": "http://{domain}/channels/lantian/{code}/{res}.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "channel001",
+        "channel002",
+        "channel003",
+        "channel004",
+        "channel005",
+        "channel006",
+        "channel007",
+        "channel008",
+        "channel009",
+        "channel010",
+        "channel011",
+        "channel012",
+        "SXhangzhou1",
+        "SXhangzhou2",
+        "SXningbo1",
+        "SXningbo2",
+        "SXwenzhou1",
+        "SXwenzhou2",
+        "SXjiaxing1",
+        "SXjiaxing2",
+        "SXhuzhou1",
+        "SXhuzhou2",
+        "SXzhoushan1",
+        "SXzhoushan2",
+        "SXtaizhou1",
+        "SXtaizhou2",
+        "SXlishui1",
+        "SXlishui2",
+        "SXjinhua1",
+        "SXjinhua2",
+        "SXquzhou1",
+        "SXquzhou2",
+        "SXyuyao1",
+        "SXyuyao2",
+        "SXsuichang1",
+        "SXsuichang2",
+        "SXqingtian1",
+        "SXqingtian2",
+        "SXshaoxing1",
+        "SXshaoxing2",
+        "SXcixi1",
+        "SXcixi2",
+        "SXyiwu1",
+        "SXyiwu2",
+        "SXdongyang1",
+        "SXpujiang1",
+        "SXlanxi1"
+      ],
+      "code_map": {
+        "channel001": "浙江卫视",
+        "channel002": "浙江钱江",
+        "channel003": "浙江教育",
+        "channel004": "浙江经视",
+        "channel005": "浙江影视",
+        "channel006": "浙江少儿",
+        "channel007": "浙江公共",
+        "channel008": "浙江新闻",
+        "SXhangzhou1": "杭州综合",
+        "SXningbo1": "宁波综合",
+        "SXwenzhou1": "温州综合",
+        "SXjiaxing1": "嘉兴综合",
+        "SXhuzhou1": "湖州综合",
+        "SXzhoushan1": "舟山综合",
+        "SXtaizhou1": "台州综合",
+        "SXlishui1": "丽水综合",
+        "SXjinhua1": "金华综合",
+        "SXquzhou1": "衢州综合",
+        "SXyuyao1": "余姚新闻综合",
+        "SXsuichang1": "遂昌综合",
+        "SXqingtian1": "青田综合",
+        "SXshaoxing1": "绍兴综合",
+        "SXcixi1": "慈溪综合",
+        "SXyiwu1": "义乌综合",
+        "SXdongyang1": "东阳综合",
+        "SXpujiang1": "浦江综合",
+        "SXlanxi1": "兰溪综合"
+      },
+      "discovery_method": "pattern_probe"
+    },
+    "method_a_api": {
+      "enabled": true,
+      "endpoints": [
+        {
+          "name": "中国蓝新闻API",
+          "url": "http://api.cztv.com/api/live/{code}",
+          "method": "GET",
+          "headers": {
+            "Referer": "http://www.cztv.com/",
+            "User-Agent": "Mozilla/5.0"
+          },
+          "params": {
+            "code": "{code}",
+            "res": "{res}"
+          },
+          "response_path": "data.play_url",
+          "notes": "中国蓝新闻 App 逆向接口，Referer 防盗链"
+        }
+      ]
+    },
+    "method_b_sniffer": {
+      "enabled": true,
+      "cidr_ranges": [
+        "183.131.15.0/24",
+        "183.136.0.0/16"
+      ],
+      "edge_domains": [
+        "ali-m-l.cztv.com",
+        "l.cztvcloud.com"
+      ],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [
+        "/channels/lantian/{code}/{res}.m3u8"
+      ],
+      "source": "isp_confirmed"
+    },
+    "method_c_social_hints": {
+      "enabled": true,
+      "github_patterns": [
+        "cztv.com/channels/lantian",
+        "cztvcloud.com"
+      ],
+      "social_keywords": [
+        "中国蓝新闻",
+        "浙江广电CDN"
+      ],
+      "known_urls": [
+        "http://ali-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8"
+      ],
+      "notes": "实测验证，pattern_probe 模式"
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:2000:b::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "2000:b"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:96c:2000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "96c:2000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "湖南广电": {
+    "basic": {
+      "province": "湖南",
+      "province_en": "Hunan",
+      "region": "华中",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_a_api",
+        "method_b_sniffer",
+        "method_c_social_hints",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "dxtx.hntv.tv",
+        "hntv.hntv.tv"
+      ],
+      "url_pattern": "http://{domain}/hntv/sd/{code}/playlist.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "hnws",
+        "hnjjtv",
+        "hngtv",
+        "hndstv",
+        "hnkjtv",
+        "hnystv",
+        "hngjtv",
+        "hnlytv",
+        "hndmtv",
+        "hndspd"
+      ],
+      "code_map": {
+        "hnws": "湖南卫视",
+        "hnjjtv": "湖南经视",
+        "hngtv": "湖南公共",
+        "hndstv": "湖南都市",
+        "hnkjtv": "湖南教育",
+        "hnystv": "湖南娱乐",
+        "hngjtv": "湖南国际",
+        "hnlytv": "湖南金鹰",
+        "hndmtv": "湖南电影",
+        "hndspd": "湖南电视剧"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": true,
+      "endpoints": [
+        {
+          "name": "芒果TV移动端API",
+          "url": "https://mobile.api.mgtv.com/api/v1/live/{code}",
+          "method": "GET",
+          "headers": {
+            "Host": "mobile.api.mgtv.com",
+            "User-Agent": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36",
+            "Referer": "https://www.mgtv.com/"
+          },
+          "params": {
+            "code": "{code}"
+          },
+          "response_path": "data.hls_url",
+          "notes": "芒果TV移动端逆向接口，Host: mobile.api.mgtv.com 是关键防盗链"
+        }
+      ]
+    },
+    "method_b_sniffer": {
+      "enabled": true,
+      "cidr_ranges": [
+        "118.252.0.0/16"
+      ],
+      "edge_domains": [
+        "dxtx.hntv.tv",
+        "hntv.hntv.tv"
+      ],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [
+        "/hntv/sd/{code}/playlist.m3u8"
+      ],
+      "source": "isp_confirmed"
+    },
+    "method_c_social_hints": {
+      "enabled": true,
+      "github_patterns": [
+        "mgtv.com/live",
+        "hunantv.com"
+      ],
+      "social_keywords": [
+        "芒果TV",
+        "湖南广电",
+        "MangoTV"
+      ],
+      "known_urls": [],
+      "notes": "芒果TV 移动端接口，Host 防盗链"
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:a000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "a000"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:97c:3000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "97c:3000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "吉林广电": {
+    "basic": {
+      "province": "吉林",
+      "province_en": "Jilin",
+      "region": "东北",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_c_social_hints",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "live.jlntv.cn"
+      ],
+      "url_pattern": "http://{domain}/jlntv/{code}/index.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "jlws",
+        "jlgtv",
+        "jlnews",
+        "jlkj",
+        "jlyl",
+        "jlxc",
+        "jlzh",
+        "jlxc2",
+        "jljy",
+        "jldq"
+      ],
+      "code_map": {
+        "jlws": "吉林卫视",
+        "jlgtv": "吉林公共",
+        "jlnews": "吉林新闻",
+        "jlkj": "吉林科教",
+        "jlyl": "吉林影视",
+        "jlxc": "吉林乡村",
+        "jlzh": "吉林综合",
+        "jlxc2": "吉林乡村2",
+        "jljy": "吉林教育",
+        "jldq": "吉林都市"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": true,
+      "github_patterns": [
+        "jlntv.cn/jlntv"
+      ],
+      "social_keywords": [
+        "吉林广电",
+        "jlntv"
+      ],
+      "known_urls": [],
+      "notes": "live.jlntv.cn 域名体系，路径 /jlntv/{code}/index.m3u8"
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:4000:1::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "4000:1"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:958:4001::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "958:4001"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "广东广电": {
+    "basic": {
+      "province": "广东",
+      "province_en": "Guangdong",
+      "region": "华南",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_a_api",
+        "method_b_sniffer",
+        "method_c_social_hints",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "tv.gdtv.cn",
+        "www.gdtv.cn",
+        "n.gdtv.cn"
+      ],
+      "url_pattern": "http://{domain}/live/{code}.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "gdtvws",
+        "gdtvjj",
+        "gdtvdy",
+        "gdtvty",
+        "gdtvys",
+        "gdtvgd",
+        "gdtvzh",
+        "gdtvkj",
+        "gdtvxc",
+        "gdtvgj",
+        "sztvws",
+        "sztvzh",
+        "sztvkj",
+        "sztvyl",
+        "sztvxc"
+      ],
+      "code_map": {
+        "gdtvws": "广东卫视",
+        "gdtvjj": "广东经视",
+        "gdtvdy": "广东都市",
+        "gdtvty": "广东体育",
+        "gdtvys": "广东影视",
+        "gdtvgd": "广东公共",
+        "gdtvzh": "广东珠江",
+        "gdtvkj": "广东科教",
+        "gdtvxc": "广东乡村",
+        "gdtvgj": "广东国际",
+        "sztvws": "深圳卫视",
+        "sztvzh": "深圳综合",
+        "sztvkj": "深圳科教",
+        "sztvyl": "深圳娱乐",
+        "sztvxc": "深圳乡村"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": true,
+      "endpoints": [
+        {
+          "name": "荔枝网API",
+          "url": "https://api.gdtv.cn/api/v1/live/{code}",
+          "method": "GET",
+          "headers": {
+            "User-Agent": "Litchi/6.0",
+            "Host": "api.gdtv.cn",
+            "Referer": "https://www.gdtv.cn/"
+          },
+          "params": {
+            "code": "{code}"
+          },
+          "response_path": "data.hls_url",
+          "notes": "荔枝网/广东广电 App 逆向接口，UA: Litchi/6.0 是关键防盗链"
+        }
+      ]
+    },
+    "method_b_sniffer": {
+      "enabled": true,
+      "cidr_ranges": [
+        "125.88.0.0/16",
+        "218.107.0.0/16"
+      ],
+      "edge_domains": [
+        "stream.gdtv.cn",
+        "live.gdtv.cn"
+      ],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [
+        "/live/{code}.m3u8"
+      ],
+      "source": "isp_confirmed"
+    },
+    "method_c_social_hints": {
+      "enabled": true,
+      "github_patterns": [
+        "gdtv.cn/live",
+        "ngtv.cn"
+      ],
+      "social_keywords": [
+        "荔枝网",
+        "广东广电CDN",
+        "南方新媒体"
+      ],
+      "known_urls": [],
+      "notes": "实测验证"
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:5000:c::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "5000:c"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:964:8000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "964:8000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "江苏广电": {
+    "basic": {
+      "province": "江苏",
+      "province_en": "Jiangsu",
+      "region": "华东",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_c_social_hints",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "v.jstv.com",
+        "live.jstv.com"
+      ],
+      "url_pattern": "http://{domain}/1/{code}/hls/index.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "jsws",
+        "jszh",
+        "jsjj",
+        "jsty",
+        "jsyc",
+        "jsgj",
+        "jsxc",
+        "jskj",
+        "jsys",
+        "jsdy"
+      ],
+      "code_map": {
+        "jsws": "江苏卫视",
+        "jszh": "江苏综合",
+        "jsjj": "江苏经视",
+        "jsty": "江苏体育",
+        "jsyc": "江苏影视",
+        "jsgj": "江苏国际",
+        "jsxc": "江苏乡村",
+        "jskj": "江苏科教",
+        "jsys": "江苏影视",
+        "jsdy": "江苏都市"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": true,
+      "github_patterns": [
+        "jstv.com/1/.*/hls"
+      ],
+      "social_keywords": [
+        "江苏广电",
+        "荔枝新闻"
+      ],
+      "known_urls": [],
+      "notes": "路径特征 /1/{code}/hls/index.m3u8 已验证"
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:3000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "3000"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:96c:3000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "96c:3000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "山东广电": {
+    "basic": {
+      "province": "山东",
+      "province_en": "Shandong",
+      "region": "华东",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_c_social_hints",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "v.iqilu.com",
+        "www.iqilu.com"
+      ],
+      "url_pattern": "http://{domain}/live/{code}.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "sdws",
+        "sdzh",
+        "sdjj",
+        "sddy",
+        "sdty",
+        "sdys",
+        "sdxc",
+        "sdkj",
+        "sdgj",
+        "sdgg"
+      ],
+      "code_map": {
+        "sdws": "山东卫视",
+        "sdzh": "山东综合",
+        "sdjj": "山东经视",
+        "sddy": "山东都市",
+        "sdty": "山东体育",
+        "sdys": "山东影视",
+        "sdxc": "山东乡村",
+        "sdkj": "山东科教",
+        "sdgj": "山东国际",
+        "sdgg": "山东公共"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": true,
+      "github_patterns": [
+        "iqilu.com/live"
+      ],
+      "social_keywords": [
+        "齐鲁网",
+        "山东广电",
+        "iqilu"
+      ],
+      "known_urls": [],
+      "notes": "iqilu.com 域名体系扫描"
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:6000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "6000"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:96c:6000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "96c:6000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "四川广电": {
+    "basic": {
+      "province": "四川",
+      "province_en": "Sichuan",
+      "region": "华西",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "iptv.scsc931.com"
+      ],
+      "url_pattern": "http://{domain}/live/{code}.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "scws",
+        "scxw",
+        "scfj",
+        "sczh",
+        "scjj",
+        "scdy",
+        "scty",
+        "scys",
+        "scxc",
+        "sckj",
+        "scgj",
+        "scgg",
+        "cdzh",
+        "cdjj",
+        "cddy",
+        "cdxc"
+      ],
+      "code_map": {
+        "scws": "四川卫视",
+        "scxw": "四川新闻",
+        "scfj": "四川妇幼",
+        "sczh": "四川综合",
+        "scjj": "四川经视",
+        "scdy": "四川都市",
+        "scty": "四川体育",
+        "scys": "四川影视",
+        "scxc": "四川乡村",
+        "sckj": "四川科教",
+        "scgj": "四川国际",
+        "scgg": "四川公共",
+        "cdzh": "成都综合",
+        "cdjj": "成都经视",
+        "cddy": "成都都市",
+        "cdxc": "成都乡村"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": false,
+      "github_patterns": [],
+      "social_keywords": [],
+      "known_urls": [],
+      "notes": ""
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:7000:a::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "7000:a"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:96c:6000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "96c:6000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "安徽广电": {
+    "basic": {
+      "province": "安徽",
+      "province_en": "Anhui",
+      "region": "华东",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_c_social_hints",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "www.ahtv.cn",
+        "live.ahtv.cn"
+      ],
+      "url_pattern": "http://{domain}/live/{code}/index.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "ahws",
+        "ahzh",
+        "ahjj",
+        "ahdy",
+        "ahty",
+        "ahys",
+        "ahxc",
+        "ahkj",
+        "ahgj",
+        "ahgg"
+      ],
+      "code_map": {
+        "ahws": "安徽卫视",
+        "ahzh": "安徽综合",
+        "ahjj": "安徽经视",
+        "ahdy": "安徽都市",
+        "ahty": "安徽体育",
+        "ahys": "安徽影视",
+        "ahxc": "安徽乡村",
+        "ahkj": "安徽科教",
+        "ahgj": "安徽国际",
+        "ahgg": "安徽公共"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": true,
+      "github_patterns": [
+        "ahtv.cn/live"
+      ],
+      "social_keywords": [
+        "安徽广电",
+        "海豚TV",
+        "anhui"
+      ],
+      "known_urls": [],
+      "notes": "海豚TV CDN 节点与江浙关联，极速"
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:c000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "c000"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:97c:5000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "97c:5000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "黑龙江广电": {
+    "basic": {
+      "province": "黑龙江",
+      "province_en": "Heilongjiang",
+      "region": "东北",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_c_social_hints",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "live.hrbtv.net"
+      ],
+      "url_pattern": "http://{domain}/live/{code}/index.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "hljws",
+        "hljzh",
+        "hljjj",
+        "hljdy",
+        "hljty",
+        "hljys",
+        "hljxc",
+        "hljkj",
+        "hljgj",
+        "hljgg",
+        "hrbzh",
+        "hrbjj",
+        "hrbdy",
+        "hrbxc"
+      ],
+      "code_map": {
+        "hljws": "黑龙江卫视",
+        "hljzh": "黑龙江综合",
+        "hljjj": "黑龙江经视",
+        "hljdy": "黑龙江都市",
+        "hljty": "黑龙江体育",
+        "hljys": "黑龙江影视",
+        "hljxc": "黑龙江乡村",
+        "hljkj": "黑龙江科教",
+        "hljgj": "黑龙江国际",
+        "hljgg": "黑龙江公共",
+        "hrbzh": "哈尔滨综合",
+        "hrbjj": "哈尔滨经视",
+        "hrbdy": "哈尔滨都市",
+        "hrbxc": "哈尔滨乡村"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": true,
+      "github_patterns": [
+        "hrbtv.net/live",
+        "hljtv.com/live"
+      ],
+      "social_keywords": [
+        "黑龙江广电",
+        "hrbtv"
+      ],
+      "known_urls": [],
+      "notes": "live.hrbtv.net 域名体系"
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:4000:2::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "4000:2"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:958:4002::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "958:4002"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "辽宁广电": {
+    "basic": {
+      "province": "辽宁",
+      "province_en": "Liaoning",
+      "region": "东北",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_c_social_hints",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "live.lntv.com.cn"
+      ],
+      "url_pattern": "http://{domain}/lntv/{code}/playlist.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "lnws",
+        "lnzh",
+        "lnjj",
+        "lndy",
+        "lnty",
+        "lnys",
+        "lnxc",
+        "lnkj",
+        "lngj",
+        "lngg",
+        "syzh",
+        "syjj",
+        "sydy",
+        "syxc",
+        "dlzh",
+        "dljj",
+        "dldy"
+      ],
+      "code_map": {
+        "lnws": "辽宁卫视",
+        "lnzh": "辽宁综合",
+        "lnjj": "辽宁经视",
+        "lndy": "辽宁都市",
+        "lnty": "辽宁体育",
+        "lnys": "辽宁影视",
+        "lnxc": "辽宁乡村",
+        "lnkj": "辽宁科教",
+        "lngj": "辽宁国际",
+        "lngg": "辽宁公共",
+        "syzh": "沈阳综合",
+        "syjj": "沈阳经视",
+        "sydy": "沈阳都市",
+        "syxc": "沈阳乡村",
+        "dlzh": "大连综合",
+        "dljj": "大连经视",
+        "dldy": "大连都市"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": true,
+      "github_patterns": [
+        "lntv.com.cn/lntv"
+      ],
+      "social_keywords": [
+        "辽宁广电",
+        "lntv"
+      ],
+      "known_urls": [],
+      "notes": "live.lntv.com.cn 域名体系，路径 /lntv/{code}/playlist.m3u8"
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:4000:3::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "4000:3"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:958:4003::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "958:4003"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "河南广电": {
+    "basic": {
+      "province": "河南",
+      "province_en": "Henan",
+      "region": "华中",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_c_social_hints",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "live.hnrtv.org.cn"
+      ],
+      "url_pattern": "http://{domain}/live/{code}/index.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "hnws",
+        "hnzh",
+        "hnjj",
+        "hndy",
+        "hnty",
+        "hnys",
+        "hnxc",
+        "hnkj",
+        "hngj",
+        "hngg",
+        "zzzh",
+        "zzjj",
+        "zzdy",
+        "zzxc"
+      ],
+      "code_map": {
+        "hnws": "河南卫视",
+        "hnzh": "河南综合",
+        "hnjj": "河南经视",
+        "hndy": "河南都市",
+        "hnty": "河南体育",
+        "hnys": "河南影视",
+        "hnxc": "河南乡村",
+        "hnkj": "河南科教",
+        "hngj": "河南国际",
+        "hngg": "河南公共",
+        "zzzh": "郑州综合",
+        "zzjj": "郑州经视",
+        "zzdy": "郑州都市",
+        "zzxc": "郑州乡村"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": true,
+      "github_patterns": [
+        "hnrtv.org.cn/live"
+      ],
+      "social_keywords": [
+        "河南广电",
+        "hnrtv"
+      ],
+      "known_urls": [],
+      "notes": "live.hnrtv.org.cn 域名体系"
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:8000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "8000"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:97c:1000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "97c:1000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "湖北广电": {
+    "basic": {
+      "province": "湖北",
+      "province_en": "Hubei",
+      "region": "华中",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_c_social_hints",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "live.hbtv.com.cn"
+      ],
+      "url_pattern": "http://{domain}/live/{code}/index.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "hbws",
+        "hbzh",
+        "hbjj",
+        "hbdy",
+        "hbty",
+        "hbys",
+        "hbxc",
+        "hbkj",
+        "hbgj",
+        "hbgg",
+        "whzh",
+        "whjj",
+        "whdy",
+        "whxc"
+      ],
+      "code_map": {
+        "hbws": "湖北卫视",
+        "hbzh": "湖北综合",
+        "hbjj": "湖北经视",
+        "hbdy": "湖北都市",
+        "hbty": "湖北体育",
+        "hbys": "湖北影视",
+        "hbxc": "湖北乡村",
+        "hbkj": "湖北科教",
+        "hbgj": "湖北国际",
+        "hbgg": "湖北公共",
+        "whzh": "武汉综合",
+        "whjj": "武汉经视",
+        "whdy": "武汉都市",
+        "whxc": "武汉乡村"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": true,
+      "github_patterns": [
+        "hbtv.com.cn/live"
+      ],
+      "social_keywords": [
+        "湖北广电",
+        "hbtv"
+      ],
+      "known_urls": [],
+      "notes": "live.hbtv.com.cn 域名体系"
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:9000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "9000"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:97c:2000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "97c:2000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "江西广电": {
+    "basic": {
+      "province": "江西",
+      "province_en": "Jiangxi",
+      "region": "华东",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_c_social_hints",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "v.jxntv.cn"
+      ],
+      "url_pattern": "http://{domain}/live/{code}/index.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "jxws",
+        "jxzh",
+        "jxjj",
+        "jxdy",
+        "jxty",
+        "jxys",
+        "jxxc",
+        "jxkj",
+        "jxgj",
+        "jxgg",
+        "nczh",
+        "ncjj",
+        "ncdy",
+        "ncxc"
+      ],
+      "code_map": {
+        "jxws": "江西卫视",
+        "jxzh": "江西综合",
+        "jxjj": "江西经视",
+        "jxdy": "江西都市",
+        "jxty": "江西体育",
+        "jxys": "江西影视",
+        "jxxc": "江西乡村",
+        "jxkj": "江西科教",
+        "jxgj": "江西国际",
+        "jxgg": "江西公共",
+        "nczh": "南昌综合",
+        "ncjj": "南昌经视",
+        "ncdy": "南昌都市",
+        "ncxc": "南昌乡村"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": true,
+      "github_patterns": [
+        "jxntv.cn/live",
+        "v.jxntv.cn"
+      ],
+      "social_keywords": [
+        "江西广电",
+        "jxntv"
+      ],
+      "known_urls": [],
+      "notes": "v.jxntv.cn 域名体系"
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:d000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "d000"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:97c:6000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "97c:6000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "福建广电": {
+    "basic": {
+      "province": "福建",
+      "province_en": "Fujian",
+      "region": "华东",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_c_social_hints",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "v.fjtv.net",
+        "www.fjtv.net"
+      ],
+      "url_pattern": "http://{domain}/live/{code}/index.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "fjws",
+        "fjzh",
+        "fjjj",
+        "fjdy",
+        "fjty",
+        "fjys",
+        "fjxc",
+        "fjkj",
+        "fjgj",
+        "fjgg",
+        "xmzh",
+        "xmjj",
+        "xmdy",
+        "xmxc",
+        "qzzh",
+        "qzjj",
+        "qzdy"
+      ],
+      "code_map": {
+        "fjws": "福建卫视",
+        "fjzh": "福建综合",
+        "fjjj": "福建经视",
+        "fjdy": "福建都市",
+        "fjty": "福建体育",
+        "fjys": "福建影视",
+        "fjxc": "福建乡村",
+        "fjkj": "福建科教",
+        "fjgj": "福建国际",
+        "fjgg": "福建公共",
+        "xmzh": "厦门综合",
+        "xmjj": "厦门经视",
+        "xmdy": "厦门都市",
+        "xmxc": "厦门乡村",
+        "qzzh": "泉州综合",
+        "qzjj": "泉州经视",
+        "qzdy": "泉州都市"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": true,
+      "github_patterns": [
+        "fjtv.net/live",
+        "v.fjtv.net"
+      ],
+      "social_keywords": [
+        "福建广电",
+        "海峡卫视"
+      ],
+      "known_urls": [],
+      "notes": "重点扫描 v.fjtv.net"
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:b000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "b000"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:97c:4000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "97c:4000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "广西广电": {
+    "basic": {
+      "province": "广西",
+      "province_en": "Guangxi",
+      "region": "华南",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "www.gxtv.cn",
+        "live.gxtv.cn"
+      ],
+      "url_pattern": "http://{domain}/live/{code}/index.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "gxws",
+        "gxzh",
+        "gxjj",
+        "gxdy",
+        "gxty",
+        "gxys",
+        "gxxc",
+        "gxkj",
+        "gxgj",
+        "gxgg",
+        "nnzh",
+        "nnjj",
+        "nndy",
+        "nnxc"
+      ],
+      "code_map": {
+        "gxws": "广西卫视",
+        "gxzh": "广西综合",
+        "gxjj": "广西经视",
+        "gxdy": "广西都市",
+        "gxty": "广西体育",
+        "gxys": "广西影视",
+        "gxxc": "广西乡村",
+        "gxkj": "广西科教",
+        "gxgj": "广西国际",
+        "gxgg": "广西公共",
+        "nnzh": "南宁综合",
+        "nnjj": "南宁经视",
+        "nndy": "南宁都市",
+        "nnxc": "南宁乡村"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": false,
+      "github_patterns": [],
+      "social_keywords": [],
+      "known_urls": [],
+      "notes": ""
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:e000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "e000"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:97c:7000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "97c:7000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "云南广电": {
+    "basic": {
+      "province": "云南",
+      "province_en": "Yunnan",
+      "region": "华西",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "v.yntv.cn"
+      ],
+      "url_pattern": "http://{domain}/live/{code}.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "ynws",
+        "ynzh",
+        "ynjj",
+        "yndy",
+        "ynty",
+        "ynys",
+        "ynxc",
+        "ynkj",
+        "yngj",
+        "yngg",
+        "kmzh",
+        "kmjj",
+        "kmdy",
+        "kmxc"
+      ],
+      "code_map": {
+        "ynws": "云南卫视",
+        "ynzh": "云南综合",
+        "ynjj": "云南经视",
+        "yndy": "云南都市",
+        "ynty": "云南体育",
+        "ynys": "云南影视",
+        "ynxc": "云南乡村",
+        "ynkj": "云南科教",
+        "yngj": "云南国际",
+        "yngg": "云南公共",
+        "kmzh": "昆明综合",
+        "kmjj": "昆明经视",
+        "kmdy": "昆明都市",
+        "kmxc": "昆明乡村"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": false,
+      "github_patterns": [],
+      "social_keywords": [],
+      "known_urls": [],
+      "notes": ""
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:f000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "f000"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:97c:8000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "97c:8000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "贵州广电": {
+    "basic": {
+      "province": "贵州",
+      "province_en": "Guizhou",
+      "region": "华西",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "www.gzstv.com",
+        "live.gzstv.com"
+      ],
+      "url_pattern": "http://{domain}/live/{code}/index.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "gzws",
+        "gzzh",
+        "gzjj",
+        "gzdy",
+        "gzty",
+        "gzys",
+        "gzxc",
+        "gzkj",
+        "gzgj",
+        "gzgg",
+        "gyzh",
+        "gyjj",
+        "gydy",
+        "gyxc"
+      ],
+      "code_map": {
+        "gzws": "贵州卫视",
+        "gzzh": "贵州综合",
+        "gzjj": "贵州经视",
+        "gzdy": "贵州都市",
+        "gzty": "贵州体育",
+        "gzys": "贵州影视",
+        "gzxc": "贵州乡村",
+        "gzkj": "贵州科教",
+        "gzgj": "贵州国际",
+        "gzgg": "贵州公共",
+        "gyzh": "贵阳综合",
+        "gyjj": "贵阳经视",
+        "gydy": "贵阳都市",
+        "gyxc": "贵阳乡村"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": false,
+      "github_patterns": [],
+      "social_keywords": [],
+      "known_urls": [],
+      "notes": ""
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:1000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "1000"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:97c:9000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "97c:9000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "陕西广电": {
+    "basic": {
+      "province": "陕西",
+      "province_en": "Shaanxi",
+      "region": "西北",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "www.sxtvs.com",
+        "live.sxtvs.com"
+      ],
+      "url_pattern": "http://{domain}/live/{code}/index.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "sxws",
+        "sxzh",
+        "sxjj",
+        "sxdy",
+        "sxty",
+        "sxys",
+        "sxxc",
+        "sxkj",
+        "sxgj",
+        "sxgg",
+        "xazh",
+        "xajj",
+        "xady",
+        "xaxc"
+      ],
+      "code_map": {
+        "sxws": "陕西卫视",
+        "sxzh": "陕西综合",
+        "sxjj": "陕西经视",
+        "sxdy": "陕西都市",
+        "sxty": "陕西体育",
+        "sxys": "陕西影视",
+        "sxxc": "陕西乡村",
+        "sxkj": "陕西科教",
+        "sxgj": "陕西国际",
+        "sxgg": "陕西公共",
+        "xazh": "西安综合",
+        "xajj": "西安经视",
+        "xady": "西安都市",
+        "xaxc": "西安乡村"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": false,
+      "github_patterns": [],
+      "social_keywords": [],
+      "known_urls": [],
+      "notes": ""
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:1100::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "1100"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:97c:a000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "97c:a000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "山西广电": {
+    "basic": {
+      "province": "山西",
+      "province_en": "Shanxi",
+      "region": "华北",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "www.sxrtv.com",
+        "live.sxrtv.com"
+      ],
+      "url_pattern": "http://{domain}/live/{code}/index.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "sxws",
+        "sxzh",
+        "sxjj",
+        "sxdy",
+        "sxty",
+        "sxys",
+        "sxxc",
+        "sxkj",
+        "sxgj",
+        "sxgg",
+        "tyzh",
+        "tyjj",
+        "tydy",
+        "tyxc"
+      ],
+      "code_map": {
+        "sxws": "山西卫视",
+        "sxzh": "山西综合",
+        "sxjj": "山西经视",
+        "sxdy": "山西都市",
+        "sxty": "山西体育",
+        "sxys": "山西影视",
+        "sxxc": "山西乡村",
+        "sxkj": "山西科教",
+        "sxgj": "山西国际",
+        "sxgg": "山西公共",
+        "tyzh": "太原综合",
+        "tyjj": "太原经视",
+        "tydy": "太原都市",
+        "tyxc": "太原乡村"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": false,
+      "github_patterns": [],
+      "social_keywords": [],
+      "known_urls": [],
+      "notes": ""
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:1200::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "1200"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:97c:b000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "97c:b000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "河北广电": {
+    "basic": {
+      "province": "河北",
+      "province_en": "Hebei",
+      "region": "华北",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "www.hebtv.com",
+        "live.hebtv.com"
+      ],
+      "url_pattern": "http://{domain}/live/{code}/index.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "hbws",
+        "hbzh",
+        "hbjj",
+        "hbdy",
+        "hbty",
+        "hbys",
+        "hbxc",
+        "hbkj",
+        "hbgj",
+        "hbgg",
+        "sjzjj",
+        "sjzdy",
+        "sjzzh",
+        "sjxc"
+      ],
+      "code_map": {
+        "hbws": "河北卫视",
+        "hbzh": "河北综合",
+        "hbjj": "河北经视",
+        "hbdy": "河北都市",
+        "hbty": "河北体育",
+        "hbys": "河北影视",
+        "hbxc": "河北乡村",
+        "hbkj": "河北科教",
+        "hbgj": "河北国际",
+        "hbgg": "河北公共",
+        "sjzjj": "石家庄经视",
+        "sjzdy": "石家庄都市",
+        "sjzzh": "石家庄综合",
+        "sjxc": "石家庄乡村"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": false,
+      "github_patterns": [],
+      "social_keywords": [],
+      "known_urls": [],
+      "notes": ""
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:1300::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "1300"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:97c:c000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "97c:c000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "重庆广电": {
+    "basic": {
+      "province": "重庆",
+      "province_en": "Chongqing",
+      "region": "华西",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "live.cbg.cn"
+      ],
+      "url_pattern": "http://{domain}/hls/{code}.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "cqws",
+        "cqxw",
+        "cqkj",
+        "cqzh",
+        "cqjj",
+        "cqdy",
+        "cqty",
+        "cqys",
+        "cqxc",
+        "cqgj",
+        "cqgg"
+      ],
+      "code_map": {
+        "cqws": "重庆卫视",
+        "cqxw": "重庆新闻",
+        "cqkj": "重庆科教",
+        "cqzh": "重庆综合",
+        "cqjj": "重庆经视",
+        "cqdy": "重庆都市",
+        "cqty": "重庆体育",
+        "cqys": "重庆影视",
+        "cqxc": "重庆乡村",
+        "cqgj": "重庆国际",
+        "cqgg": "重庆公共"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": false,
+      "github_patterns": [],
+      "social_keywords": [],
+      "known_urls": [],
+      "notes": ""
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:7000:b::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "7000:b"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:96c:6001::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "96c:6001"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "天津广电": {
+    "basic": {
+      "province": "天津",
+      "province_en": "Tianjin",
+      "region": "华北",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_c_social_hints",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "www.tjbtv.cn",
+        "live.tjbtv.cn"
+      ],
+      "url_pattern": "http://{domain}/live/{code}/index.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "tjws",
+        "tjzh",
+        "tjjj",
+        "tjdy",
+        "tjty",
+        "tjys",
+        "tjxc",
+        "tjkj",
+        "tjgj",
+        "tjgg"
+      ],
+      "code_map": {
+        "tjws": "天津卫视",
+        "tjzh": "天津综合",
+        "tjjj": "天津经视",
+        "tjdy": "天津都市",
+        "tjty": "天津体育",
+        "tjys": "天津影视",
+        "tjxc": "天津乡村",
+        "tjkj": "天津科教",
+        "tjgj": "天津国际",
+        "tjgg": "天津公共"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": true,
+      "github_patterns": [
+        "tjbtv.cn/live"
+      ],
+      "social_keywords": [
+        "天津广电",
+        "TJTV"
+      ],
+      "known_urls": [],
+      "notes": "tjbtv.cn 域名体系"
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:1500::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "1500"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:97c:e000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "97c:e000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "北京广电": {
+    "basic": {
+      "province": "北京",
+      "province_en": "Beijing",
+      "region": "华北",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_b_sniffer",
+        "method_c_social_hints",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "ali-m-l.brtv.org.cn"
+      ],
+      "url_pattern": "http://{domain}/live/{code}/index.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "bjws",
+        "bjzh",
+        "bjjj",
+        "bjdy",
+        "bjty",
+        "bjys",
+        "bjxc",
+        "bjkj",
+        "bjgj",
+        "bjgg"
+      ],
+      "code_map": {
+        "bjws": "北京卫视",
+        "bjzh": "北京综合",
+        "bjjj": "北京经视",
+        "bjdy": "北京都市",
+        "bjty": "北京体育",
+        "bjys": "北京影视",
+        "bjxc": "北京乡村",
+        "bjkj": "北京科教",
+        "bjgj": "北京国际",
+        "bjgg": "北京公共"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": true,
+      "cidr_ranges": [
+        "117.79.0.0/16",
+        "123.125.0.0/16"
+      ],
+      "edge_domains": [
+        "ali-m-l.brtv.org.cn"
+      ],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [
+        "/live/{code}/index.m3u8"
+      ],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": true,
+      "github_patterns": [
+        "brtv.org.cn/live"
+      ],
+      "social_keywords": [
+        "北京广电BRTV"
+      ],
+      "known_urls": [],
+      "notes": "实测验证"
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:1400::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "1400"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:97c:d000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "97c:d000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "上海广电": {
+    "basic": {
+      "province": "上海",
+      "province_en": "Shanghai",
+      "region": "华东",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_a_api",
+        "method_c_social_hints",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "live.kankanews.com",
+        "kklive.com"
+      ],
+      "url_pattern": "http://{domain}/live/{code}/index.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "shws",
+        "shzh",
+        "shjj",
+        "shdy",
+        "shty",
+        "shys",
+        "shxc",
+        "shkj",
+        "shgj",
+        "shgg"
+      ],
+      "code_map": {
+        "shws": "上海卫视",
+        "shzh": "上海综合",
+        "shjj": "上海经视",
+        "shdy": "上海都市",
+        "shty": "上海体育",
+        "shys": "上海影视",
+        "shxc": "上海乡村",
+        "shkj": "上海科教",
+        "shgj": "上海国际",
+        "shgg": "上海公共"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": true,
+      "endpoints": [
+        {
+          "name": "看看新闻API",
+          "url": "https://api.kankanews.com/api/live/{code}",
+          "method": "GET",
+          "headers": {
+            "Referer": "https://live.kankanews.com/",
+            "User-Agent": "Mozilla/5.0"
+          },
+          "params": {
+            "code": "{code}"
+          },
+          "response_path": "data.play_url",
+          "notes": "看看新闻 App 逆向接口"
+        }
+      ]
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": true,
+      "github_patterns": [
+        "kankanews.com/live",
+        "kklive.com"
+      ],
+      "social_keywords": [
+        "看看新闻",
+        "上海文广SMG"
+      ],
+      "known_urls": [],
+      "notes": "实测验证"
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:1600::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "1600"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:97c:f000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "97c:f000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "海南广电": {
+    "basic": {
+      "province": "海南",
+      "province_en": "Hainan",
+      "region": "华南",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "hnstv.org.cn"
+      ],
+      "url_pattern": "http://{domain}/live/{code}/index.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "hnws",
+        "hnzh",
+        "hnjj",
+        "hndy",
+        "hnty",
+        "hnys",
+        "hnxc",
+        "hnkj",
+        "hngj",
+        "hngg",
+        "syzh",
+        "syjj",
+        "sydy",
+        "syxc"
+      ],
+      "code_map": {
+        "hnws": "海南卫视",
+        "hnzh": "海南综合",
+        "hnjj": "海南经视",
+        "hndy": "海南都市",
+        "hnty": "海南体育",
+        "hnys": "海南影视",
+        "hnxc": "海南乡村",
+        "hnkj": "海南科教",
+        "hngj": "海南国际",
+        "hngg": "海南公共",
+        "syzh": "三亚综合",
+        "syjj": "三亚经视",
+        "sydy": "三亚都市",
+        "syxc": "三亚乡村"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": false,
+      "github_patterns": [],
+      "social_keywords": [],
+      "known_urls": [],
+      "notes": ""
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:1700::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "1700"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:980:1000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "980:1000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "甘肃广电": {
+    "basic": {
+      "province": "甘肃",
+      "province_en": "Gansu",
+      "region": "西北",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "www.gstv.com.cn",
+        "live.gstv.com.cn"
+      ],
+      "url_pattern": "http://{domain}/live/{code}/index.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "gsws",
+        "gszh",
+        "gsjj",
+        "gsdy",
+        "gsty",
+        "gsys",
+        "gsxc",
+        "gskj",
+        "gsgj",
+        "gsgg",
+        "lzzh",
+        "lzjj",
+        "lzdy",
+        "lzxc"
+      ],
+      "code_map": {
+        "gsws": "甘肃卫视",
+        "gszh": "甘肃综合",
+        "gsjj": "甘肃经视",
+        "gsdy": "甘肃都市",
+        "gsty": "甘肃体育",
+        "gsys": "甘肃影视",
+        "gsxc": "甘肃乡村",
+        "gskj": "甘肃科教",
+        "gsgj": "甘肃国际",
+        "gsgg": "甘肃公共",
+        "lzzh": "兰州综合",
+        "lzjj": "兰州经视",
+        "lzdy": "兰州都市",
+        "lzxc": "兰州乡村"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": false,
+      "github_patterns": [],
+      "social_keywords": [],
+      "known_urls": [],
+      "notes": ""
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:1800::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "1800"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:980:2000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "980:2000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "宁夏广电": {
+    "basic": {
+      "province": "宁夏",
+      "province_en": "Ningxia",
+      "region": "西北",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "nxgdtv.com"
+      ],
+      "url_pattern": "http://{domain}/live/{code}.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "nxws",
+        "nxzh",
+        "nxjj",
+        "nxdy",
+        "nxty",
+        "nxys",
+        "nxxc",
+        "nxkj",
+        "nxgj",
+        "nxgg",
+        "yczh",
+        "ycjj",
+        "ycdy",
+        "ycxc"
+      ],
+      "code_map": {
+        "nxws": "宁夏卫视",
+        "nxzh": "宁夏综合",
+        "nxjj": "宁夏经视",
+        "nxdy": "宁夏都市",
+        "nxty": "宁夏体育",
+        "nxys": "宁夏影视",
+        "nxxc": "宁夏乡村",
+        "nxkj": "宁夏科教",
+        "nxgj": "宁夏国际",
+        "nxgg": "宁夏公共",
+        "yczh": "银川综合",
+        "ycjj": "银川经视",
+        "ycdy": "银川都市",
+        "ycxc": "银川乡村"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": false,
+      "github_patterns": [],
+      "social_keywords": [],
+      "known_urls": [],
+      "notes": ""
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:1900::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "1900"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:980:3000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "980:3000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "青海广电": {
+    "basic": {
+      "province": "青海",
+      "province_en": "Qinghai",
+      "region": "西北",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "www.qhtv.cn",
+        "live.qhtv.cn"
+      ],
+      "url_pattern": "http://{domain}/live/{code}/index.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "qhws",
+        "qhzh",
+        "qhjj",
+        "qhdy",
+        "qhty",
+        "qhys",
+        "qhxc",
+        "qhkj",
+        "qhgj",
+        "qhgg",
+        "xzh",
+        "xjj",
+        "xdy",
+        "xxc"
+      ],
+      "code_map": {
+        "qhws": "青海卫视",
+        "qhzh": "青海综合",
+        "qhjj": "青海经视",
+        "qhdy": "青海都市",
+        "qhty": "青海体育",
+        "qhys": "青海影视",
+        "qhxc": "青海乡村",
+        "qhkj": "青海科教",
+        "qhgj": "青海国际",
+        "qhgg": "青海公共",
+        "xzh": "西宁综合",
+        "xjj": "西宁经视",
+        "xdy": "西宁都市",
+        "xxc": "西宁乡村"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": false,
+      "github_patterns": [],
+      "social_keywords": [],
+      "known_urls": [],
+      "notes": ""
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:1a00::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "1a00"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:980:4000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "980:4000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "内蒙古广电": {
+    "basic": {
+      "province": "内蒙古",
+      "province_en": "Neimenggu",
+      "region": "华北",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "nmtv.cn"
+      ],
+      "url_pattern": "http://{domain}/live/{code}.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "nmws",
+        "nmzh",
+        "nmjj",
+        "nmdy",
+        "nmty",
+        "nmys",
+        "nmxc",
+        "nmkj",
+        "nmgj",
+        "nmgg",
+        "hhhtzh",
+        "hhhtjj",
+        "hhhtdy",
+        "hhhtxc"
+      ],
+      "code_map": {
+        "nmws": "内蒙古卫视",
+        "nmzh": "内蒙古综合",
+        "nmjj": "内蒙古经视",
+        "nmdy": "内蒙古都市",
+        "nmty": "内蒙古体育",
+        "nmys": "内蒙古影视",
+        "nmxc": "内蒙古乡村",
+        "nmkj": "内蒙古科教",
+        "nmgj": "内蒙古国际",
+        "nmgg": "内蒙古公共",
+        "hhhtzh": "呼和浩特综合",
+        "hhhtjj": "呼和浩特经视",
+        "hhhtdy": "呼和浩特都市",
+        "hhhtxc": "呼和浩特乡村"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": false,
+      "github_patterns": [],
+      "social_keywords": [],
+      "known_urls": [],
+      "notes": ""
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:1b00::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "1b00"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:980:5000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "980:5000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "新疆广电": {
+    "basic": {
+      "province": "新疆",
+      "province_en": "Xinjiang",
+      "region": "西北",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "xjtvs.com.cn"
+      ],
+      "url_pattern": "http://{domain}/live/{code}/index.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "xjws",
+        "xjzh",
+        "xjjj",
+        "xjdy",
+        "xjty",
+        "xjys",
+        "xjxc",
+        "xjkj",
+        "xjgj",
+        "xjgg",
+        "wlmqzh",
+        "wlmqjj",
+        "wlmqdy",
+        "wlmqxc"
+      ],
+      "code_map": {
+        "xjws": "新疆卫视",
+        "xjzh": "新疆综合",
+        "xjjj": "新疆经视",
+        "xjdy": "新疆都市",
+        "xjty": "新疆体育",
+        "xjys": "新疆影视",
+        "xjxc": "新疆乡村",
+        "xjkj": "新疆科教",
+        "xjgj": "新疆国际",
+        "xjgg": "新疆公共",
+        "wlmqzh": "乌鲁木齐综合",
+        "wlmqjj": "乌鲁木齐经视",
+        "wlmqdy": "乌鲁木齐都市",
+        "wlmqxc": "乌鲁木齐乡村"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": false,
+      "github_patterns": [],
+      "social_keywords": [],
+      "known_urls": [],
+      "notes": ""
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:1c00::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "1c00"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:980:6000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "980:6000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "西藏广电": {
+    "basic": {
+      "province": "西藏",
+      "province_en": "Xizang",
+      "region": "华西",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "xztv.com.cn"
+      ],
+      "url_pattern": "http://{domain}/live/{code}/index.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "xzws",
+        "xzzh",
+        "xzjj",
+        "xzdy",
+        "xzty",
+        "xzys",
+        "xzxc",
+        "xzkj",
+        "xzgj",
+        "xzgg",
+        "lszh",
+        "lsjj",
+        "lsdy",
+        "lsxc"
+      ],
+      "code_map": {
+        "xzws": "西藏卫视",
+        "xzzh": "西藏综合",
+        "xzjj": "西藏经视",
+        "xzdy": "西藏都市",
+        "xzty": "西藏体育",
+        "xzys": "西藏影视",
+        "xzxc": "西藏乡村",
+        "xzkj": "西藏科教",
+        "xzgj": "西藏国际",
+        "xzgg": "西藏公共",
+        "lszh": "拉萨综合",
+        "lsjj": "拉萨经视",
+        "lsdy": "拉萨都市",
+        "lsxc": "拉萨乡村"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": false,
+      "github_patterns": [],
+      "social_keywords": [],
+      "known_urls": [],
+      "notes": ""
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:1d00::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "1d00"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:980:7000::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "980:7000"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  },
+  "央视CCTV": {
+    "basic": {
+      "province": "央视",
+      "province_en": "CCTV",
+      "region": "全国",
+      "enabled_methods": [
+        "method_1_probe",
+        "method_c_social_hints",
+        "method_ipv6_probe"
+      ]
+    },
+    "method_1_probe": {
+      "domains": [
+        "hls.cntv.myalicdn.com",
+        "live.cctv.cn",
+        "cntv.cn",
+        "cctv.com"
+      ],
+      "url_pattern": "http://{domain}/live/{code}/index.m3u8",
+      "res_options": [
+        "1080p",
+        "720p",
+        "360p"
+      ],
+      "probe_codes": [
+        "cctv1",
+        "cctv3",
+        "cctv5",
+        "cctv5plus",
+        "cctv6",
+        "cctv13",
+        "cctv16"
+      ],
+      "code_map": {
+        "cctv1": "CCTV-1 综合",
+        "cctv3": "CCTV-3 综艺",
+        "cctv5": "CCTV-5 体育",
+        "cctv5plus": "CCTV-5+ 体育赛事",
+        "cctv6": "CCTV-6 电影",
+        "cctv13": "CCTV-13 新闻",
+        "cctv16": "CCTV-16 奥林匹克"
+      },
+      "discovery_method": "known_only"
+    },
+    "method_a_api": {
+      "enabled": false,
+      "endpoints": []
+    },
+    "method_b_sniffer": {
+      "enabled": false,
+      "cidr_ranges": [],
+      "edge_domains": [],
+      "port_hints": [
+        80,
+        443,
+        8080
+      ],
+      "path_patterns": [],
+      "source": "public_bgp"
+    },
+    "method_c_social_hints": {
+      "enabled": true,
+      "github_patterns": [
+        "cntv.cn/live",
+        "cctv.com/live",
+        "cntv.myalicdn.com"
+      ],
+      "social_keywords": [
+        "央视",
+        "CCTV",
+        "cntv",
+        "中国中央电视台"
+      ],
+      "known_urls": [
+        "http://121.31.30.170/live-play.m3u8?id=cctv1",
+        "http://121.31.30.170/live-play.m3u8?id=cctv3",
+        "http://121.31.30.170/live-play.m3u8?id=cctv5",
+        "http://121.31.30.170/live-play.m3u8?id=cctv6",
+        "http://121.31.30.170/live-play.m3u8?id=cctv13"
+      ],
+      "notes": "央视源 — 基础中的基础，运营商转码节点。121.31.30.170 为四川电信 CDN 社交情报 IP。"
+    },
+    "method_ipv6_probe": {
+      "enabled": true,
+      "ipv6_templates": [
+        {
+          "isp": "cmcc",
+          "url_pattern": "http://[2409:8087:ff00::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "ff00"
+        },
+        {
+          "isp": "ctcc",
+          "url_pattern": "http://[240e:980:ff00::1]:8080/PLTV/88888888/224/322122{code}/index.m3u8",
+          "cidr_segment": "980:ff00"
+        }
+      ],
+      "probe_codes": [
+        "5473",
+        "5474",
+        "5475",
+        "5476",
+        "5477"
+      ],
+      "code_map": {
+        "5473": "CCTV-1 综合",
+        "5474": "CCTV-3 综艺",
+        "5475": "CCTV-5 体育",
+        "5476": "CCTV-6 电影",
+        "5477": "CCTV-13 新闻"
+      },
+      "notes": "IPv6 固定探针优先策略：先用 CCTV 通用频道探测节点存活"
+    }
+  }
+}

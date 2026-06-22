@@ -43,7 +43,7 @@ TS_SLICE_TIMEOUT = aiohttp.ClientTimeout(total=4)  # TS 切片下载(前10KB)
 MAX_M3U_BYTES = 1024    # #EXTM3U 校验读取量
 MAX_TS_BYTES = 10240    # TS 切片验证读取量
 
-BATCH_SIZE = 500        # 分批处理大小
+BATCH_SIZE = 100        # 分批处理大小
 
 # ── 双轨验证常量 ────────────────────────────────
 FLV_MAGIC = b'FLV'           # FLV 文件头魔数 (0x46 0x4C 0x56)
@@ -152,11 +152,31 @@ async def fetch_and_parse_sources() -> list[dict]:
     并发拉取所有订阅源 → M3U/TXT 解析 → MD5 去重
     返回: [{"name": raw_name, "url": stream_url}, ...]
     """
-    # 拉取所有源
-    connector = aiohttp.TCPConnector(limit=10, limit_per_host=3, enable_cleanup_closed=True)
+    big_source_names = ["yuanzl77/IPTV"]
+    normal_sources = [s for s in SOURCES if s["name"] not in big_source_names]
+    big_sources = [s for s in SOURCES if s["name"] in big_source_names]
+
+    raw_texts = [None] * len(SOURCES)
+    
+    connector = aiohttp.TCPConnector(limit=10, limit_per_host=5, enable_cleanup_closed=True)
     async with aiohttp.ClientSession(connector=connector, headers=HEADERS) as session:
-        tasks = [fetch_one_source(session, src) for src in SOURCES]
-        raw_texts = await asyncio.gather(*tasks)
+        # Step 1: 并发拉取普通源
+        normal_tasks = []
+        for i, src in enumerate(SOURCES):
+            if src["name"] not in big_source_names:
+                normal_tasks.append((i, fetch_one_source(session, src)))
+        
+        if normal_tasks:
+            indices, tasks = zip(*normal_tasks)
+            results = await asyncio.gather(*tasks)
+            for idx, res in zip(indices, results):
+                raw_texts[idx] = res
+
+        # Step 2: 序列化或延迟拉取大数据源 (yuanzl77)
+        for i, src in enumerate(SOURCES):
+            if src["name"] in big_source_names:
+                print(f"  [核心拉取] {src['name']} (大数据源, 正在加载...)...")
+                raw_texts[i] = await fetch_one_source(session, src)
 
     # 解析每个源的文本
     all_channels = []

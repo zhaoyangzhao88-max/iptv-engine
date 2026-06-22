@@ -344,6 +344,12 @@ EPG_IDS: dict[str, str] = {
     "TVB明珠台": "tvbpearl",
     "TVBS亚洲台": "tvbsasia",
     "TVBS新闻台": "tvbsnews",
+    # 扩展频道
+    "广东体育": "gdty",
+    "深圳体育": "szty",
+    "北京卡酷": "kaku",
+    "嘉佳卡通": "jiajia",
+    "金鹰卡通": "jinying",
 }
 
 

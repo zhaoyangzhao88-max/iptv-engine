@@ -32,8 +32,16 @@ import time
 import os
 import argparse
 import ipaddress
+import socket
 
 from config import HEADERS, OUTPUT_DIR, DATA_DIR
+
+# ── 可选依赖：psutil 用于 NIC IP 提取 ──────
+try:
+    import psutil
+    _HAS_PSUTIL = True
+except ImportError:
+    _HAS_PSUTIL = False
 
 # ── 配置常量 ──────────────────────────────────
 DEFAULT_CONCURRENCY = 20
@@ -49,6 +57,34 @@ def load_cdn_domains() -> dict:
     with open(DATA_FILE, encoding="utf-8") as f:
         data = json.load(f)
     return {k: v for k, v in data.items() if not k.startswith("_")}
+
+
+def _extract_json_path(data: dict, path: str):
+    """从嵌套 JSON dict 中按点号路径提取值（容错：键缺失返回 None）"""
+    keys = path.split(".")
+    current = data
+    for key in keys:
+        if isinstance(current, dict):
+            current = current.get(key)
+        else:
+            return None
+    return current
+
+
+async def _validate_m3u8_url(session: aiohttp.ClientSession, url: str, timeout_sec: int = 5) -> bool:
+    """验证 URL 是否为有效 M3U8 流（下载前 1024 字节校验 #EXTM3U）"""
+    try:
+        vtimeout = aiohttp.ClientTimeout(total=timeout_sec)
+        async with session.get(url, timeout=vtimeout, headers=HEADERS, allow_redirects=True, max_redirects=5) as resp:
+            if 200 <= resp.status < 300:
+                chunk = await resp.content.read(1024)
+                try:
+                    text = chunk.decode("utf-8", errors="ignore")
+                    return "#EXTM3U" in text
+                except Exception:
+                    return False
+    except Exception:
+        return False
 
 
 # ── 任务构建 ──────────────────────────────────
@@ -126,7 +162,7 @@ def _build_method1_tasks(cdn_domains: dict, target_province: str = None) -> list
 
 
 def _build_method_a_tasks(cdn_domains: dict, target_province: str = None) -> list[dict]:
-    """method_a_api: App 逆向 API 接口探测（含 Headers 防盗链）"""
+    """method_a_api: App 逆向 API 接口探测（含 Headers 防盗链 + probe_range 范围扫描）"""
     tasks = []
     for prov_name, cfg in cdn_domains.items():
         if target_province and target_province not in prov_name:
@@ -143,15 +179,23 @@ def _build_method_a_tasks(cdn_domains: dict, target_province: str = None) -> lis
         m1 = cfg.get("method_1_probe", {})
         probe_codes = m1.get("probe_codes", [])
         code_map = m1.get("code_map", {})
-        res_options = m1.get("res_options", ["1080p", "720p", "360p"])
 
         for ep in endpoints:
             api_url_template = ep.get("url", "")
             api_headers = ep.get("headers", {})
             api_name = ep.get("name", "unknown")
             response_path = ep.get("response_path", "")
+            probe_range = ep.get("probe_range", None)
 
-            for code in probe_codes:
+            # 支持 probe_range 动态生成 code 列表
+            if probe_range and len(probe_range) == 2:
+                range_start, range_end = probe_range[0], probe_range[1]
+                pad_width = len(str(range_end))
+                codes = [str(i).zfill(pad_width) for i in range(range_start, range_end + 1)]
+            else:
+                codes = probe_codes
+
+            for code in codes:
                 channel_name = code_map.get(code, code)
                 # 替换 URL 模板中的占位符
                 api_url = api_url_template.replace("{code}", code)
@@ -173,6 +217,7 @@ def _build_method_a_tasks(cdn_domains: dict, target_province: str = None) -> lis
                     "response_path": response_path,
                     "api_name": api_name,
                     "timeout_sec": 5,
+                    "_probe_range": probe_range or [],
                 })
 
     return tasks
@@ -355,6 +400,113 @@ def _build_method_ipv6_tasks(cdn_domains: dict, target_province: str = None) -> 
     return tasks
 
 
+# ── NIC 接口绑定工具 ─────────────────────────
+
+def _is_ipv6_url(url: str) -> bool:
+    """判断 URL 是否为 IPv6 地址格式（检测方括号包裹的 IPv6 地址）"""
+    return "[" in url
+
+
+def get_interface_ips(interface_name: str) -> tuple[str | None, str | None]:
+    """
+    根据网卡名称获取其 IPv4 地址和全球单播公网 IPv6 地址。
+
+    提取优先级：
+      1. 主路径：psutil（迭代所有 NIC，大小写不敏感部分匹配）
+      2. 降级路径：socket.getaddrinfo（psutil 缺失时回退）
+
+    过滤规则：
+      IPv4：排除 127.0.0.1 等环回地址，取第一个非环回地址
+      IPv6：排除 fe80:: 链路本地和 ::1 环回，只保留全球单播地址
+
+    返回 (ipv4_str | None, ipv6_str | None)
+    """
+    try:
+        if _HAS_PSUTIL:
+            return _get_ips_via_psutil(interface_name)
+        return _get_ips_via_socket()
+    except Exception as exc:
+        print(f"[NIC] 获取接口 IP 失败: {interface_name}，错误: {exc}，返回 (None, None)")
+        return (None, None)
+
+
+def _get_ips_via_psutil(interface_name: str) -> tuple[str | None, str | None]:
+    """psutil 主路径：枚举 NIC 地址并匹配接口名（大小写不敏感，部分匹配）"""
+    ipv4_addr = None
+    ipv6_addr = None
+
+    try:
+        all_interfaces = psutil.net_if_addrs()
+    except Exception:
+        return (None, None)
+
+    for iface, addrs in all_interfaces.items():
+        if interface_name.lower() not in iface.lower():
+            continue
+
+        for addr in addrs:
+            if addr.family == socket.AF_INET:
+                ip = addr.address
+                if ipv4_addr is None and not ip.startswith("127."):
+                    ipv4_addr = ip
+            elif addr.family == socket.AF_INET6:
+                ip = addr.address
+                if "%" in ip:
+                    ip = ip.split("%")[0]
+
+                if (
+                    ipv6_addr is None
+                    and ip != "::1"
+                    and not ip.startswith("fe80:")
+                    and ip.startswith(("2408:", "2409:", "240e:", "2001:"))
+                ):
+                    ipv6_addr = ip
+
+        if ipv4_addr is not None and ipv6_addr is not None:
+            break
+
+    return (ipv4_addr, ipv6_addr)
+
+
+def _get_ips_via_socket() -> tuple[str | None, str | None]:
+    """
+    psutil 降级路径：通过 socket.getaddrinfo 获取本机 IP。
+
+    该路径无法精确定位指定 NIC，仅提供基础 IP 绑定能力。
+    """
+    hostname = socket.gethostname()
+    try:
+        addrinfo_list = socket.getaddrinfo(
+            hostname, None, socket.AF_UNSPEC, socket.SOCK_STREAM
+        )
+    except socket.gaierror:
+        return (None, None)
+
+    ipv4_addr = None
+    ipv6_addr = None
+
+    for info in addrinfo_list:
+        family, _, _, _, sockaddr = info
+        ip = sockaddr[0]
+
+        if family == socket.AF_INET:
+            if ipv4_addr is None and not ip.startswith("127."):
+                ipv4_addr = ip
+        elif family == socket.AF_INET6:
+            if "%" in ip:
+                ip = ip.split("%")[0]
+
+            if (
+                ipv6_addr is None
+                and ip != "::1"
+                and not ip.startswith("fe80:")
+                and ip.startswith(("2408:", "2409:", "240e:", "2001:"))
+            ):
+                ipv6_addr = ip
+
+    return (ipv4_addr, ipv6_addr)
+
+
 # ── 探测核心 ──────────────────────────────────
 
 async def probe_single(
@@ -386,23 +538,59 @@ async def probe_single(
             timeout = aiohttp.ClientTimeout(total=effective_timeout)
 
             if method_type == "method_a_api":
-                # API 接口用 GET 请求
-                async with session.get(
-                    url,
-                    timeout=timeout,
-                    headers=merged_headers,
-                    allow_redirects=True,
-                    max_redirects=5,
-                ) as resp:
-                    if resp.status == 200:
-                        return {
-                            "name": task["channel_name"],
-                            "url": url,
-                            "province": task["province"],
-                            "domain": task["domain"],
-                            "method_type": method_type,
-                            "api_name": task.get("api_name", ""),
-                        }
+                # API 接口用 GET 请求 + 深度解析 + 二次流验证
+                try:
+                    async with session.get(
+                        url,
+                        timeout=timeout,
+                        headers=merged_headers,
+                        allow_redirects=True,
+                        max_redirects=5,
+                    ) as resp:
+                        if resp.status in (401, 403):
+                            print(f"  [API防盗链] {url} → HTTP {resp.status} (api={task.get('api_name','')}, code={task.get('code','')})")
+                            return None
+                        if 200 <= resp.status < 300:
+                            response_path = task.get("response_path", "")
+                            if response_path:
+                                try:
+                                    body = await resp.text()
+                                    json_data = json.loads(body)
+                                    stream_url = _extract_json_path(json_data, response_path)
+                                    if stream_url and isinstance(stream_url, str) and stream_url.startswith("http"):
+                                        is_valid = await _validate_m3u8_url(session, stream_url, timeout_sec=task.get("timeout_sec", 5))
+                                        if is_valid:
+                                            return {
+                                                "name": task["channel_name"],
+                                                "url": stream_url,
+                                                "province": task["province"],
+                                                "domain": task["domain"],
+                                                "method_type": method_type,
+                                                "api_name": task.get("api_name", ""),
+                                            }
+                                        else:
+                                            print(f"  [流验证失败] {stream_url} (api={task.get('api_name','')}, code={task.get('code','')})")
+                                            return None
+                                    else:
+                                        print(f"  [JSON解析失败] path={response_path} 未提取到URL (api={task.get('api_name','')}, code={task.get('code','')})")
+                                        return None
+                                except (json.JSONDecodeError, ValueError) as json_err:
+                                    print(f"  [JSON解析错误] {url} → {json_err}")
+                                    return None
+                            else:
+                                # 无 response_path，回退到 API URL
+                                return {
+                                    "name": task["channel_name"],
+                                    "url": url,
+                                    "province": task["province"],
+                                    "domain": task["domain"],
+                                    "method_type": method_type,
+                                    "api_name": task.get("api_name", ""),
+                                }
+                        # 其他非200状态码（如404、500）→ 判死，不输出
+                except Exception as exc:
+                    print(f"  [API探测异常] {url} → {type(exc).__name__}: {exc}")
+                    return None
             elif method_type == "method_ipv6_probe":
                 # IPv6 单播源：直接使用 GET + #EXTM3U 内容校验
                 try:
@@ -500,41 +688,124 @@ async def probe_all(
     tasks: list[dict],
     concurrency: int,
     timeout_sec: int,
+    interface_name: str | None = None,
 ) -> list[dict]:
     """
     并发探测所有任务，返回存活结果列表。
-    使用 asyncio.Semaphore 限制并发，防止被 CDN 防火墙封禁。
+
+    当 interface_name 为 None 时：使用默认路由的单会话模式（原有逻辑）
+    当 interface_name 指定时：按 IPv4/IPv6 分流绑定指定物理网卡
     """
     semaphore = asyncio.Semaphore(concurrency)
-    connector = aiohttp.TCPConnector(
-        limit=concurrency,
-        limit_per_host=5,
-        enable_cleanup_closed=True,
-    )
 
+    if interface_name is None:
+        connector = aiohttp.TCPConnector(
+            limit=concurrency,
+            limit_per_host=5,
+            enable_cleanup_closed=True,
+        )
+
+        async with aiohttp.ClientSession(connector=connector) as session:
+            return await _run_probes(tasks, session, None, semaphore, timeout_sec)
+
+    local_ipv4, local_ipv6 = get_interface_ips(interface_name)
+
+    if local_ipv4:
+        v4_status = local_ipv4
+    else:
+        v4_status = "未检测到 IPv4"
+
+    if local_ipv6:
+        v6_status = f"已绑定物理 IPv6: {local_ipv6}"
+    else:
+        v6_status = "未检测到公网 IPv6 地址（IPv6 探测通道将自动安全退避）"
+
+    print(f"[{interface_name} 状态自检] 已绑定物理 IPv4: {v4_status} | {v6_status}")
+
+    connector_v4 = None
+    session_v4 = None
+    session_v6 = None
+
+    if local_ipv4:
+        connector_v4 = aiohttp.TCPConnector(
+            limit=concurrency,
+            limit_per_host=5,
+            enable_cleanup_closed=True,
+            local_addr=(local_ipv4, 0),
+        )
+        session_v4 = aiohttp.ClientSession(connector=connector_v4)
+
+    if local_ipv6:
+        connector_v6 = aiohttp.TCPConnector(
+            limit=concurrency,
+            limit_per_host=5,
+            enable_cleanup_closed=True,
+            family=socket.AF_INET6,
+            local_addr=(local_ipv6, 0),
+        )
+        session_v6 = aiohttp.ClientSession(connector=connector_v6)
+
+    if session_v4 is None:
+        print(f"[{interface_name} 状态自检] 未检测到可用 IPv4，IPv4 探测通道将自动安全退避")
+        return []
+
+    try:
+        return await _run_probes(tasks, session_v4, session_v6, semaphore, timeout_sec)
+    finally:
+        await session_v4.close()
+        if session_v6 is not None:
+            await session_v6.close()
+
+
+async def _run_probes(
+    tasks: list[dict],
+    session_v4: aiohttp.ClientSession,
+    session_v6: aiohttp.ClientSession | None,
+    semaphore: asyncio.Semaphore,
+    timeout_sec: int,
+) -> list[dict]:
+    """
+    实际执行探测的协程。
+    保持分批处理与进度报告，并按目标 URL 的协议栈选择会话。
+    """
     alive_results = []
     total = len(tasks)
     completed = 0
     last_report = 0
+    skipped_ipv6 = 0
 
-    async with aiohttp.ClientSession(connector=connector) as session:
-        BATCH = 200
-        for batch_start in range(0, total, BATCH):
-            batch = tasks[batch_start : batch_start + BATCH]
-            batch_results = await asyncio.gather(*[
-                probe_single(session, task, semaphore, timeout_sec)
-                for task in batch
-            ])
+    BATCH = 200
+    for batch_start in range(0, total, BATCH):
+        batch = tasks[batch_start : batch_start + BATCH]
 
-            for result in batch_results:
-                completed += 1
-                if result is not None:
-                    alive_results.append(result)
+        async def _dispatch(task: dict) -> dict | None:
+            nonlocal skipped_ipv6
 
-            progress = completed / total * 100
-            if progress - last_report >= 10 or completed == total:
-                last_report = progress
-                print(f"  进度: {completed}/{total} ({progress:.0f}%) | 存活: {len(alive_results)}")
+            if _is_ipv6_url(task["url"]):
+                if session_v6 is None:
+                    skipped_ipv6 += 1
+                    return None
+                return await probe_single(session_v6, task, semaphore, timeout_sec)
+
+            return await probe_single(session_v4, task, semaphore, timeout_sec)
+
+        batch_results = await asyncio.gather(*[
+            _dispatch(task)
+            for task in batch
+        ])
+
+        for result in batch_results:
+            completed += 1
+            if result is not None:
+                alive_results.append(result)
+
+        progress = completed / total * 100
+        if progress - last_report >= 10 or completed == total:
+            last_report = progress
+            print(f"  进度: {completed}/{total} ({progress:.0f}%) | 存活: {len(alive_results)}")
+
+    if skipped_ipv6 > 0:
+        print(f"  [IPv6 退避] 已跳过 {skipped_ipv6} 个 IPv6 任务（未检测到有效 IPv6 通道）")
 
     return alive_results
 
@@ -618,6 +889,8 @@ async def main():
                         help=f"并发数（默认{DEFAULT_CONCURRENCY}）")
     parser.add_argument("--timeout", type=int, default=DEFAULT_TIMEOUT_SEC, help=f"超时秒数（默认{DEFAULT_TIMEOUT_SEC}）")
     parser.add_argument("--output", type=str, default=OUTPUT_FILE, help=f"输出文件名（默认{OUTPUT_FILE}）")
+    parser.add_argument("--interface", type=str, default=None,
+                        help="绑定物理网卡接口名（如：WLAN、Ethernet），未指定则使用系统默认路由")
     args = parser.parse_args()
 
     method_labels = {
@@ -664,7 +937,7 @@ async def main():
     # 开始探测
     print("── 开始探测 ──")
     t_start = time.monotonic()
-    alive_results = await probe_all(tasks, args.concurrency, args.timeout)
+    alive_results = await probe_all(tasks, args.concurrency, args.timeout, args.interface)
     elapsed = time.monotonic() - t_start
 
     # 构建输出

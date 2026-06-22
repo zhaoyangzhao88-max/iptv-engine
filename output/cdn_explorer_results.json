@@ -1,10 +1,10 @@
 {
   "_meta": {
     "version": "2.0",
-    "method": "method_1_probe",
-    "generated_at": "2026-06-21T16:34:42",
-    "elapsed_seconds": 0.8,
-    "total_probe_tasks": 60,
+    "method": "method_a_api",
+    "generated_at": "2026-06-22T11:10:44",
+    "elapsed_seconds": 0.6,
+    "total_probe_tasks": 40,
     "alive_urls": 0,
     "provinces_covered": 0,
     "province_stats": {}

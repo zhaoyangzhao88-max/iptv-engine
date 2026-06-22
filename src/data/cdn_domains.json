@@ -1,5 +1,22 @@
 {
-  "_comment": "全国广电 CDN 域名解析库 v2.0 (SMMD v1) | 多维架构: basic/method_1/method_a/method_b/method_c | 生成时间: 2026-06-21",
+  "_comment": "全国广电 CDN 域名解析库 v2.0 (SMMD v1) | 多维架构: basic/method_1/method_a/method_b/method_c/method_d | 生成时间: 2026-06-22",
+  "_method_d_aggregator": {
+    "enabled": true,
+    "description": "公开订阅源聚合清洗线（IPTV Washer）- 由 iptv_washer.py 驱动",
+    "sources": [
+      "fanmingming/live",
+      "vbskycn/iptv",
+      "iptv-org/iptv",
+      "YanG-1989/m3u",
+      "YueChan/Live",
+      "lwr851/live"
+    ],
+    "pipeline": "fetch→parse→dedup→HEAD+#EXTM3U→TS-slice-10KB→classify→output",
+    "output_files": [
+      "output/cleaned_iptv_list.m3u",
+      "output/cleaned_channels.json"
+    ]
+  },
   "_schema": {
     "version": "SMMD v1",
     "basic": {
@@ -157,6 +174,22 @@
           },
           "response_path": "data.play_url",
           "notes": "中国蓝新闻 App 逆向接口，Referer 防盗链"
+        },
+        {
+          "name": "中国蓝新闻API-区县扫码",
+          "url": "http://api.cztv.com/api/live/{code}",
+          "method": "GET",
+          "headers": {
+            "Referer": "http://www.cztv.com/",
+            "User-Agent": "Mozilla/5.0"
+          },
+          "params": {
+            "code": "{code}",
+            "res": "{res}"
+          },
+          "response_path": "data.play_url",
+          "probe_range": [1, 50],
+          "notes": "中国蓝新闻 App 逆向接口，自动扫描 001-050 区县级频道"
         }
       ]
     },
@@ -293,6 +326,22 @@
           },
           "response_path": "data.hls_url",
           "notes": "芒果TV移动端逆向接口，Host: mobile.api.mgtv.com 是关键防盗链"
+        },
+        {
+          "name": "芒果TV-API-区县扫码",
+          "url": "https://mobile.api.mgtv.com/api/v1/live/{code}",
+          "method": "GET",
+          "headers": {
+            "Host": "mobile.api.mgtv.com",
+            "User-Agent": "Mozilla/5.0 (Linux; Android 13; Pixel 7) AppleWebKit/537.36",
+            "Referer": "https://www.mgtv.com/"
+          },
+          "params": {
+            "code": "{code}"
+          },
+          "response_path": "data.hls_url",
+          "probe_range": [1, 30],
+          "notes": "芒果TV移动端逆向接口，自动扫描 001-030 区县级频道"
         }
       ]
     },

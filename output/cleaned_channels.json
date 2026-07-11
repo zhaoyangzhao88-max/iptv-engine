@@ -1,12 +1,12 @@
 {
   "_meta": {
-    "generated_at": "2026-07-10T23:23:48",
-    "total_channels": 1024,
+    "generated_at": "2026-07-11T23:10:23",
+    "total_channels": 956,
     "category_stats": {
-      "其他": 181,
-      "央视": 179,
-      "卫视": 338,
-      "地方台": 326
+      "其他": 216,
+      "央视": 147,
+      "卫视": 261,
+      "地方台": 332
     },
     "generator": "IPTV Washer v4.0",
     "pipeline": "fetch→parse→dedup→HEAD+#EXTM3U→dual-track(FLV/TS/HLS)→classify"
@@ -18,13 +18,6 @@
       "category": "其他",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/2026-07-10 17:56:40.png",
       "epg_id": ""
-    },
-    {
-      "name": "CCTV-1",
-      "url": "http://74.91.26.218:82/live/cctv1hd.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV1.png",
-      "epg_id": "cctv1"
     },
     {
       "name": "CCTV-1",
@@ -391,6 +384,13 @@
       "epg_id": "cctv12"
     },
     {
+      "name": "CCTV-12",
+      "url": "http://120.76.248.139/live/bfgd/4200000131.m3u8",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV12.png",
+      "epg_id": "cctv12"
+    },
+    {
       "name": "CCTV-13",
       "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv13hd",
       "category": "央视",
@@ -400,6 +400,13 @@
     {
       "name": "CCTV-13",
       "url": "http://74.91.26.218:82/live/cctv13hd.m3u8",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV13.png",
+      "epg_id": "cctv13"
+    },
+    {
+      "name": "CCTV-13",
+      "url": "http://120.76.248.139/live/bfgd/4200000067.m3u8",
       "category": "央视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV13.png",
       "epg_id": "cctv13"
@@ -463,6 +470,13 @@
     {
       "name": "CCTV-15",
       "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv15hd",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV15.png",
+      "epg_id": "cctv15"
+    },
+    {
+      "name": "CCTV-15",
+      "url": "http://120.76.248.139/live/bfgd/4200000133.m3u8",
       "category": "央视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV15.png",
       "epg_id": "cctv15"
@@ -1875,13 +1889,6 @@
       "epg_id": ""
     },
     {
-      "name": "普陀电视台",
-      "url": "https://l.cztvcloud.com/channels/lantian/SXputuo1/720p.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/普陀电视台.png",
-      "epg_id": ""
-    },
-    {
       "name": "普陀新闻综合",
       "url": "http://l.cztvcloud.com/channels/lantian/SXputuo1/720p.m3u8",
       "category": "地方台",
@@ -1970,6 +1977,13 @@
       "url": "http://zjtv-wshls.homecdn.com/live/2aa16.m3u8",
       "category": "其他",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/镇江二套社会民生.png",
+      "epg_id": ""
+    },
+    {
+      "name": "朝阳新闻综合",
+      "url": "http://120.76.248.139/live/bfgd/4200000282.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/朝阳新闻综合.png",
       "epg_id": ""
     },
     {
@@ -2103,20 +2117,6 @@
       "url": "http://satellitepull.cnr.cn/live/wx32fjdnjjgb/playlist.m3u8",
       "category": "地方台",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/福建经济.png",
-      "epg_id": ""
-    },
-    {
-      "name": "福建公共",
-      "url": "https://live.264788.xyz/channel/fujianxiangcungonggong?streamid=1cf7fc3a8f6d160c33b43c2f9507a0cc&livekey=01WgOR41rriMmMkzNsd0UoaxJRwetZdxIvtVk",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/福建公共.png",
-      "epg_id": ""
-    },
-    {
-      "name": "福建旅游",
-      "url": "https://live.264788.xyz/channel/fujianlvyou?streamid=8f26765ebf367079cef58c6b7752da1e&livekey=01WgOR41rriMmMkzNsd0UoaxJRwetZdxIvtVk",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/福建旅游.png",
       "epg_id": ""
     },
     {
@@ -2526,11 +2526,39 @@
       "epg_id": "dongfangweishi"
     },
     {
-      "name": "福建卫视",
-      "url": "http://8.138.7.223/tv/hxws.m3u8",
+      "name": "河北卫视",
+      "url": "http://120.76.248.139/live/bfgd/4200000108.m3u8",
       "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/福建卫视.png",
-      "epg_id": "fjtv"
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/河北卫视.png",
+      "epg_id": "hebei"
+    },
+    {
+      "name": "内蒙古卫视",
+      "url": "http://120.76.248.139/live/bfgd/4200000110.m3u8",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/内蒙古卫视.png",
+      "epg_id": "nmengtv"
+    },
+    {
+      "name": "海南卫视",
+      "url": "http://120.76.248.139/live/bfgd/4200000473.m3u8",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/海南卫视.png",
+      "epg_id": "hainantv"
+    },
+    {
+      "name": "宁夏卫视",
+      "url": "http://120.76.248.139/live/bfgd/4200000118.m3u8",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/宁夏卫视.png",
+      "epg_id": "nxtv"
+    },
+    {
+      "name": "农林卫视",
+      "url": "http://120.76.248.139/live/bfgd/4200000122.m3u8",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/农林卫视.png",
+      "epg_id": ""
     },
     {
       "name": "浙江卫视",
@@ -2743,45 +2771,24 @@
       "epg_id": "henanavtv"
     },
     {
-      "name": "福建卫视",
-      "url": "http://112.27.235.94:8000/hls/38/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/福建卫视.png",
-      "epg_id": "fjtv"
-    },
-    {
-      "name": "河北卫视",
-      "url": "http://112.27.235.94:8000/hls/39/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/河北卫视.png",
-      "epg_id": "hebei"
-    },
-    {
-      "name": "云南卫视",
-      "url": "http://112.27.235.94:8000/hls/40/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/云南卫视.png",
-      "epg_id": "yntv"
-    },
-    {
-      "name": "湖北卫视",
-      "url": "http://112.27.235.94:8000/hls/41/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/湖北卫视.png",
-      "epg_id": "hbtv"
-    },
-    {
-      "name": "天津卫视",
-      "url": "http://112.27.235.94:8000/hls/42/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/天津卫视.png",
-      "epg_id": "tjtv"
-    },
-    {
       "name": "重温经典",
       "url": "http://8.138.7.223/tv/cwjd.php",
       "category": "其他",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/重温经典.png",
+      "epg_id": ""
+    },
+    {
+      "name": "纪实科教",
+      "url": "http://120.76.248.139/live/bfgd/4200000113.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/纪实科教.png",
+      "epg_id": ""
+    },
+    {
+      "name": "新视觉",
+      "url": "http://120.76.248.139/live/bfgd/4200000249.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/新视觉.png",
       "epg_id": ""
     },
     {
@@ -2838,6 +2845,13 @@
       "url": "http://utv1.hqtvzb.com:9999/hls/world.m3u8",
       "category": "地方台",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/环球电视.png",
+      "epg_id": ""
+    },
+    {
+      "name": "耀才财经",
+      "url": "https://v3.mediacast.hk/webcast/bshdlive-pc/chunklist_w99771165.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/耀才财经.png",
       "epg_id": ""
     },
     {
@@ -2978,6 +2992,27 @@
       "url": "http://jsmov2.a.yximgs.com/bs3/video-hls/5203346449046555193_hlsb.m3u8",
       "category": "其他",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/龙门飞甲.png",
+      "epg_id": ""
+    },
+    {
+      "name": "中华特产",
+      "url": "http://120.76.248.139/live/bfgd/4200000158.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/中华特产.png",
+      "epg_id": ""
+    },
+    {
+      "name": "四海钓鱼",
+      "url": "http://120.76.248.139/live/bfgd/4200000229.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/四海钓鱼.png",
+      "epg_id": ""
+    },
+    {
+      "name": "环球旅游",
+      "url": "http://120.76.248.139/live/bfgd/4200000147.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/环球旅游.png",
       "epg_id": ""
     },
     {
@@ -3135,6 +3170,69 @@
       "epg_id": ""
     },
     {
+      "name": "辽宁公共",
+      "url": "http://120.76.248.139/live/bfgd/4200000077.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/辽宁公共.png",
+      "epg_id": ""
+    },
+    {
+      "name": "辽宁公共",
+      "url": "http://120.76.248.139/live/bfgd/4200000481.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/辽宁公共.png",
+      "epg_id": ""
+    },
+    {
+      "name": "辽宁影视剧",
+      "url": "http://120.76.248.139/live/bfgd/4200000070.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/辽宁影视剧.png",
+      "epg_id": ""
+    },
+    {
+      "name": "辽宁教育青少",
+      "url": "http://120.76.248.139/live/bfgd/4200000075.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/辽宁教育青少.png",
+      "epg_id": ""
+    },
+    {
+      "name": "辽宁生活",
+      "url": "http://120.76.248.139/live/bfgd/4200000073.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/辽宁生活.png",
+      "epg_id": ""
+    },
+    {
+      "name": "辽宁经济",
+      "url": "http://120.76.248.139/live/bfgd/4200000076.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/辽宁经济.png",
+      "epg_id": ""
+    },
+    {
+      "name": "辽宁经济",
+      "url": "http://120.76.248.139/live/bfgd/4200000480.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/辽宁经济.png",
+      "epg_id": ""
+    },
+    {
+      "name": "辽宁都市",
+      "url": "http://120.76.248.139/live/bfgd/4200000068.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/辽宁都市.png",
+      "epg_id": ""
+    },
+    {
+      "name": "辽宁都市",
+      "url": "http://120.76.248.139/live/bfgd/4200000610.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/辽宁都市.png",
+      "epg_id": ""
+    },
+    {
       "name": "广州新闻",
       "url": "http://tencentplay.gztv.com/live/xinwen.m3u8?txSecret=d2c2db0b598c02ec1b5623728434d367&txTime=18d57929bd3",
       "category": "地方台",
@@ -3167,20 +3265,6 @@
       "url": "https://stream.sun0769.com/dgrtv1/mp4tv2_800/index.m3u8",
       "category": "地方台",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/东莞生活资讯.png",
-      "epg_id": ""
-    },
-    {
-      "name": "河源综合",
-      "url": "http://tmpstream.hyrtv.cn/xwzh/sd/live.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/河源综合.png",
-      "epg_id": ""
-    },
-    {
-      "name": "河源公共",
-      "url": "http://tmpstream.hyrtv.cn/hygg/sd/live.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/河源公共.png",
       "epg_id": ""
     },
     {
@@ -3541,235 +3625,11 @@
       "epg_id": ""
     },
     {
-      "name": "CCTV-1",
-      "url": "http://183.11.239.36:808/hls/19/index.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV1.png",
-      "epg_id": "cctv1"
-    },
-    {
-      "name": "CCTV-1",
-      "url": "http://61.136.172.236:9901/tsfile/live/0001_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV1.png",
-      "epg_id": "cctv1"
-    },
-    {
-      "name": "CCTV-1",
-      "url": "http://59.39.89.130:60901/tsfile/live/0001_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV1.png",
-      "epg_id": "cctv1"
-    },
-    {
-      "name": "CCTV-1",
-      "url": "http://61.136.172.236:9901/tsfile/live/0001_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV1.png",
-      "epg_id": "cctv1"
-    },
-    {
-      "name": "CCTV-2",
-      "url": "http://218.13.170.98:9901/tsfile/live/0002_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV2.png",
-      "epg_id": "cctv2"
-    },
-    {
-      "name": "CCTV-2",
-      "url": "http://61.136.172.236:9901/tsfile/live/0002_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV2.png",
-      "epg_id": "cctv2"
-    },
-    {
-      "name": "CCTV-2",
-      "url": "http://61.136.172.236:9901/tsfile/live/0002_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV2.png",
-      "epg_id": "cctv2"
-    },
-    {
-      "name": "CCTV-2",
-      "url": "http://222.169.85.8:9901/tsfile/live/0002_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV2.png",
-      "epg_id": "cctv2"
-    },
-    {
       "name": "CCTV-3",
-      "url": "http://182.150.23.74:808/hls/3/index.m3u8",
+      "url": "http://222.169.85.8:9901/tsfile/live/0003_1.m3u8?key=txiptv&playlive=1&authid=0",
       "category": "央视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV3.png",
       "epg_id": "cctv3"
-    },
-    {
-      "name": "CCTV-3",
-      "url": "http://61.136.172.236:9901/tsfile/live/0003_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV3.png",
-      "epg_id": "cctv3"
-    },
-    {
-      "name": "CCTV-3",
-      "url": "http://59.39.89.130:60901/tsfile/live/0003_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV3.png",
-      "epg_id": "cctv3"
-    },
-    {
-      "name": "CCTV-4",
-      "url": "https://global.cgtn.cicc.media.caton.cloud/master/cgtn-america.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV4.png",
-      "epg_id": "cctv4"
-    },
-    {
-      "name": "CCTV-4",
-      "url": "http://183.11.239.36:808/hls/67/index.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV4.png",
-      "epg_id": "cctv4"
-    },
-    {
-      "name": "CCTV-4",
-      "url": "http://123.130.84.106:8154/tsfile/live/0004_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV4.png",
-      "epg_id": "cctv4"
-    },
-    {
-      "name": "CCTV-5",
-      "url": "http://61.136.172.236:9901/tsfile/live/0005_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV5.png",
-      "epg_id": "cctv5"
-    },
-    {
-      "name": "CCTV-5",
-      "url": "http://222.169.85.8:9901/tsfile/live/0005_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV5.png",
-      "epg_id": "cctv5"
-    },
-    {
-      "name": "CCTV-5",
-      "url": "http://61.136.172.236:9901/tsfile/live/0005_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV5.png",
-      "epg_id": "cctv5"
-    },
-    {
-      "name": "CCTV-5",
-      "url": "http://182.150.23.74:808/hls/5/index.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV5.png",
-      "epg_id": "cctv5"
-    },
-    {
-      "name": "CCTV-5+",
-      "url": "http://183.129.255.66:8480/hls/6/index.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV5+.png",
-      "epg_id": "cctv5plus"
-    },
-    {
-      "name": "CCTV-5+",
-      "url": "http://cssbyd.imwork.net:8082/hls/6/index.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV5+.png",
-      "epg_id": "cctv5plus"
-    },
-    {
-      "name": "CCTV-5+",
-      "url": "http://123.130.84.106:8154/tsfile/live/0016_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV5+.png",
-      "epg_id": "cctv5plus"
-    },
-    {
-      "name": "CCTV-5+",
-      "url": "http://61.136.172.236:9901/tsfile/live/0016_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV5+.png",
-      "epg_id": "cctv5plus"
-    },
-    {
-      "name": "CCTV-5+",
-      "url": "http://123.130.84.106:8154/tsfile/live/0016_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV5+.png",
-      "epg_id": "cctv5plus"
-    },
-    {
-      "name": "CCTV-6",
-      "url": "http://222.169.85.8:9901/tsfile/live/0006_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV6.png",
-      "epg_id": "cctv6"
-    },
-    {
-      "name": "CCTV-6",
-      "url": "http://182.150.23.74:808/hls/6/index.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV6.png",
-      "epg_id": "cctv6"
-    },
-    {
-      "name": "CCTV-6",
-      "url": "http://123.130.84.106:8154/tsfile/live/0006_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV6.png",
-      "epg_id": "cctv6"
-    },
-    {
-      "name": "CCTV-6",
-      "url": "http://61.136.172.236:9901/tsfile/live/0006_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV6.png",
-      "epg_id": "cctv6"
-    },
-    {
-      "name": "CCTV-6",
-      "url": "http://59.39.89.130:60901/tsfile/live/0006_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV6.png",
-      "epg_id": "cctv6"
-    },
-    {
-      "name": "CCTV-7",
-      "url": "http://123.130.84.106:8154/tsfile/live/0007_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV7.png",
-      "epg_id": "cctv7"
-    },
-    {
-      "name": "CCTV-7",
-      "url": "http://123.130.84.106:8154/tsfile/live/0007_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV7.png",
-      "epg_id": "cctv7"
-    },
-    {
-      "name": "CCTV-7",
-      "url": "http://183.11.239.36:808/hls/25/index.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV7.png",
-      "epg_id": "cctv7"
-    },
-    {
-      "name": "CCTV-8",
-      "url": "http://61.136.172.236:9901/tsfile/live/0008_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV8.png",
-      "epg_id": "cctv8"
-    },
-    {
-      "name": "CCTV-8",
-      "url": "http://123.130.84.106:8154/tsfile/live/0008_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV8.png",
-      "epg_id": "cctv8"
     },
     {
       "name": "CCTV-8",
@@ -3777,118 +3637,6 @@
       "category": "央视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV8.png",
       "epg_id": "cctv8"
-    },
-    {
-      "name": "CCTV-8",
-      "url": "http://123.130.84.106:8154/tsfile/live/0008_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV8.png",
-      "epg_id": "cctv8"
-    },
-    {
-      "name": "CCTV-8",
-      "url": "http://61.136.172.236:9901/tsfile/live/0008_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV8.png",
-      "epg_id": "cctv8"
-    },
-    {
-      "name": "CCTV-9",
-      "url": "http://182.150.23.74:808/hls/9/index.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV9.png",
-      "epg_id": "cctv9"
-    },
-    {
-      "name": "CCTV-9",
-      "url": "http://123.130.84.106:8154/tsfile/live/0009_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV9.png",
-      "epg_id": "cctv9"
-    },
-    {
-      "name": "CCTV-9",
-      "url": "http://61.136.172.236:9901/tsfile/live/0009_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV9.png",
-      "epg_id": "cctv9"
-    },
-    {
-      "name": "CCTV-10",
-      "url": "http://182.150.23.74:808/hls/10/index.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV10.png",
-      "epg_id": "cctv10"
-    },
-    {
-      "name": "CCTV-10",
-      "url": "http://61.136.172.236:9901/tsfile/live/0010_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV10.png",
-      "epg_id": "cctv10"
-    },
-    {
-      "name": "CCTV-10",
-      "url": "http://59.39.89.130:60901/tsfile/live/0010_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV10.png",
-      "epg_id": "cctv10"
-    },
-    {
-      "name": "CCTV-10",
-      "url": "http://222.169.85.8:9901/tsfile/live/0010_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV10.png",
-      "epg_id": "cctv10"
-    },
-    {
-      "name": "CCTV-11",
-      "url": "http://61.136.172.236:9901/tsfile/live/0011_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV11.png",
-      "epg_id": "cctv11"
-    },
-    {
-      "name": "CCTV-11",
-      "url": "http://61.136.172.236:9901/tsfile/live/0011_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV11.png",
-      "epg_id": "cctv11"
-    },
-    {
-      "name": "CCTV-11",
-      "url": "http://222.169.85.8:9901/tsfile/live/0011_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV11.png",
-      "epg_id": "cctv11"
-    },
-    {
-      "name": "CCTV-11",
-      "url": "http://182.150.23.74:808/hls/11/index.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV11.png",
-      "epg_id": "cctv11"
-    },
-    {
-      "name": "CCTV-12",
-      "url": "http://182.150.23.74:808/hls/12/index.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV12.png",
-      "epg_id": "cctv12"
-    },
-    {
-      "name": "CCTV-12",
-      "url": "http://183.11.239.36:808/hls/30/index.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV12.png",
-      "epg_id": "cctv12"
-    },
-    {
-      "name": "CCTV-12",
-      "url": "http://61.136.172.236:9901/tsfile/live/0012_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV12.png",
-      "epg_id": "cctv12"
     },
     {
       "name": "CCTV-12",
@@ -3903,97 +3651,6 @@
       "category": "央视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV13.png",
       "epg_id": "cctv13"
-    },
-    {
-      "name": "CCTV-13",
-      "url": "http://183.11.239.36:808/hls/31/index.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV13.png",
-      "epg_id": "cctv13"
-    },
-    {
-      "name": "CCTV-13",
-      "url": "http://222.169.85.8:9901/tsfile/live/0013_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV13.png",
-      "epg_id": "cctv13"
-    },
-    {
-      "name": "CCTV-13",
-      "url": "http://61.136.172.236:9901/tsfile/live/0013_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV13.png",
-      "epg_id": "cctv13"
-    },
-    {
-      "name": "CCTV-13",
-      "url": "http://59.39.89.130:60901/tsfile/live/0013_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV13.png",
-      "epg_id": "cctv13"
-    },
-    {
-      "name": "CCTV-14",
-      "url": "http://182.150.23.74:808/hls/14/index.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV14.png",
-      "epg_id": "cctv14"
-    },
-    {
-      "name": "CCTV-14",
-      "url": "http://61.136.172.236:9901/tsfile/live/0014_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV14.png",
-      "epg_id": "cctv14"
-    },
-    {
-      "name": "CCTV-14",
-      "url": "http://61.136.172.236:9901/tsfile/live/0014_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV14.png",
-      "epg_id": "cctv14"
-    },
-    {
-      "name": "CCTV-15",
-      "url": "http://222.134.245.16:9901/tsfile/live/0015_1.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV15.png",
-      "epg_id": "cctv15"
-    },
-    {
-      "name": "CCTV-15",
-      "url": "http://61.136.172.236:9901/tsfile/live/0015_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV15.png",
-      "epg_id": "cctv15"
-    },
-    {
-      "name": "CCTV-15",
-      "url": "http://222.134.245.16:9901/tsfile/live/0015_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV15.png",
-      "epg_id": "cctv15"
-    },
-    {
-      "name": "CCTV-16",
-      "url": "http://gmxw.7766.org:808/hls/169/index.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV16.png",
-      "epg_id": "cctv16"
-    },
-    {
-      "name": "CCTV-16",
-      "url": "http://183.11.239.36:808/hls/169/index.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV16.png",
-      "epg_id": "cctv16"
-    },
-    {
-      "name": "CCTV-17",
-      "url": "http://183.11.239.36:808/hls/35/index.m3u8",
-      "category": "央视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV17.png",
-      "epg_id": "cctv17"
     },
     {
       "name": "CGTN俄语",
@@ -4024,104 +3681,6 @@
       "epg_id": ""
     },
     {
-      "name": "安徽卫视",
-      "url": "http://182.150.23.74:808/hls/25/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/安徽卫视.png",
-      "epg_id": "ahtv"
-    },
-    {
-      "name": "安徽卫视",
-      "url": "http://222.134.245.16:9901/tsfile/live/0130_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/安徽卫视.png",
-      "epg_id": "ahtv"
-    },
-    {
-      "name": "安徽卫视",
-      "url": "http://61.136.172.236:9901/tsfile/live/0130_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/安徽卫视.png",
-      "epg_id": "ahtv"
-    },
-    {
-      "name": "安徽卫视",
-      "url": "http://59.39.89.130:60901/tsfile/live/0125_6.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/安徽卫视.png",
-      "epg_id": "ahtv"
-    },
-    {
-      "name": "北京卫视",
-      "url": "http://satellitepull.cnr.cn/live/wxbtv/playlist.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/北京卫视.png",
-      "epg_id": "brtv"
-    },
-    {
-      "name": "北京卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0122_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/北京卫视.png",
-      "epg_id": "brtv"
-    },
-    {
-      "name": "北京卫视",
-      "url": "http://222.134.245.16:9901/tsfile/live/0122_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/北京卫视.png",
-      "epg_id": "brtv"
-    },
-    {
-      "name": "北京卫视",
-      "url": "http://59.39.89.130:60901/tsfile/live/0125_7.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/北京卫视.png",
-      "epg_id": "brtv"
-    },
-    {
-      "name": "兵团卫视",
-      "url": "http://218.13.170.98:9901/tsfile/live/0115_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/兵团卫视.png",
-      "epg_id": ""
-    },
-    {
-      "name": "兵团卫视",
-      "url": "http://183.11.239.36:808/hls/7/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/兵团卫视.png",
-      "epg_id": ""
-    },
-    {
-      "name": "东方卫视",
-      "url": "http://218.13.170.98:9901/tsfile/live/1010_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/东方卫视.png",
-      "epg_id": "dongfangweishi"
-    },
-    {
-      "name": "福建卫视",
-      "url": "http://61.136.172.236:9901/tsfile/live/0137_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/福建卫视.png",
-      "epg_id": "fjtv"
-    },
-    {
-      "name": "福建卫视",
-      "url": "http://61.136.172.236:9901/tsfile/live/0137_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/福建卫视.png",
-      "epg_id": "fjtv"
-    },
-    {
-      "name": "福建卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0137_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/福建卫视.png",
-      "epg_id": "fjtv"
-    },
-    {
       "name": "甘肃卫视",
       "url": "http://live.zohi.tv/video/s10001-fztv-3/index.m3u8",
       "category": "卫视",
@@ -4129,43 +3688,8 @@
       "epg_id": "gstv"
     },
     {
-      "name": "甘肃卫视",
-      "url": "http://cssbyd.imwork.net:8082/hls/48/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/甘肃卫视.png",
-      "epg_id": "gstv"
-    },
-    {
-      "name": "甘肃卫视",
-      "url": "http://218.13.170.98:9901/tsfile/live/0141_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/甘肃卫视.png",
-      "epg_id": "gstv"
-    },
-    {
-      "name": "甘肃卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0141_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/甘肃卫视.png",
-      "epg_id": "gstv"
-    },
-    {
-      "name": "甘肃卫视",
-      "url": "http://183.11.239.36:808/hls/119/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/甘肃卫视.png",
-      "epg_id": "gstv"
-    },
-    {
       "name": "广东卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0125_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/广东卫视.png",
-      "epg_id": "gdtv"
-    },
-    {
-      "name": "广东卫视",
-      "url": "http://61.136.172.236:9901/tsfile/live/0125_1.m3u8",
+      "url": "http://222.169.85.8:9901/tsfile/live/0125_1.m3u8?key=txiptv&playlive=1&authid=0",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/广东卫视.png",
       "epg_id": "gdtv"
@@ -4178,179 +3702,11 @@
       "epg_id": "gxtv"
     },
     {
-      "name": "广西卫视",
-      "url": "http://183.11.239.36:808/hls/56/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/广西卫视.png",
-      "epg_id": "gxtv"
-    },
-    {
-      "name": "广西卫视",
-      "url": "http://182.150.23.74:808/hls/31/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/广西卫视.png",
-      "epg_id": "gxtv"
-    },
-    {
-      "name": "广西卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0113_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/广西卫视.png",
-      "epg_id": "gxtv"
-    },
-    {
-      "name": "贵州卫视",
-      "url": "http://182.150.23.74:808/hls/26/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/贵州卫视.png",
-      "epg_id": "gztv"
-    },
-    {
-      "name": "贵州卫视",
-      "url": "http://183.11.239.36:808/hls/49/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/贵州卫视.png",
-      "epg_id": "gztv"
-    },
-    {
-      "name": "贵州卫视",
-      "url": "http://61.136.172.236:9901/tsfile/live/0120_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/贵州卫视.png",
-      "epg_id": "gztv"
-    },
-    {
-      "name": "贵州卫视",
-      "url": "http://59.39.89.130:60901/tsfile/live/0125_15.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/贵州卫视.png",
-      "epg_id": "gztv"
-    },
-    {
-      "name": "海南卫视",
-      "url": "http://cssbyd.imwork.net:8082/hls/31/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/海南卫视.png",
-      "epg_id": "hainantv"
-    },
-    {
       "name": "海南卫视",
       "url": "http://111.221.137.234:44330/tsfile/live/0117_1.m3u8?key=txiptv&playlive=0&authid=0",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/海南卫视.png",
       "epg_id": "hainantv"
-    },
-    {
-      "name": "海南卫视",
-      "url": "http://183.11.239.36:808/hls/124/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/海南卫视.png",
-      "epg_id": "hainantv"
-    },
-    {
-      "name": "福建卫视",
-      "url": "http://38.64.72.148:80/hls/modn/list/4009/chunklist0.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/福建卫视.png",
-      "epg_id": "fjtv"
-    },
-    {
-      "name": "福建卫视",
-      "url": "http://38.64.72.148:80/hls/modn/list/4009/playlist.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/福建卫视.png",
-      "epg_id": "fjtv"
-    },
-    {
-      "name": "河北卫视",
-      "url": "http://183.11.239.36:808/hls/54/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/河北卫视.png",
-      "epg_id": "hebei"
-    },
-    {
-      "name": "河北卫视",
-      "url": "http://61.136.172.236:9901/tsfile/live/0117_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/河北卫视.png",
-      "epg_id": "hebei"
-    },
-    {
-      "name": "河北卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0117_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/河北卫视.png",
-      "epg_id": "hebei"
-    },
-    {
-      "name": "河北卫视",
-      "url": "http://61.136.172.236:9901/tsfile/live/0117_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/河北卫视.png",
-      "epg_id": "hebei"
-    },
-    {
-      "name": "河南卫视",
-      "url": "http://183.11.239.36:808/hls/51/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/河南卫视.png",
-      "epg_id": "henanavtv"
-    },
-    {
-      "name": "河南卫视",
-      "url": "http://61.136.172.236:9901/tsfile/live/0139_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/河南卫视.png",
-      "epg_id": "henanavtv"
-    },
-    {
-      "name": "河南卫视",
-      "url": "http://61.136.172.236:9901/tsfile/live/0139_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/河南卫视.png",
-      "epg_id": "henanavtv"
-    },
-    {
-      "name": "河南卫视",
-      "url": "http://182.150.23.74:808/hls/33/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/河南卫视.png",
-      "epg_id": "henanavtv"
-    },
-    {
-      "name": "湖北卫视",
-      "url": "http://124.116.183.146:9901/tsfile/live/0132_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/湖北卫视.png",
-      "epg_id": "hbtv"
-    },
-    {
-      "name": "湖北卫视",
-      "url": "http://182.150.23.74:808/hls/28/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/湖北卫视.png",
-      "epg_id": "hbtv"
-    },
-    {
-      "name": "湖北卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0132_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/湖北卫视.png",
-      "epg_id": "hbtv"
-    },
-    {
-      "name": "湖北卫视",
-      "url": "http://183.11.239.36:808/hls/46/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/湖北卫视.png",
-      "epg_id": "hbtv"
-    },
-    {
-      "name": "湖南卫视",
-      "url": "https://txmov2.a.kwimgs.com/bs3/video-hls/5199687338554291078_hlsb.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/湖南卫视.png",
-      "epg_id": "hunantv"
     },
     {
       "name": "湖南卫视",
@@ -4360,188 +3716,6 @@
       "epg_id": "hunantv"
     },
     {
-      "name": "湖南卫视",
-      "url": "http://antvlive.ab5c6921.cdnviet.com/antv/playlist.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/湖南卫视.png",
-      "epg_id": "hunantv"
-    },
-    {
-      "name": "湖南卫视",
-      "url": "http://218.13.170.98:9901/tsfile/live/1001_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/湖南卫视.png",
-      "epg_id": "hunantv"
-    },
-    {
-      "name": "吉林卫视",
-      "url": "http://cssbyd.imwork.net:8082/hls/41/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/吉林卫视.png",
-      "epg_id": "jltv"
-    },
-    {
-      "name": "吉林卫视",
-      "url": "http://61.136.172.236:9901/tsfile/live/0116_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/吉林卫视.png",
-      "epg_id": "jltv"
-    },
-    {
-      "name": "吉林卫视",
-      "url": "http://59.39.89.130:60901/tsfile/live/0125_19.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/吉林卫视.png",
-      "epg_id": "jltv"
-    },
-    {
-      "name": "吉林卫视",
-      "url": "http://61.136.172.236:9901/tsfile/live/0116_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/吉林卫视.png",
-      "epg_id": "jltv"
-    },
-    {
-      "name": "江苏卫视",
-      "url": "http://218.13.170.98:9901/tsfile/live/1003_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/江苏卫视.png",
-      "epg_id": "jssat"
-    },
-    {
-      "name": "江苏卫视",
-      "url": "http://183.11.239.36:808/hls/38/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/江苏卫视.png",
-      "epg_id": "jssat"
-    },
-    {
-      "name": "江苏卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0127_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/江苏卫视.png",
-      "epg_id": "jssat"
-    },
-    {
-      "name": "江苏卫视",
-      "url": "http://61.136.172.236:9901/tsfile/live/0127_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/江苏卫视.png",
-      "epg_id": "jssat"
-    },
-    {
-      "name": "江西卫视",
-      "url": "http://182.150.23.74:808/hls/30/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/江西卫视.png",
-      "epg_id": "jxtv"
-    },
-    {
-      "name": "江西卫视",
-      "url": "http://61.136.172.236:9901/tsfile/live/0138_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/江西卫视.png",
-      "epg_id": "jxtv"
-    },
-    {
-      "name": "江西卫视",
-      "url": "http://59.39.89.130:60901/tsfile/live/0125_10.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/江西卫视.png",
-      "epg_id": "jxtv"
-    },
-    {
-      "name": "江西卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0138_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/江西卫视.png",
-      "epg_id": "jxtv"
-    },
-    {
-      "name": "辽宁卫视",
-      "url": "http://61.136.172.236:9901/tsfile/live/0121_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/辽宁卫视.png",
-      "epg_id": "lntv"
-    },
-    {
-      "name": "辽宁卫视",
-      "url": "http://59.39.89.130:60901/tsfile/live/0125_13.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/辽宁卫视.png",
-      "epg_id": "lntv"
-    },
-    {
-      "name": "辽宁卫视",
-      "url": "http://61.136.172.236:9901/tsfile/live/0121_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/辽宁卫视.png",
-      "epg_id": "lntv"
-    },
-    {
-      "name": "辽宁卫视",
-      "url": "http://183.11.239.36:808/hls/47/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/辽宁卫视.png",
-      "epg_id": "lntv"
-    },
-    {
-      "name": "宁夏卫视",
-      "url": "http://cssbyd.imwork.net:8082/hls/45/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/宁夏卫视.png",
-      "epg_id": "nxtv"
-    },
-    {
-      "name": "宁夏卫视",
-      "url": "http://183.11.239.36:808/hls/106/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/宁夏卫视.png",
-      "epg_id": "nxtv"
-    },
-    {
-      "name": "农林卫视",
-      "url": "http://124.116.183.146:9901/tsfile/live/1004_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/农林卫视.png",
-      "epg_id": ""
-    },
-    {
-      "name": "农林卫视",
-      "url": "http://124.116.183.146:9901/tsfile/live/1004_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/农林卫视.png",
-      "epg_id": ""
-    },
-    {
-      "name": "厦门卫视",
-      "url": "http://183.11.239.36:808/hls/17/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/厦门卫视.png",
-      "epg_id": ""
-    },
-    {
-      "name": "山东卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0131_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/山东卫视.png",
-      "epg_id": "sdtv"
-    },
-    {
-      "name": "山东卫视",
-      "url": "http://61.136.172.236:9901/tsfile/live/0131_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/山东卫视.png",
-      "epg_id": "sdtv"
-    },
-    {
-      "name": "山东卫视",
-      "url": "http://61.136.172.236:9901/tsfile/live/0131_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/山东卫视.png",
-      "epg_id": "sdtv"
-    },
-    {
       "name": "山西卫视",
       "url": "http://119.39.9.8:9901/tsfile/live/0118_1.m3u8",
       "category": "卫视",
@@ -4549,113 +3723,15 @@
       "epg_id": "shanxi"
     },
     {
-      "name": "深圳卫视",
-      "url": "http://182.150.23.74:808/hls/20/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/深圳卫视.png",
-      "epg_id": "sztv"
-    },
-    {
-      "name": "深圳卫视",
-      "url": "http://gmxw.7766.org:808/hls/45/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/深圳卫视.png",
-      "epg_id": "sztv"
-    },
-    {
-      "name": "深圳卫视",
-      "url": "http://61.136.172.236:9901/tsfile/live/0126_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/深圳卫视.png",
-      "epg_id": "sztv"
-    },
-    {
-      "name": "深圳卫视",
-      "url": "http://38.64.72.148:80/hls/modn/list/4007/playlist.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/深圳卫视.png",
-      "epg_id": "sztv"
-    },
-    {
-      "name": "四川卫视",
-      "url": "http://182.150.23.74:808/hls/38/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/四川卫视.png",
-      "epg_id": "sctv"
-    },
-    {
-      "name": "四川卫视",
-      "url": "http://222.134.245.16:9901/tsfile/live/0123_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/四川卫视.png",
-      "epg_id": "sctv"
-    },
-    {
-      "name": "四川卫视",
-      "url": "http://61.136.172.236:9901/tsfile/live/0123_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/四川卫视.png",
-      "epg_id": "sctv"
-    },
-    {
-      "name": "四川卫视",
-      "url": "http://59.39.89.130:60901/tsfile/live/0125_16.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/四川卫视.png",
-      "epg_id": "sctv"
-    },
-    {
       "name": "天津卫视",
-      "url": "http://124.116.183.146:9901/tsfile/live/0135_1.m3u8",
+      "url": "http://222.169.85.8:9901/tsfile/live/0135_1.m3u8?key=txiptv&playlive=1&authid=0",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/天津卫视.png",
       "epg_id": "tjtv"
-    },
-    {
-      "name": "天津卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0135_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/天津卫视.png",
-      "epg_id": "tjtv"
-    },
-    {
-      "name": "天津卫视",
-      "url": "http://61.136.172.236:9901/tsfile/live/0135_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/天津卫视.png",
-      "epg_id": "tjtv"
-    },
-    {
-      "name": "西藏卫视",
-      "url": "http://cssbyd.imwork.net:8082/hls/46/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/西藏卫视.png",
-      "epg_id": "xizang"
-    },
-    {
-      "name": "西藏卫视",
-      "url": "http://183.11.239.36:808/hls/64/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/西藏卫视.png",
-      "epg_id": "xizang"
     },
     {
       "name": "新疆卫视",
       "url": "http://218.84.12.186:8001/hls/main/playlist.m3u8?zxinjd;http://218.84.12.186:8001/hls/main/playlist.m3u8zxinjd",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/新疆卫视.png",
-      "epg_id": "xjtv"
-    },
-    {
-      "name": "新疆卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0110_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/新疆卫视.png",
-      "epg_id": "xjtv"
-    },
-    {
-      "name": "新疆卫视",
-      "url": "http://183.11.239.36:808/hls/65/index.m3u8",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/新疆卫视.png",
       "epg_id": "xjtv"
@@ -4668,43 +3744,15 @@
       "epg_id": ""
     },
     {
-      "name": "延边卫视",
-      "url": "http://gmxw.7766.org:808/hls/15/index.m3u8",
+      "name": "浙江卫视",
+      "url": "http://ali-m-l.cztv.com:80/channels/lantian/channel001/1080p.m3u8",
       "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/延边卫视.png",
-      "epg_id": ""
-    },
-    {
-      "name": "云南卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0119_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/云南卫视.png",
-      "epg_id": "yntv"
-    },
-    {
-      "name": "云南卫视",
-      "url": "http://59.39.89.130:60901/tsfile/live/0125_18.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/云南卫视.png",
-      "epg_id": "yntv"
-    },
-    {
-      "name": "云南卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0119_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/云南卫视.png",
-      "epg_id": "yntv"
-    },
-    {
-      "name": "云南卫视",
-      "url": "http://183.11.239.36:808/hls/52/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/云南卫视.png",
-      "epg_id": "yntv"
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江卫视.png",
+      "epg_id": "zjstv"
     },
     {
       "name": "浙江卫视",
-      "url": "http://ali-xwl.cztv.com/live/channel011080Plxw.m3u8",
+      "url": "http://ali-m-l.cztv.com/channels/lantian/channel01/1080p.m3u8",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江卫视.png",
       "epg_id": "zjstv"
@@ -4718,52 +3766,10 @@
     },
     {
       "name": "浙江卫视",
-      "url": "http://ali-m-l.cztv.com:80/channels/lantian/channel001/1080p.m3u8",
+      "url": "http://ali-xwl.cztv.com/live/channel011080Plxw.m3u8",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江卫视.png",
       "epg_id": "zjstv"
-    },
-    {
-      "name": "浙江卫视",
-      "url": "https://ali-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8?",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江卫视.png",
-      "epg_id": "zjstv"
-    },
-    {
-      "name": "浙江卫视",
-      "url": "http://ali-m-l.cztv.com/channels/lantian/channel01/1080p.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江卫视.png",
-      "epg_id": "zjstv"
-    },
-    {
-      "name": "重庆卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0142_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/重庆卫视.png",
-      "epg_id": "cqtv"
-    },
-    {
-      "name": "重庆卫视",
-      "url": "http://61.136.172.236:9901/tsfile/live/0142_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/重庆卫视.png",
-      "epg_id": "cqtv"
-    },
-    {
-      "name": "重庆卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0142_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/重庆卫视.png",
-      "epg_id": "cqtv"
-    },
-    {
-      "name": "重庆卫视",
-      "url": "http://61.136.172.236:9901/tsfile/live/0142_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/重庆卫视.png",
-      "epg_id": "cqtv"
     },
     {
       "name": "安多卫视",
@@ -4771,69 +3777,6 @@
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/安多卫视.png",
       "epg_id": ""
-    },
-    {
-      "name": "大湾区卫视",
-      "url": "http://gmxw.7766.org:808/hls/132/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/大湾区卫视.png",
-      "epg_id": ""
-    },
-    {
-      "name": "大湾区卫视",
-      "url": "http://183.11.239.36:808/hls/132/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/大湾区卫视.png",
-      "epg_id": ""
-    },
-    {
-      "name": "黑龙江卫视",
-      "url": "http://218.13.170.98:9901/tsfile/live/1006_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/黑龙江卫视.png",
-      "epg_id": "hljtv"
-    },
-    {
-      "name": "黑龙江卫视",
-      "url": "http://61.136.172.236:9901/tsfile/live/0143_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/黑龙江卫视.png",
-      "epg_id": "hljtv"
-    },
-    {
-      "name": "黑龙江卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0143_1.m3u8?key=txiptv&playlive=1&authid=0",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/黑龙江卫视.png",
-      "epg_id": "hljtv"
-    },
-    {
-      "name": "内蒙古卫视",
-      "url": "http://cssbyd.imwork.net:8082/hls/44/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/内蒙古卫视.png",
-      "epg_id": "nmengtv"
-    },
-    {
-      "name": "内蒙古卫视",
-      "url": "http://183.11.239.36:808/hls/60/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/内蒙古卫视.png",
-      "epg_id": "nmengtv"
-    },
-    {
-      "name": "内蒙古卫视",
-      "url": "http://222.134.245.16:9901/tsfile/live/0109_1.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/内蒙古卫视.png",
-      "epg_id": "nmengtv"
-    },
-    {
-      "name": "内蒙古卫视",
-      "url": "http://182.150.23.74:808/hls/37/index.m3u8",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/内蒙古卫视.png",
-      "epg_id": "nmengtv"
     },
     {
       "name": "人间卫视",
@@ -4850,87 +3793,10 @@
       "epg_id": "dongfangweishi"
     },
     {
-      "name": "CHC动作电影",
-      "url": "http://183.237.95.108:9901/tsfile/live/1006_1.m3u8?key=txiptv&playlive=0&authid=0",
-      "category": "其他",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CHC动作电影.png",
-      "epg_id": ""
-    },
-    {
-      "name": "CHC家庭影院",
-      "url": "http://61.162.52.6:8088/newlive/live/hls/60/live.m3u8",
-      "category": "其他",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CHC家庭影院.png",
-      "epg_id": ""
-    },
-    {
       "name": "CHC电影",
       "url": "http://183.237.95.108:9901/tsfile/live/1008_1.m3u8?key=txiptv&playlive=0&authid=0",
       "category": "其他",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CHC电影.png",
-      "epg_id": ""
-    },
-    {
-      "name": "浙江教科影视",
-      "url": "http://ali-m-l.cztv.com/channels/lantian/channel04/1080p.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江教科影视.png",
-      "epg_id": ""
-    },
-    {
-      "name": "浙江教科影视",
-      "url": "http://ali-xwl.cztv.com/live/channel041080Plxw.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江教科影视.png",
-      "epg_id": ""
-    },
-    {
-      "name": "浙江教科影视",
-      "url": "http://ali-vl.cztv.com/channels/lantian/channel004/360p.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江教科影视.png",
-      "epg_id": ""
-    },
-    {
-      "name": "卡酷少儿",
-      "url": "http://218.13.170.98:9901/tsfile/live/1021_1.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/卡酷少儿.png",
-      "epg_id": ""
-    },
-    {
-      "name": "金鹰卡通",
-      "url": "http://183.11.239.36:808/hls/69/index.m3u8",
-      "category": "其他",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/金鹰卡通.png",
-      "epg_id": "jinying"
-    },
-    {
-      "name": "广东少儿",
-      "url": "http://gmxw.7766.org:808/hls/175/index.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/广东少儿.png",
-      "epg_id": ""
-    },
-    {
-      "name": "浙江少儿",
-      "url": "http://ali-m-l.cztv.com/channels/lantian/channel008/1080p.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江少儿.png",
-      "epg_id": ""
-    },
-    {
-      "name": "浙江少儿",
-      "url": "http://ali-vl.cztv.com/channels/lantian/channel008/360p.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江少儿.png",
-      "epg_id": ""
-    },
-    {
-      "name": "浙江少儿",
-      "url": "https://ali-m-l.cztv.com/channels/lantian/channel008/1080p.m3u8?",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江少儿.png",
       "epg_id": ""
     },
     {
@@ -4948,20 +3814,6 @@
       "epg_id": ""
     },
     {
-      "name": "广东珠江",
-      "url": "http://gmxw.7766.org:808/hls/83/index.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/广东珠江.png",
-      "epg_id": ""
-    },
-    {
-      "name": "广东珠江",
-      "url": "http://183.11.239.36:808/hls/83/index.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/广东珠江.png",
-      "epg_id": ""
-    },
-    {
       "name": "万荣综合",
       "url": "http://60.222.246.220:19433/hls1.m3u8",
       "category": "地方台",
@@ -4970,14 +3822,14 @@
     },
     {
       "name": "三明新闻综合",
-      "url": "http://ls.qingting.fm/live/4885.m3u8",
+      "url": "https://ls.qingting.fm/live/5022100/64k.m3u8",
       "category": "地方台",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/三明新闻综合.png",
       "epg_id": ""
     },
     {
       "name": "三明新闻综合",
-      "url": "https://ls.qingting.fm/live/5022100/64k.m3u8",
+      "url": "http://ls.qingting.fm/live/4885.m3u8",
       "category": "地方台",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/三明新闻综合.png",
       "epg_id": ""
@@ -5039,6 +3891,13 @@
       "epg_id": ""
     },
     {
+      "name": "亳州农村",
+      "url": "http://zbbf2.ahbztv.com/live/418.m3u8?zanhd",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/亳州农村.png",
+      "epg_id": ""
+    },
+    {
       "name": "仁寿综合",
       "url": "https://play.scrstv.com.cn/DT/live.m3u8?auth_key=60001724663204-0-0-c1cc4ded9841ac34f63cdbd3aec647ef",
       "category": "地方台",
@@ -5089,14 +3948,14 @@
     },
     {
       "name": "余姚综合",
-      "url": "http://l.cztvcloud.com/channels/lantian/SXyuyao1/720p.m3u8?zzhed",
+      "url": "http://l.cztvcloud.com/channels/lantian/SXyuyao1/720p.m3u8?",
       "category": "地方台",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/余姚综合.png",
       "epg_id": ""
     },
     {
       "name": "余姚综合",
-      "url": "http://l.cztvcloud.com/channels/lantian/SXyuyao1/720p.m3u8?",
+      "url": "http://l.cztvcloud.com/channels/lantian/SXyuyao1/720p.m3u8?zzhed",
       "category": "地方台",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/余姚综合.png",
       "epg_id": ""
@@ -5257,14 +4116,14 @@
     },
     {
       "name": "嘉兴新闻综合",
-      "url": "http://tvfile.jyrmt.cn:80/nmip-media/channellive/channel104452/playlist.m3u8",
+      "url": "http://live.zohi.tv/video/s10001-fztv-1/index.m3u8",
       "category": "地方台",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/嘉兴新闻综合.png",
       "epg_id": ""
     },
     {
       "name": "嘉兴新闻综合",
-      "url": "http://live.zohi.tv/video/s10001-fztv-1/index.m3u8",
+      "url": "http://tvfile.jyrmt.cn:80/nmip-media/channellive/channel104452/playlist.m3u8",
       "category": "地方台",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/嘉兴新闻综合.png",
       "epg_id": ""
@@ -5418,13 +4277,6 @@
     },
     {
       "name": "开化国家公园",
-      "url": "http://l.cztvcloud.com/channels/lantian/SXkaihua2/720p.m3u8?zzhed#http://l.cztvcloud.com/channels/lantian/SXkaihua2/720p.m3u8zzhed#http://l.cztvcloud.com/channels/lantian/SXkaihua2/720p.m3u8",
-      "category": "其他",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/开化国家公园.png",
-      "epg_id": ""
-    },
-    {
-      "name": "开化国家公园",
       "url": "http://l.cztvcloud.com/channels/lantian/SXkaihua2/720p.m3u8?zzhed",
       "category": "其他",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/开化国家公园.png",
@@ -5467,14 +4319,14 @@
     },
     {
       "name": "文成综合",
-      "url": "http://l.cztvcloud.com/channels/lantian/SXwencheng1/720p.m3u8?zzhed?",
+      "url": "http://l.cztvcloud.com/channels/lantian/SXwencheng1/720p.m3u8?zzhed",
       "category": "地方台",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/文成综合.png",
       "epg_id": ""
     },
     {
       "name": "文成综合",
-      "url": "http://l.cztvcloud.com/channels/lantian/SXwencheng1/720p.m3u8?zzhed",
+      "url": "http://l.cztvcloud.com/channels/lantian/SXwencheng1/720p.m3u8?zzhed?",
       "category": "地方台",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/文成综合.png",
       "epg_id": ""
@@ -5578,6 +4430,20 @@
       "epg_id": ""
     },
     {
+      "name": "武进新闻",
+      "url": "https://live.wjyanghu.com/live/CH1.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/武进新闻.png",
+      "epg_id": ""
+    },
+    {
+      "name": "武进生活",
+      "url": "http://live.wjyanghu.com/live/CH2.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/武进生活.png",
+      "epg_id": ""
+    },
+    {
       "name": "永嘉新闻综合",
       "url": "http://l.cztvcloud.com/channels/lantian/SXyongjia1/720p.m3u8",
       "category": "地方台",
@@ -5600,13 +4466,6 @@
     },
     {
       "name": "河北农民",
-      "url": "https://jwcdnqx.hebyun.com.cn/live/clzhpd/1500k/tzwj_video.m3u8?zhebd",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/河北农民.png",
-      "epg_id": ""
-    },
-    {
-      "name": "河北农民",
       "url": "https://ls.qingting.fm/live/1650/64k.m3u8",
       "category": "地方台",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/河北农民.png",
@@ -5615,6 +4474,13 @@
     {
       "name": "河北农民",
       "url": "http://ls.qingting.fm/live/1650.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/河北农民.png",
+      "epg_id": ""
+    },
+    {
+      "name": "河北农民",
+      "url": "https://jwcdnqx.hebyun.com.cn/live/clzhpd/1500k/tzwj_video.m3u8?zhebd",
       "category": "地方台",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/河北农民.png",
       "epg_id": ""
@@ -5655,48 +4521,6 @@
       "epg_id": ""
     },
     {
-      "name": "浙江公共新闻",
-      "url": "http://ali-m-l.cztv.com/channels/lantian/channel07/1080p.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江公共新闻.png",
-      "epg_id": ""
-    },
-    {
-      "name": "浙江国际",
-      "url": "http://ali-m-l.cztv.com/channels/lantian/channel010/720p.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江国际.png",
-      "epg_id": ""
-    },
-    {
-      "name": "浙江国际",
-      "url": "http://ali-m-l.cztv.com/channels/lantian/channel010/1080p.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江国际.png",
-      "epg_id": ""
-    },
-    {
-      "name": "浙江国际",
-      "url": "http://ali-vl.cztv.com/channels/lantian/channel010/360p.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江国际.png",
-      "epg_id": ""
-    },
-    {
-      "name": "浙江国际",
-      "url": "http://ali-xwl.cztv.com/live/channel10720Plxw.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江国际.png",
-      "epg_id": ""
-    },
-    {
-      "name": "浙江国际",
-      "url": "https://ali-m-l.cztv.com/channels/lantian/channel010/1080p.m3u8?",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江国际.png",
-      "epg_id": ""
-    },
-    {
       "name": "浙江教科",
       "url": "http://ali-m-l.cztv.com/channels/lantian/channel004/1080p.m3u8",
       "category": "地方台",
@@ -5712,21 +4536,7 @@
     },
     {
       "name": "浙江新闻",
-      "url": "http://ali-xwl.cztv.com/live/channel071080Plxw.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江新闻.png",
-      "epg_id": ""
-    },
-    {
-      "name": "浙江新闻",
       "url": "http://ali-vl.cztv.com/channels/lantian/channel007/360p.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江新闻.png",
-      "epg_id": ""
-    },
-    {
-      "name": "浙江新闻",
-      "url": "http://ali-xwl.cztv.com/live/channel07720Plxw.m3u8",
       "category": "地方台",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江新闻.png",
       "epg_id": ""
@@ -5736,41 +4546,6 @@
       "url": "http://ali-m-l.cztv.com/channels/lantian/channel006/1080p.m3u8",
       "category": "地方台",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江民生.png",
-      "epg_id": ""
-    },
-    {
-      "name": "浙江民生",
-      "url": "http://ali-m-l.cztv.com/channels/lantian/channel06/1080p.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江民生.png",
-      "epg_id": ""
-    },
-    {
-      "name": "浙江民生",
-      "url": "https://ali-m-l.cztv.com/channels/lantian/channel006/1080p.m3u8?",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江民生.png",
-      "epg_id": ""
-    },
-    {
-      "name": "浙江民生休闲",
-      "url": "http://ali-xwl.cztv.com/live/channel061080Plxw.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江民生休闲.png",
-      "epg_id": ""
-    },
-    {
-      "name": "浙江民生休闲",
-      "url": "http://ali-vl.cztv.com/channels/lantian/channel006/360p.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江民生休闲.png",
-      "epg_id": ""
-    },
-    {
-      "name": "浙江民生休闲",
-      "url": "http://ali-xwl.cztv.com/live/channel06720Plxw.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江民生休闲.png",
       "epg_id": ""
     },
     {
@@ -5795,13 +4570,6 @@
       "epg_id": ""
     },
     {
-      "name": "浙江经济",
-      "url": "https://ali-m-l.cztv.com/channels/lantian/channel003/1080p.m3u8?",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江经济.png",
-      "epg_id": ""
-    },
-    {
       "name": "浙江经济生活",
       "url": "http://l.cztvcloud.com/channels/lantian/SXxiaoshan2/720p.m3u8",
       "category": "地方台",
@@ -5811,27 +4579,6 @@
     {
       "name": "浙江经济生活",
       "url": "http://ali-m-l.cztv.com/channels/lantian/channel03/1080p.m3u8#https://ali-m-l.cztv.com/channels/lantian/channel003/1080p.m3u8#http://ali-m-l.cztv.com/channels/lantian/channel003/1080p.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江经济生活.png",
-      "epg_id": ""
-    },
-    {
-      "name": "浙江经济生活",
-      "url": "http://ali-xwl.cztv.com/live/channel031080Plxw.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江经济生活.png",
-      "epg_id": ""
-    },
-    {
-      "name": "浙江经济生活",
-      "url": "http://ali-m-l.cztv.com/channels/lantian/channel03/1080p.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江经济生活.png",
-      "epg_id": ""
-    },
-    {
-      "name": "浙江经济生活",
-      "url": "http://ali-vl.cztv.com/channels/lantian/channel003/360p.m3u8",
       "category": "地方台",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江经济生活.png",
       "epg_id": ""
@@ -5862,13 +4609,6 @@
       "url": "http://ali-xwl.cztv.com/live/channel02720Plxw.m3u8",
       "category": "地方台",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江钱江都市.png",
-      "epg_id": ""
-    },
-    {
-      "name": "浙江钱江频道",
-      "url": "http://ali-m-l.cztv.com/channels/lantian/channel02/1080p.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江钱江频道.png",
       "epg_id": ""
     },
     {
@@ -5985,14 +4725,14 @@
     },
     {
       "name": "荆门新闻综合",
-      "url": "https://stream.jmtv.com.cn/xwzh/playlist.m3u8?_upt=3e28e7271664278691",
+      "url": "http://stream.jmtv.com.cn/xwzh/sd/live.m3u8",
       "category": "地方台",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/荆门新闻综合.png",
       "epg_id": ""
     },
     {
       "name": "荆门新闻综合",
-      "url": "http://stream.jmtv.com.cn/xwzh/sd/live.m3u8",
+      "url": "https://stream.jmtv.com.cn/xwzh/playlist.m3u8?_upt=3e28e7271664278691",
       "category": "地方台",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/荆门新闻综合.png",
       "epg_id": ""
@@ -6020,14 +4760,14 @@
     },
     {
       "name": "萧山生活",
-      "url": "http://l.cztvcloud.com/channels/lantian/SXxiaoshan2/720p.m3u8?zzhed",
+      "url": "http://l.cztvcloud.com/channels/lantian/SXxiaoshan2/720p.m3u8?zzhed?",
       "category": "地方台",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/萧山生活.png",
       "epg_id": ""
     },
     {
       "name": "萧山生活",
-      "url": "http://l.cztvcloud.com/channels/lantian/SXxiaoshan2/720p.m3u8?zzhed?",
+      "url": "http://l.cztvcloud.com/channels/lantian/SXxiaoshan2/720p.m3u8?zzhed",
       "category": "地方台",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/萧山生活.png",
       "epg_id": ""
@@ -6062,14 +4802,14 @@
     },
     {
       "name": "诸暨新闻综合",
-      "url": "http://l.cztvcloud.com/channels/lantian/SXzhuji3/720p.m3u8?zzhed",
+      "url": "https://l.cztvcloud.com/channels/lantian/SXzhuji3/720p.m3u8",
       "category": "地方台",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/诸暨新闻综合.png",
       "epg_id": ""
     },
     {
       "name": "诸暨新闻综合",
-      "url": "https://l.cztvcloud.com/channels/lantian/SXzhuji3/720p.m3u8",
+      "url": "http://l.cztvcloud.com/channels/lantian/SXzhuji3/720p.m3u8?zzhed",
       "category": "地方台",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/诸暨新闻综合.png",
       "epg_id": ""
@@ -6128,6 +4868,13 @@
       "url": "https://jwcdnqx.hebyun.com.cn/live/hdxwzh/1500k/tzwj_video.m3u8",
       "category": "地方台",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/邯郸新闻.png",
+      "epg_id": ""
+    },
+    {
+      "name": "重庆汽摩",
+      "url": "http://120.76.248.139/live/bfgd/4200000168.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/重庆汽摩.png",
       "epg_id": ""
     },
     {
@@ -6198,6 +4945,20 @@
       "url": "http://ls.qingting.fm/live/23797.m3u8",
       "category": "地方台",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/靖江新闻综合.png",
+      "epg_id": ""
+    },
+    {
+      "name": "黄山公共生活",
+      "url": "http://hslive.hsnewsnet.com/lsdream/iY92ady/1000/live.m3u8?zanhd",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/黄山公共生活.png",
+      "epg_id": ""
+    },
+    {
+      "name": "黄山新闻综合",
+      "url": "http://hslive.hsnewsnet.com/lsdream/hve9Wjs/1000/live.m3u8?zanhd",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/黄山新闻综合.png",
       "epg_id": ""
     },
     {
@@ -6425,20 +5186,6 @@
       "epg_id": ""
     },
     {
-      "name": "广东体育",
-      "url": "http://218.13.170.98:9901/tsfile/live/0019_1.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/广东体育.png",
-      "epg_id": "gdty"
-    },
-    {
-      "name": "广东体育",
-      "url": "http://183.11.239.36:808/hls/2/index.m3u8",
-      "category": "地方台",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/广东体育.png",
-      "epg_id": "gdty"
-    },
-    {
       "name": "安徽综艺体育",
       "url": "http://112.27.235.94:8000/hls/25/index.m3u8",
       "category": "地方台",
@@ -6453,6 +5200,230 @@
       "epg_id": ""
     },
     {
+      "name": "中央电视塔东",
+      "url": "https://gcalic.v.myalicdn.com/gc/ztd_1/index.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/中央电视塔东.png",
+      "epg_id": ""
+    },
+    {
+      "name": "中央电视塔南",
+      "url": "https://gcalic.v.myalicdn.com/gc/ztn_1/index.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/中央电视塔南.png",
+      "epg_id": ""
+    },
+    {
+      "name": "丽江古城万古楼遥望玉龙雪山",
+      "url": "https://gcalic.v.myalicdn.com/gc/ljgcwglytylxs_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/丽江古城万古楼遥望玉龙雪山.png",
+      "epg_id": ""
+    },
+    {
+      "name": "丽江古城大水车",
+      "url": "https://gcalic.v.myalicdn.com/gc/ljgcdsc_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/丽江古城大水车.png",
+      "epg_id": ""
+    },
+    {
+      "name": "丽江古城大研花巷观景",
+      "url": "https://gcalic.v.myalicdn.com/gc/ljgcdyhxgjt_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/丽江古城大研花巷观景.png",
+      "epg_id": ""
+    },
+    {
+      "name": "乌镇全景",
+      "url": "https://gcalic.v.myalicdn.com/gc/zjwzblt_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/乌镇全景.png",
+      "epg_id": ""
+    },
+    {
+      "name": "乌镇蓝印花布",
+      "url": "https://gcalic.v.myalicdn.com/gc/zjwzlyhb_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/乌镇蓝印花布.png",
+      "epg_id": ""
+    },
+    {
+      "name": "乌镇西市河",
+      "url": "https://gcalic.v.myalicdn.com/gc/zjwzbblh_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/乌镇西市河.png",
+      "epg_id": ""
+    },
+    {
+      "name": "乌镇龙形田",
+      "url": "https://gcalic.v.myalicdn.com/gc/zjwzlxt_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/乌镇龙形田.png",
+      "epg_id": ""
+    },
+    {
+      "name": "乐山大佛全景",
+      "url": "https://gcalic.v.myalicdn.com/gc/lsdfgfl_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/乐山大佛全景.png",
+      "epg_id": ""
+    },
+    {
+      "name": "云南丽江冰川",
+      "url": "https://gcalic.v.myalicdn.com/gc/hkylxs05_1/index.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/云南丽江冰川.png",
+      "epg_id": ""
+    },
+    {
+      "name": "云南丽江印象实景",
+      "url": "https://gcalic.v.myalicdn.com/gc/hkylxs01_1/index.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/云南丽江印象实景.png",
+      "epg_id": ""
+    },
+    {
+      "name": "云南丽江玉龙雪山",
+      "url": "https://gcalic.v.myalicdn.com/gc/ylxs11_1/index.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/云南丽江玉龙雪山.png",
+      "epg_id": ""
+    },
+    {
+      "name": "云南丽江玉龙雪山草甸",
+      "url": "https://gcalic.v.myalicdn.com/gc/hkylxs06_1/index.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/云南丽江玉龙雪山草甸.png",
+      "epg_id": ""
+    },
+    {
+      "name": "云南丽江蓝月谷",
+      "url": "https://gcalic.v.myalicdn.com/gc/ylxs12_1/index.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/云南丽江蓝月谷.png",
+      "epg_id": ""
+    },
+    {
+      "name": "云南大理崇圣寺三塔中景",
+      "url": "https://gcalic.v.myalicdn.com/gc/dlst03_1/index.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/云南大理崇圣寺三塔中景.png",
+      "epg_id": ""
+    },
+    {
+      "name": "云南大理崇圣寺三塔远景",
+      "url": "https://gcalic.v.myalicdn.com/gc/dlst01_1/index.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/云南大理崇圣寺三塔远景.png",
+      "epg_id": ""
+    },
+    {
+      "name": "云南白沙远眺玉龙雪山",
+      "url": "https://gcalic.v.myalicdn.com/gc/hkylxs03_1/index.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/云南白沙远眺玉龙雪山.png",
+      "epg_id": ""
+    },
+    {
+      "name": "五彩池",
+      "url": "https://gcalic.v.myalicdn.com/gc/hlwcc_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/五彩池.png",
+      "epg_id": ""
+    },
+    {
+      "name": "八里沟风景区天界山玻璃栈道",
+      "url": "https://gcalic.v.myalicdn.com/gc/blg03_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/八里沟风景区天界山玻璃栈道.png",
+      "epg_id": ""
+    },
+    {
+      "name": "八里沟风景区桃花湾瀑布",
+      "url": "https://gcalic.v.myalicdn.com/gc/blg05_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/八里沟风景区桃花湾瀑布.png",
+      "epg_id": ""
+    },
+    {
+      "name": "六盘山红军长征景区",
+      "url": "https://gcalic.v.myalicdn.com/gc/lpsgmjng01_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/六盘山红军长征景区.png",
+      "epg_id": ""
+    },
+    {
+      "name": "南京玄武湖公园",
+      "url": "https://gcalic.v.myalicdn.com/gc/xwh01_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/南京玄武湖公园.png",
+      "epg_id": ""
+    },
+    {
+      "name": "厦门鼓浪屿",
+      "url": "https://gcalic.v.myalicdn.com/gc/gly01_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/厦门鼓浪屿.png",
+      "epg_id": ""
+    },
+    {
+      "name": "四川四姑娘山隆珠措",
+      "url": "https://gcalic.v.myalicdn.com/gc/sgns02_1/index.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/四川四姑娘山隆珠措.png",
+      "epg_id": ""
+    },
+    {
+      "name": "四川峨眉山云海日出",
+      "url": "https://gcalic.v.myalicdn.com/gc/emsarm_1/index.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/四川峨眉山云海日出.png",
+      "epg_id": ""
+    },
+    {
+      "name": "四川峨眉山普贤菩萨铜像",
+      "url": "https://gcalic.v.myalicdn.com/gc/emspxps_1/index.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/四川峨眉山普贤菩萨铜像.png",
+      "epg_id": ""
+    },
+    {
+      "name": "四川峨眉山远眺万佛顶",
+      "url": "https://gcalic.v.myalicdn.com/gc/emswfs_1/index.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/四川峨眉山远眺万佛顶.png",
+      "epg_id": ""
+    },
+    {
+      "name": "四川峨眉山远眺贡嘎雪山",
+      "url": "https://gcalic.v.myalicdn.com/gc/emsyh_1/index.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/四川峨眉山远眺贡嘎雪山.png",
+      "epg_id": ""
+    },
+    {
+      "name": "天涯石",
+      "url": "https://gcalic.v.myalicdn.com/gc/tyhjtys_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/天涯石.png",
+      "epg_id": ""
+    },
+    {
+      "name": "安徽池州九华山风景区九华山",
+      "url": "https://gcalic.v.myalicdn.com/gc/jhs05_1/index.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/安徽池州九华山风景区九华山.png",
+      "epg_id": ""
+    },
+    {
+      "name": "安徽黟县芦村远眺",
+      "url": "https://gcalic.v.myalicdn.com/gc/yxlcyt_1/index.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/安徽黟县芦村远眺.png",
+      "epg_id": ""
+    },
+    {
       "name": "新疆天山",
       "url": "http://gctxyc.liveplay.myqcloud.com/gc/xjtcdhsz_1/index.m3u8",
       "category": "地方台",
@@ -6460,10 +5431,192 @@
       "epg_id": ""
     },
     {
-      "name": "直播中国精编直播",
-      "url": "https://gcalic.v.myalicdn.com/gc/wgw05_1/index.m3u8",
+      "name": "泰山玉皇顶",
+      "url": "https://gcalic.v.myalicdn.com/gc/taishan06_1/index.m3u8",
       "category": "其他",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/直播中国精编直播.png",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/泰山玉皇顶.png",
+      "epg_id": ""
+    },
+    {
+      "name": "泰山白云亭悬崖",
+      "url": "https://gcalic.v.myalicdn.com/gc/hkts02_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/泰山白云亭悬崖.png",
+      "epg_id": ""
+    },
+    {
+      "name": "泰山碧霞祠",
+      "url": "https://gcalic.v.myalicdn.com/gc/hkts03_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/泰山碧霞祠.png",
+      "epg_id": ""
+    },
+    {
+      "name": "浙江舟山东极岛",
+      "url": "https://gcalic.v.myalicdn.com/gc/djd01_1/index.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江舟山东极岛.png",
+      "epg_id": ""
+    },
+    {
+      "name": "湖南张家界天门山西线玻璃栈道",
+      "url": "https://gcalic.v.myalicdn.com/gc/tms05_1/index.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/湖南张家界天门山西线玻璃栈道.png",
+      "epg_id": ""
+    },
+    {
+      "name": "湖南张家界宝峰湖",
+      "url": "https://gcalic.v.myalicdn.com/gc/zjjbfh_1/index.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/湖南张家界宝峰湖.png",
+      "epg_id": ""
+    },
+    {
+      "name": "湖南张家界御笔峰",
+      "url": "https://gcalic.v.myalicdn.com/gc/zjjybf_1/index.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/湖南张家界御笔峰.png",
+      "epg_id": ""
+    },
+    {
+      "name": "湖南张家界水绕四门",
+      "url": "https://gcalic.v.myalicdn.com/gc/zjjsrsm_1/index.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/湖南张家界水绕四门.png",
+      "epg_id": ""
+    },
+    {
+      "name": "狮子山鸟瞰丽江古城",
+      "url": "https://gcalic.v.myalicdn.com/gc/ljgcszsnkgc_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/狮子山鸟瞰丽江古城.png",
+      "epg_id": ""
+    },
+    {
+      "name": "福建武夷山玉女峰",
+      "url": "https://gcalic.v.myalicdn.com/gc/wysynf_1/index.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/福建武夷山玉女峰.png",
+      "epg_id": ""
+    },
+    {
+      "name": "福建漳州醉美沙滩翡翠湾",
+      "url": "https://gcalic.v.myalicdn.com/gc/fcw03_1/index.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/福建漳州醉美沙滩翡翠湾.png",
+      "epg_id": ""
+    },
+    {
+      "name": "贵州省兴义市万峰林",
+      "url": "https://gcalic.v.myalicdn.com/gc/xywfl_1/index.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/贵州省兴义市万峰林.png",
+      "epg_id": ""
+    },
+    {
+      "name": "都江堰鱼嘴",
+      "url": "https://gcalic.v.myalicdn.com/gc/djyqyl1_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/都江堰鱼嘴.png",
+      "epg_id": ""
+    },
+    {
+      "name": "陕西洋县国宝朱鹮02",
+      "url": "https://gcalic.v.myalicdn.com/gc/zh02_1/index.m3u8",
+      "category": "地方台",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/陕西洋县国宝朱鹮02.png",
+      "epg_id": ""
+    },
+    {
+      "name": "雪乡大石碑",
+      "url": "https://gcalic.v.myalicdn.com/gc/mdjxxdsb_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/雪乡大石碑.png",
+      "epg_id": ""
+    },
+    {
+      "name": "雪乡梦幻家园",
+      "url": "https://gcalic.v.myalicdn.com/gc/mdjxxmhjyxj_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/雪乡梦幻家园.png",
+      "epg_id": ""
+    },
+    {
+      "name": "青岛崂山八水河",
+      "url": "https://gcalic.v.myalicdn.com/gc/qdls02_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/青岛崂山八水河.png",
+      "epg_id": ""
+    },
+    {
+      "name": "青岛崂山双福",
+      "url": "https://gcalic.v.myalicdn.com/gc/qdls03_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/青岛崂山双福.png",
+      "epg_id": ""
+    },
+    {
+      "name": "鸣沙山",
+      "url": "https://gcalic.v.myalicdn.com/gc/dhyyqst_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/鸣沙山.png",
+      "epg_id": ""
+    },
+    {
+      "name": "黄山",
+      "url": "https://gcalic.v.myalicdn.com/gc/ahhs01_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/黄山.png",
+      "epg_id": ""
+    },
+    {
+      "name": "黄山始信新道",
+      "url": "https://gcalic.v.myalicdn.com/gc/hsyg_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/黄山始信新道.png",
+      "epg_id": ""
+    },
+    {
+      "name": "黄山排云亭",
+      "url": "https://gcalic.v.myalicdn.com/gc/hspyt_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/黄山排云亭.png",
+      "epg_id": ""
+    },
+    {
+      "name": "黄山飞来石",
+      "url": "https://gcalic.v.myalicdn.com/gc/hsptgy_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/黄山飞来石.png",
+      "epg_id": ""
+    },
+    {
+      "name": "黄果树六角亭瀑布",
+      "url": "https://gcalic.v.myalicdn.com/gc/hgsspzxdpb_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/黄果树六角亭瀑布.png",
+      "epg_id": ""
+    },
+    {
+      "name": "黄花城水长城01",
+      "url": "https://gcalic.v.myalicdn.com/gc/wgw01_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/黄花城水长城01.png",
+      "epg_id": ""
+    },
+    {
+      "name": "黄花城水长城03",
+      "url": "https://gcalic.v.myalicdn.com/gc/wgw03_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/黄花城水长城03.png",
+      "epg_id": ""
+    },
+    {
+      "name": "黄龙",
+      "url": "https://gcalic.v.myalicdn.com/gc/hlzycc_1/index.m3u8",
+      "category": "其他",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/黄龙.png",
       "epg_id": ""
     },
     {
@@ -6475,7 +5628,35 @@
     },
     {
       "name": "CCTV-1",
-      "url": "http://222.169.85.8:9901/tsfile/live/0001_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路191』",
+      "url": "http://123.130.84.106:8154/tsfile/live/0001_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路160』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV1.png",
+      "epg_id": "cctv1"
+    },
+    {
+      "name": "CCTV-1",
+      "url": "http://120.76.248.139/live/bfgd/4200000484.m3u8$LR•IPV4『线路168』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV1.png",
+      "epg_id": "cctv1"
+    },
+    {
+      "name": "CCTV-1",
+      "url": "http://120.76.248.139/live/bfgd/4200000488.m3u8$LR•IPV4『线路169』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV1.png",
+      "epg_id": "cctv1"
+    },
+    {
+      "name": "CCTV-1",
+      "url": "http://120.76.248.139/live/bfgd/4200000489.m3u8$LR•IPV4『线路170』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV1.png",
+      "epg_id": "cctv1"
+    },
+    {
+      "name": "CCTV-1",
+      "url": "http://120.76.248.139/live/bfgd/4200000201.m3u8$LR•IPV4『线路171』",
       "category": "央视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV1.png",
       "epg_id": "cctv1"
@@ -6496,6 +5677,20 @@
     },
     {
       "name": "CCTV-2",
+      "url": "http://123.130.84.106:8154/tsfile/live/0002_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路35』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV2.png",
+      "epg_id": "cctv2"
+    },
+    {
+      "name": "CCTV-2",
+      "url": "http://120.76.248.139/live/bfgd/4200000061.m3u8$LR•IPV4『线路158』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV2.png",
+      "epg_id": "cctv2"
+    },
+    {
+      "name": "CCTV-2",
       "url": "http://61.136.172.236:9901/tsfile/live/0002_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路300』",
       "category": "央视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV2.png",
@@ -6504,6 +5699,13 @@
     {
       "name": "CCTV-3",
       "url": "http://123.130.84.106:8154/tsfile/live/0003_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路27』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV3.png",
+      "epg_id": "cctv3"
+    },
+    {
+      "name": "CCTV-3",
+      "url": "http://120.76.248.139/live/bfgd/4200000062.m3u8$LR•IPV4『线路147』",
       "category": "央视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV3.png",
       "epg_id": "cctv3"
@@ -6523,8 +5725,29 @@
       "epg_id": "cctv3"
     },
     {
+      "name": "CCTV-4",
+      "url": "http://123.130.84.106:8154/tsfile/live/0004_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路30』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV4.png",
+      "epg_id": "cctv4"
+    },
+    {
+      "name": "CCTV-4",
+      "url": "http://120.76.248.139/live/bfgd/4200000063.m3u8$LR•IPV4『线路164』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV4.png",
+      "epg_id": "cctv4"
+    },
+    {
       "name": "CCTV-5",
       "url": "http://123.130.84.106:8154/tsfile/live/0005_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路43』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV5.png",
+      "epg_id": "cctv5"
+    },
+    {
+      "name": "CCTV-5",
+      "url": "http://120.76.248.139/live/bfgd/4200000064.m3u8$LR•IPV4『线路179』",
       "category": "央视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV5.png",
       "epg_id": "cctv5"
@@ -6545,10 +5768,24 @@
     },
     {
       "name": "CCTV-5+",
+      "url": "http://120.76.248.139/live/bfgd/4200000246.m3u8$LR•IPV4『线路77』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV5+.png",
+      "epg_id": "cctv5plus"
+    },
+    {
+      "name": "CCTV-5+",
       "url": "http://61.136.172.236:9901/tsfile/live/0016_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路166』",
       "category": "央视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV5+.png",
       "epg_id": "cctv5plus"
+    },
+    {
+      "name": "CCTV-6",
+      "url": "http://120.76.248.139/live/bfgd/4200000065.m3u8$LR•IPV4『线路145』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV6.png",
+      "epg_id": "cctv6"
     },
     {
       "name": "CCTV-6",
@@ -6572,8 +5809,29 @@
       "epg_id": "cctv6"
     },
     {
+      "name": "CCTV-7",
+      "url": "http://123.130.84.106:8154/tsfile/live/0007_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路33』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV7.png",
+      "epg_id": "cctv7"
+    },
+    {
+      "name": "CCTV-7",
+      "url": "http://120.76.248.139/live/bfgd/4200000127.m3u8$LR•IPV4『线路156』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV7.png",
+      "epg_id": "cctv7"
+    },
+    {
       "name": "CCTV-8",
       "url": "http://123.130.84.106:8154/tsfile/live/0008_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路131』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV8.png",
+      "epg_id": "cctv8"
+    },
+    {
+      "name": "CCTV-8",
+      "url": "http://120.76.248.139/live/bfgd/4200000066.m3u8$LR•IPV4『线路140』",
       "category": "央视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV8.png",
       "epg_id": "cctv8"
@@ -6584,6 +5842,20 @@
       "category": "央视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV8.png",
       "epg_id": "cctv8"
+    },
+    {
+      "name": "CCTV-9",
+      "url": "http://123.130.84.106:8154/tsfile/live/0009_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路141』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV9.png",
+      "epg_id": "cctv9"
+    },
+    {
+      "name": "CCTV-9",
+      "url": "http://120.76.248.139/live/bfgd/4200000128.m3u8$LR•IPV4『线路149』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV9.png",
+      "epg_id": "cctv9"
     },
     {
       "name": "CCTV-9",
@@ -6601,10 +5873,24 @@
     },
     {
       "name": "CCTV-10",
+      "url": "http://120.76.248.139/live/bfgd/4200000129.m3u8$LR•IPV4『线路154』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV10.png",
+      "epg_id": "cctv10"
+    },
+    {
+      "name": "CCTV-10",
       "url": "http://59.39.89.130:60901/tsfile/live/0010_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路170』",
       "category": "央视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV10.png",
       "epg_id": "cctv10"
+    },
+    {
+      "name": "CCTV-11",
+      "url": "http://120.76.248.139/live/bfgd/4200000130.m3u8$LR•IPV4『线路143』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV11.png",
+      "epg_id": "cctv11"
     },
     {
       "name": "CCTV-11",
@@ -6615,10 +5901,31 @@
     },
     {
       "name": "CCTV-12",
+      "url": "http://120.76.248.139/live/bfgd/4200000131.m3u8$LR•IPV4『线路161』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV12.png",
+      "epg_id": "cctv12"
+    },
+    {
+      "name": "CCTV-12",
       "url": "http://59.39.89.130:60901/tsfile/live/0012_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路245』",
       "category": "央视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV12.png",
       "epg_id": "cctv12"
+    },
+    {
+      "name": "CCTV-13",
+      "url": "http://123.130.84.106:8154/tsfile/live/0013_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路27』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV13.png",
+      "epg_id": "cctv13"
+    },
+    {
+      "name": "CCTV-13",
+      "url": "http://120.76.248.139/live/bfgd/4200000067.m3u8$LR•IPV4『线路151』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV13.png",
+      "epg_id": "cctv13"
     },
     {
       "name": "CCTV-13",
@@ -6636,10 +5943,31 @@
     },
     {
       "name": "CCTV-14",
+      "url": "http://120.76.248.139/live/bfgd/4200000132.m3u8$LR•IPV4『线路160』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV14.png",
+      "epg_id": "cctv14"
+    },
+    {
+      "name": "CCTV-14",
       "url": "http://61.136.172.236:9901/tsfile/live/0014_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路292』",
       "category": "央视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV14.png",
       "epg_id": "cctv14"
+    },
+    {
+      "name": "CCTV-15",
+      "url": "http://123.130.84.106:8154/tsfile/live/0015_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路29』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV15.png",
+      "epg_id": "cctv15"
+    },
+    {
+      "name": "CCTV-15",
+      "url": "http://120.76.248.139/live/bfgd/4200000133.m3u8$LR•IPV4『线路146』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV15.png",
+      "epg_id": "cctv15"
     },
     {
       "name": "CCTV-15",
@@ -6656,11 +5984,32 @@
       "epg_id": "cctv15"
     },
     {
+      "name": "CCTV-16",
+      "url": "http://php.jdshipin.com:8880/bst2.php?id=cctv16hd4k/15000000$LR•IPV4『线路74』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV16.png",
+      "epg_id": "cctv16"
+    },
+    {
       "name": "CCTV-17",
       "url": "http://123.130.84.106:8154/tsfile/live/0019_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路32』",
       "category": "央视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV17.png",
       "epg_id": "cctv17"
+    },
+    {
+      "name": "CCTV-17",
+      "url": "http://120.76.248.139/live/bfgd/4200000204.m3u8$LR•IPV4『线路109』",
+      "category": "央视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/CCTV17.png",
+      "epg_id": "cctv17"
+    },
+    {
+      "name": "湖南卫视",
+      "url": "http://120.76.248.139/live/bfgd/4200000086.m3u8$LR•IPV4『线路107』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/湖南卫视.png",
+      "epg_id": "hunantv"
     },
     {
       "name": "湖南卫视",
@@ -6699,6 +6048,13 @@
     },
     {
       "name": "浙江卫视",
+      "url": "http://123.130.84.106:8154/tsfile/live/0124_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路64』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江卫视.png",
+      "epg_id": "zjstv"
+    },
+    {
+      "name": "浙江卫视",
       "url": "https://ali-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8?$LR•IPV4『线路89』",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江卫视.png",
@@ -6707,6 +6063,13 @@
     {
       "name": "浙江卫视",
       "url": "http://ali-m-l.cztv.com/channels/lantian/channel001/1080p.m3u8$LR•IPV4『线路105』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江卫视.png",
+      "epg_id": "zjstv"
+    },
+    {
+      "name": "浙江卫视",
+      "url": "http://120.76.248.139/live/bfgd/4200000094.m3u8$LR•IPV4『线路112』",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/浙江卫视.png",
       "epg_id": "zjstv"
@@ -6734,10 +6097,38 @@
     },
     {
       "name": "东方卫视",
+      "url": "http://123.130.84.106:8154/tsfile/live/0107_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路64』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/东方卫视.png",
+      "epg_id": "dongfangweishi"
+    },
+    {
+      "name": "东方卫视",
+      "url": "http://120.76.248.139/live/bfgd/4200000093.m3u8$LR•IPV4『线路115』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/东方卫视.png",
+      "epg_id": "dongfangweishi"
+    },
+    {
+      "name": "东方卫视",
       "url": "http://61.136.172.236:9901/tsfile/live/0107_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路207』",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/东方卫视.png",
       "epg_id": "dongfangweishi"
+    },
+    {
+      "name": "北京卫视",
+      "url": "http://123.130.84.106:8154/tsfile/live/0122_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路99』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/北京卫视.png",
+      "epg_id": "brtv"
+    },
+    {
+      "name": "北京卫视",
+      "url": "http://120.76.248.139/live/bfgd/4200000083.m3u8$LR•IPV4『线路108』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/北京卫视.png",
+      "epg_id": "brtv"
     },
     {
       "name": "北京卫视",
@@ -6762,10 +6153,31 @@
     },
     {
       "name": "江苏卫视",
+      "url": "http://120.76.248.139/live/bfgd/4200000085.m3u8$LR•IPV4『线路112』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/江苏卫视.png",
+      "epg_id": "jssat"
+    },
+    {
+      "name": "江苏卫视",
       "url": "http://61.136.172.236:9901/tsfile/live/0127_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路221』",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/江苏卫视.png",
       "epg_id": "jssat"
+    },
+    {
+      "name": "安徽卫视",
+      "url": "http://123.130.84.106:8154/tsfile/live/0130_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路49』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/安徽卫视.png",
+      "epg_id": "ahtv"
+    },
+    {
+      "name": "安徽卫视",
+      "url": "http://120.76.248.139/live/bfgd/4200000096.m3u8$LR•IPV4『线路101』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/安徽卫视.png",
+      "epg_id": "ahtv"
     },
     {
       "name": "安徽卫视",
@@ -6776,10 +6188,31 @@
     },
     {
       "name": "重庆卫视",
+      "url": "http://120.76.248.139/live/bfgd/4200000107.m3u8$LR•IPV4『线路98』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/重庆卫视.png",
+      "epg_id": "cqtv"
+    },
+    {
+      "name": "重庆卫视",
       "url": "http://61.136.172.236:9901/tsfile/live/0142_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路181』",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/重庆卫视.png",
       "epg_id": "cqtv"
+    },
+    {
+      "name": "四川卫视",
+      "url": "http://123.130.84.106:8154/tsfile/live/0123_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路41』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/四川卫视.png",
+      "epg_id": "sctv"
+    },
+    {
+      "name": "四川卫视",
+      "url": "http://120.76.248.139/live/bfgd/4200000103.m3u8$LR•IPV4『线路87』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/四川卫视.png",
+      "epg_id": "sctv"
     },
     {
       "name": "四川卫视",
@@ -6797,6 +6230,20 @@
     },
     {
       "name": "福建卫视",
+      "url": "http://123.130.84.106:8154/tsfile/live/0137_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路91』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/福建卫视.png",
+      "epg_id": "fjtv"
+    },
+    {
+      "name": "福建卫视",
+      "url": "http://120.76.248.139/live/bfgd/4200000483.m3u8$LR•IPV4『线路94』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/福建卫视.png",
+      "epg_id": "fjtv"
+    },
+    {
+      "name": "福建卫视",
       "url": "http://61.136.172.236:9901/tsfile/live/0137_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路184』",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/福建卫视.png",
@@ -6805,6 +6252,13 @@
     {
       "name": "深圳卫视",
       "url": "http://61.136.172.236:9901/tsfile/live/0126_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路37』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/深圳卫视.png",
+      "epg_id": "sztv"
+    },
+    {
+      "name": "深圳卫视",
+      "url": "http://120.76.248.139/live/bfgd/4200000100.m3u8$LR•IPV4『线路79』",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/深圳卫视.png",
       "epg_id": "sztv"
@@ -6825,6 +6279,13 @@
     },
     {
       "name": "广东卫视",
+      "url": "http://120.76.248.139/live/bfgd/4200000092.m3u8$LR•IPV4『线路110』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/广东卫视.png",
+      "epg_id": "gdtv"
+    },
+    {
+      "name": "广东卫视",
       "url": "http://59.39.89.130:60901/tsfile/live/0125_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路166』",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/广东卫视.png",
@@ -6836,6 +6297,20 @@
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/广东卫视.png",
       "epg_id": "gdtv"
+    },
+    {
+      "name": "广西卫视",
+      "url": "http://123.130.84.106:8154/tsfile/live/0113_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路33』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/广西卫视.png",
+      "epg_id": "gxtv"
+    },
+    {
+      "name": "广西卫视",
+      "url": "http://120.76.248.139/live/bfgd/4200000116.m3u8$LR•IPV4『线路74』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/广西卫视.png",
+      "epg_id": "gxtv"
     },
     {
       "name": "广西卫视",
@@ -6852,8 +6327,15 @@
       "epg_id": "gstv"
     },
     {
+      "name": "甘肃卫视",
+      "url": "http://120.76.248.139/live/bfgd/4200000119.m3u8$LR•IPV4『线路54』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/甘肃卫视.png",
+      "epg_id": "gstv"
+    },
+    {
       "name": "贵州卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0120_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路54』",
+      "url": "http://120.76.248.139/live/bfgd/4200000101.m3u8$LR•IPV4『线路98』",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/贵州卫视.png",
       "epg_id": "gztv"
@@ -6874,7 +6356,7 @@
     },
     {
       "name": "河北卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0117_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路53』",
+      "url": "http://120.76.248.139/live/bfgd/4200000108.m3u8$LR•IPV4『线路93』",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/河北卫视.png",
       "epg_id": "hebei"
@@ -6895,6 +6377,13 @@
     },
     {
       "name": "河南卫视",
+      "url": "http://120.76.248.139/live/bfgd/4200000339.m3u8$LR•IPV4『线路85』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/河南卫视.png",
+      "epg_id": "henanavtv"
+    },
+    {
+      "name": "河南卫视",
       "url": "http://61.136.172.236:9901/tsfile/live/0139_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路170』",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/河南卫视.png",
@@ -6902,21 +6391,14 @@
     },
     {
       "name": "黑龙江卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0143_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路59』",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/黑龙江卫视.png",
-      "epg_id": "hljtv"
-    },
-    {
-      "name": "黑龙江卫视",
-      "url": "http://61.136.172.236:9901/tsfile/live/0143_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路183』",
+      "url": "http://120.76.248.139/live/bfgd/4200000095.m3u8$LR•IPV4『线路99』",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/黑龙江卫视.png",
       "epg_id": "hljtv"
     },
     {
       "name": "湖北卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0132_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路53』",
+      "url": "http://120.76.248.139/live/bfgd/4200000102.m3u8$LR•IPV4『线路103』",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/湖北卫视.png",
       "epg_id": "hbtv"
@@ -6937,7 +6419,7 @@
     },
     {
       "name": "江西卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0138_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路47』",
+      "url": "http://120.76.248.139/live/bfgd/4200000098.m3u8$LR•IPV4『线路99』",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/江西卫视.png",
       "epg_id": "jxtv"
@@ -6958,7 +6440,7 @@
     },
     {
       "name": "吉林卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0116_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路82』",
+      "url": "http://120.76.248.139/live/bfgd/4200000097.m3u8$LR•IPV4『线路89』",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/吉林卫视.png",
       "epg_id": "jltv"
@@ -6986,14 +6468,28 @@
     },
     {
       "name": "内蒙古卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0109_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路76』",
+      "url": "http://120.76.248.139/live/bfgd/4200000110.m3u8$LR•IPV4『线路43』",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/内蒙古卫视.png",
       "epg_id": "nmengtv"
     },
     {
       "name": "辽宁卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0121_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路52』",
+      "url": "http://120.76.248.139/live/bfgd/4200000141.m3u8$LR•IPV4『线路93』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/辽宁卫视.png",
+      "epg_id": "lntv"
+    },
+    {
+      "name": "辽宁卫视",
+      "url": "http://120.76.248.139/live/bfgd/4200000185.m3u8$LR•IPV4『线路94』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/辽宁卫视.png",
+      "epg_id": "lntv"
+    },
+    {
+      "name": "辽宁卫视",
+      "url": "http://120.76.248.139/live/bfgd/4200000058.m3u8$LR•IPV4『线路95』",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/辽宁卫视.png",
       "epg_id": "lntv"
@@ -7013,15 +6509,22 @@
       "epg_id": "lntv"
     },
     {
+      "name": "宁夏卫视",
+      "url": "http://120.76.248.139/live/bfgd/4200000118.m3u8$LR•IPV4『线路49』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/宁夏卫视.png",
+      "epg_id": "nxtv"
+    },
+    {
       "name": "青海卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0140_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路24』",
+      "url": "http://120.76.248.139/live/bfgd/4200000111.m3u8$LR•IPV4『线路56』",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/青海卫视.png",
       "epg_id": "qhtv"
     },
     {
       "name": "山东卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0131_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路97』",
+      "url": "http://120.76.248.139/live/bfgd/4200000099.m3u8$LR•IPV4『线路101』",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/山东卫视.png",
       "epg_id": "sdtv"
@@ -7035,28 +6538,28 @@
     },
     {
       "name": "天津卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0135_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路59』",
-      "category": "卫视",
-      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/天津卫视.png",
-      "epg_id": "tjtv"
-    },
-    {
-      "name": "天津卫视",
       "url": "http://61.136.172.236:9901/tsfile/live/0135_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路196』",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/天津卫视.png",
       "epg_id": "tjtv"
     },
     {
+      "name": "海南卫视",
+      "url": "http://120.76.248.139/live/bfgd/4200000473.m3u8$LR•IPV4『线路72』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/海南卫视.png",
+      "epg_id": "hainantv"
+    },
+    {
       "name": "新疆卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0110_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路46』",
+      "url": "http://120.76.248.139/live/bfgd/4200000150.m3u8$LR•IPV4『线路49』",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/新疆卫视.png",
       "epg_id": "xjtv"
     },
     {
       "name": "云南卫视",
-      "url": "http://123.130.84.106:8154/tsfile/live/0119_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路25』",
+      "url": "http://120.76.248.139/live/bfgd/4200000482.m3u8$LR•IPV4『线路64』",
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/云南卫视.png",
       "epg_id": "yntv"
@@ -7067,6 +6570,27 @@
       "category": "卫视",
       "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/云南卫视.png",
       "epg_id": "yntv"
+    },
+    {
+      "name": "西藏卫视",
+      "url": "http://120.76.248.139/live/bfgd/4200000121.m3u8$LR•IPV4『线路38』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/西藏卫视.png",
+      "epg_id": "xizang"
+    },
+    {
+      "name": "兵团卫视",
+      "url": "http://120.76.248.139/live/bfgd/4200000124.m3u8$LR•IPV4『线路8』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/兵团卫视.png",
+      "epg_id": ""
+    },
+    {
+      "name": "农林卫视",
+      "url": "http://120.76.248.139/live/bfgd/4200000122.m3u8$LR•IPV4『线路2』",
+      "category": "卫视",
+      "logo": "https://gitee.com/suxuang/logo/raw/master/mylogo/农林卫视.png",
+      "epg_id": ""
     },
     {
       "name": "农林卫视",

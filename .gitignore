@@ -18,5 +18,7 @@ venv/
 .DS_Store
 Thumbs.db
 
-# 大型输出文件（可选，按需调整）
-# output/*.json
+# Output artifacts
+output/
+tmp/
+temp/

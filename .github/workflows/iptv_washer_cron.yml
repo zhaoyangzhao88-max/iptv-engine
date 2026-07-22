@@ -33,7 +33,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add output/cleaned_iptv_list.m3u output/cleaned_channels.json
+          git add output/cleaned_iptv_list.m3u output/cleaned_channels.json index.html
           git status
           if [ -n "$(git status --porcelain)" ]; then
             git commit -m "Auto update: $(date +'%Y-%m-%d %H:%M:%S')"

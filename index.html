@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPTV Engine · 极净直播源</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+/* ── Reset & Base ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0b0e14;--surface:#131720;--card:#1a1f2e;--border:#252b3b;
+  --blue:#3b82f6;--cyan:#06b6d4;--green:#10b981;--amber:#f59e0b;--red:#ef4444;
+  --text:#e2e8f0;--muted:#94a3b8;--dim:#64748b;
+  --radius:12px;--shadow:0 4px 24px rgba(0,0,0,.4);
+}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh}
+a{color:var(--blue);text-decoration:none}
+button{cursor:pointer;border:none;outline:none;font-family:inherit}
+img{display:block}
+.container{width:100%;max-width:1280px;margin:0 auto;padding:0 clamp(12px,3vw,24px)}
+
+/* ── Animations ── */
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.fade-in{animation:fadeIn .5s ease-out both}
+.shimmer{background:linear-gradient(90deg,var(--card) 25%,#252b3b 50%,var(--card) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:4px}
+
+/* ── Header ── */
+.header{padding:clamp(24px,5vw,48px) 0 0;text-align:center;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-50%;left:50%;transform:translateX(-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(59,130,246,.12) 0%,transparent 70%);pointer-events:none}
+.logo{display:inline-flex;align-items:center;gap:12px;margin-bottom:8px}
+.logo-icon{width:48px;height:48px;background:linear-gradient(135deg,var(--blue),var(--cyan));border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 0 32px rgba(59,130,246,.3)}
+.logo h1{font-size:clamp(1.4rem,4vw,2rem);font-weight:700;background:linear-gradient(135deg,#fff,var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.logo .version{display:inline-block;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff;font-size:11px;padding:2px 8px;border-radius:6px;font-weight:600;vertical-align:middle;margin-left:8px}
+.subtitle{color:var(--muted);font-size:clamp(.85rem,2vw,1rem);margin-top:8px}
+.pipeline-badge{display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:6px 16px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);border-radius:20px;font-size:12px;color:var(--cyan)}
+.pipeline-badge .dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+
+/* ── Metric Cards ── */
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:clamp(10px,2vw,16px);padding:clamp(20px,4vw,32px) 0}
+.metric-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:clamp(16px,3vw,24px);text-align:center;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.metric-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.metric-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan))}
+.metric-card .value{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;background:linear-gradient(135deg,#fff,var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.metric-card .label{color:var(--muted);font-size:13px;margin-top:4px}
+.metric-card .icon{font-size:28px;margin-bottom:8px}
+
+/* ── Chart Section ── */
+.chart-section{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:clamp(16px,3vw,24px);margin-bottom:24px}
+.chart-section h3{font-size:16px;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.chart-wrap{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:center}
+.chart-legend{flex:1;min-width:200px}
+.legend-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}
+.legend-item:last-child{border-bottom:none}
+.legend-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+.legend-name{flex:1;font-size:14px}
+.legend-count{font-weight:600;font-size:14px;color:var(--cyan)}
+.legend-pct{font-size:12px;color:var(--dim);min-width:40px;text-align:right}
+.chart-pie-wrap{width:180px;height:180px;flex-shrink:0;position:relative}
+.chart-pie-wrap canvas{width:100%!important;height:100%!important}
+.pie-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.pie-center .total{font-size:24px;font-weight:700;color:#fff}
+.pie-center .label{font-size:11px;color:var(--dim)}
+
+/* ── Subscription Card ── */
+.sub-card{background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(6,182,212,.08));border:1px solid rgba(59,130,246,.25);border-radius:var(--radius);padding:clamp(16px,3vw,24px);margin-bottom:24px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start}
+@media(max-width:640px){.sub-card{grid-template-columns:1fr}}
+.sub-card h3{font-size:16px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.link-row{display:flex;gap:8px;margin-bottom:10px;align-items:center}
+.link-row .url{flex:1;background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:12px;color:var(--cyan);word-break:break-all;font-family:'SF Mono','Fira Code',monospace;max-height:60px;overflow-y:auto}
+.copy-btn{padding:8px 14px;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff;border-radius:8px;font-size:12px;font-weight:600;white-space:nowrap;transition:opacity .2s}
+.copy-btn:hover{opacity:.85}
+.copy-btn.copied{background:var(--green)}
+.qr-wrap{display:flex;flex-direction:column;align-items:center;gap:8px}
+.qr-wrap #qrcode{background:#fff;padding:8px;border-radius:8px}
+.qr-label{font-size:12px;color:var(--muted);text-align:center}
+
+/* ── Channel Catalog ── */
+.catalog{margin-bottom:24px}
+.catalog h3{font-size:18px;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.tabs{display:flex;gap:4px;margin-bottom:16px;flex-wrap:wrap}
+.tab{padding:8px 20px;background:var(--card);border:1px solid var(--border);border-radius:8px;font-size:14px;color:var(--muted);transition:all .2s}
+.tab:hover{border-color:var(--blue);color:var(--blue)}
+.tab.active{background:linear-gradient(135deg,rgba(59,130,246,.2),rgba(6,182,212,.2));border-color:var(--blue);color:#fff}
+.tab .count{font-size:11px;margin-left:4px;opacity:.7}
+
+/* ── Search ── */
+.search-wrap{margin-bottom:16px}
+.search-input{width:100%;max-width:400px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 16px;color:var(--text);font-size:14px;transition:border-color .2s}
+.search-input:focus{border-color:var(--blue)}
+.search-input::placeholder{color:var(--dim)}
+
+/* ── Channel Grid ── */
+.channel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.channel-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:transform .2s,box-shadow .2s;cursor:pointer}
+.channel-card:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:rgba(59,130,246,.3)}
+.channel-card-header{display:flex;align-items:center;gap:12px;padding:12px}
+.channel-logo{width:44px;height:44px;border-radius:8px;object-fit:contain;background:rgba(255,255,255,.05);flex-shrink:0}
+.channel-logo-placeholder{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#fff;flex-shrink:0}
+.channel-info{flex:1;min-width:0}
+.channel-name{font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.channel-meta{display:flex;align-items:center;gap:8px;margin-top:4px;font-size:12px;color:var(--muted)}
+.channel-meta .epg{background:rgba(59,130,246,.15);color:var(--blue);padding:1px 6px;border-radius:4px;font-size:11px}
+.channel-meta .streams{color:var(--green)}
+.channel-card-body{display:none;padding:0 12px 12px}
+.channel-card.expanded .channel-card-body{display:block}
+.stream-list{max-height:200px;overflow-y:auto}
+.stream-item{display:flex;align-items:center;gap:8px;padding:6px 0;border-top:1px solid var(--border)}
+.stream-url{flex:1;font-size:11px;color:var(--dim);word-break:break-all;font-family:'SF Mono','Fira Code',monospace;max-height:36px;overflow:hidden}
+.stream-copy{padding:4px 10px;background:rgba(59,130,246,.15);color:var(--blue);border-radius:6px;font-size:11px;white-space:nowrap}
+.stream-copy:hover{background:rgba(59,130,246,.25)}
+.expand-hint{font-size:11px;color:var(--dim);text-align:center;padding:4px 0 0}
+
+/* ── Tutorial Section ── */
+.tutorial{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:clamp(16px,3vw,24px);margin-bottom:24px}
+.tutorial h3{font-size:16px;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.tutorial-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.tut-card{background:rgba(0,0,0,.2);border-radius:10px;padding:16px;border:1px solid var(--border)}
+.tut-card h4{font-size:14px;margin-bottom:8px;color:var(--cyan)}
+.tut-card p{font-size:13px;color:var(--muted);line-height:1.7}
+.tut-card .tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;margin:2px}
+.tag-rec{background:rgba(16,185,129,.15);color:var(--green)}
+.tag-epg{background:rgba(59,130,246,.15);color:var(--blue)}
+
+/* ── Footer ── */
+.footer{text-align:center;padding:32px 0;color:var(--dim);font-size:13px;border-top:1px solid var(--border);margin-top:24px}
+.footer a{color:var(--muted)}
+
+/* ── Loading / Error ── */
+.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 0;gap:16px}
+.spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.error-msg{text-align:center;padding:40px;color:var(--red);font-size:14px}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--dim)}
+
+/* ── Responsive ── */
+@media(max-width:768px){
+  .metrics{grid-template-columns:repeat(2,1fr)}
+  .chart-wrap{flex-direction:column}
+  .channel-grid{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .metrics{grid-template-columns:1fr 1fr}
+  .tab{padding:6px 12px;font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ Header ═══ -->
+<header class="header container fade-in">
+  <div class="logo">
+    <div class="logo-icon">🛸</div>
+    <h1>IPTV Engine <span class="version">v4.0</span></h1>
+  </div>
+  <p class="subtitle">极净直播源 · 双轨制流验证 · 每日自动清洗</p>
+  <div class="pipeline-badge" id="pipelineBadge">
+    <span class="dot"></span>
+    <span id="pipelineText">流水线加载中...</span>
+  </div>
+</header>
+
+<!-- ═══ Metrics ═══ -->
+<section class="container" id="metricsSection">
+  <div class="metrics" id="metricsGrid">
+    <div class="metric-card shimmer" style="height:120px"><div class="value">&nbsp;</div></div>
+    <div class="metric-card shimmer" style="height:120px"><div class="value">&nbsp;</div></div>
+    <div class="metric-card shimmer" style="height:120px"><div class="value">&nbsp;</div></div>
+    <div class="metric-card shimmer" style="height:120px"><div class="value">&nbsp;</div></div>
+  </div>
+</section>
+
+<!-- ═══ Chart ═══ -->
+<section class="container fade-in" style="animation-delay:.1s">
+  <div class="chart-section">
+    <h3>📊 分类占比</h3>
+    <div class="chart-wrap">
+      <div class="chart-pie-wrap">
+        <canvas id="pieCanvas"></canvas>
+        <div class="pie-center">
+          <div class="total" id="pieTotal">-</div>
+          <div class="label">频道总数</div>
+        </div>
+      </div>
+      <div class="chart-legend" id="chartLegend"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Subscription ═══ -->
+<section class="container fade-in" style="animation-delay:.2s">
+  <div class="sub-card">
+    <div>
+      <h3>📡 订阅入口</h3>
+      <div class="link-row">
+        <div class="url" id="cdnLink">加载中...</div>
+        <button class="copy-btn" onclick="copyLink('cdnLink',this)">📋 复制</button>
+      </div>
+      <div class="link-row">
+        <div class="url" id="rawLink">加载中...</div>
+        <button class="copy-btn" onclick="copyLink('rawLink',this)">📋 复制</button>
+      </div>
+      <p style="font-size:12px;color:var(--dim);margin-top:8px">💡 推荐使用 jsDelivr CDN 加速链接，在 TiviMate / VLC / PotPlayer 中直接粘贴订阅</p>
+    </div>
+    <div class="qr-wrap">
+      <div id="qrcode"></div>
+      <div class="qr-label">扫码订阅<br>TiviMate / 手机</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Channel Catalog ═══ -->
+<section class="container catalog fade-in" style="animation-delay:.3s">
+  <h3>📺 存活节目清单</h3>
+  <div class="tabs" id="tabs"></div>
+  <div class="search-wrap">
+    <input type="text" class="search-input" id="searchInput" placeholder="🔍 搜索频道名...">
+  </div>
+  <div class="channel-grid" id="channelGrid"></div>
+</section>
+
+<!-- ═══ Tutorial ═══ -->
+<section class="container tutorial fade-in" style="animation-delay:.4s">
+  <h3>📖 电视盒配置指南</h3>
+  <div class="tutorial-grid">
+    <div class="tut-card">
+      <h4>📱 推荐播放器</h4>
+      <p>
+        <span class="tag tag-rec">TiviMate</span> — 电视盒首选，支持M3U订阅+EPG<br>
+        <span class="tag tag-rec">VLC</span> — 跨平台，电脑/手机通用<br>
+        <span class="tag tag-rec">PotPlayer</span> — Windows 端强力播放器<br>
+        <span class="tag tag-rec">IPTV Smarters</span> — 手机端推荐
+      </p>
+    </div>
+    <div class="tut-card">
+      <h4>📋 TiviMate 订阅步骤</h4>
+      <p>
+        1. 打开 TiviMate → 设置 → 播放列表<br>
+        2. 添加播放列表 → 输入 URL<br>
+        3. 粘贴上方 jsDelivr CDN 链接<br>
+        4. 或使用手机扫描右上角二维码<br>
+        5. 等待加载完成即可观看 🎉
+      </p>
+    </div>
+    <div class="tut-card">
+      <h4>📡 EPG 电子节目单</h4>
+      <p>
+        在播放器 EPG 设置中添加以下源：<br><br>
+        <span class="tag tag-epg">EPG.PW</span> https://epg.pw/xmltv/china.xml<br><br>
+        <span class="tag tag-epg">fanmingming</span> https://raw.githubusercontent.com/fanmingming/live/main/e.xml<br><br>
+        推荐使用 fanmingming EPG，更新更及时
+      </p>
+    </div>
+    <div class="tut-card">
+      <h4>⚡ GitHub Pages 托管</h4>
+      <p>
+        1. 登录 GitHub → 进入仓库 Settings<br>
+        2. 左侧 Pages → Source 选择 <code>main</code> 分支<br>
+        3. 保存后访问 <code>https://用户名.github.io/iptv-engine</code><br>
+        4. 即可全球极速访问本 Dashboard 🌍
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Footer ═══ -->
+<footer class="footer container">
+  <p>IPTV Engine v4.0 · Powered by <a href="https://github.com/zhaoyangzhao88-max/iptv-engine" target="_blank">GitHub</a> · 数据每日自动更新</p>
+  <p style="margin-top:4px" id="footerMeta"></p>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════
+//  Configuration
+// ═══════════════════════════════════════════
+const GITHUB_USER = 'zhaoyangzhao88-max';
+const REPO = 'iptv-engine';
+const BRANCH = 'main';
+const CDN_URL = `https://cdn.jsdelivr.net/gh/${GITHUB_USER}/${REPO}@${BRANCH}/output/cleaned_iptv_list.m3u`;
+const RAW_URL = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/${BRANCH}/output/cleaned_iptv_list.m3u`;
+const JSON_URL = `https://cdn.jsdelivr.net/gh/${GITHUB_USER}/${REPO}@${BRANCH}/output/cleaned_channels.json`;
+
+const CAT_COLORS = {
+  '央视': '#3b82f6',
+  '卫视': '#06b6d4',
+  '地方台': '#10b981',
+  '其他': '#f59e0b'
+};
+const CAT_ORDER = ['央视', '卫视', '地方台', '其他'];
+
+// ═══════════════════════════════════════════
+//  State
+// ═══════════════════════════════════════════
+let allChannels = [];
+let groupedChannels = [];
+let currentTab = '央视';
+let searchQuery = '';
+
+// ═══════════════════════════════════════════
+//  Data Loading
+// ═══════════════════════════════════════════
+async function loadData() {
+  try {
+    // Try CDN first, fallback to relative path (for local file:// or GitHub Pages)
+    let data;
+    const urls = [
+      'output/cleaned_channels.json',
+      JSON_URL,
+      `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/${BRANCH}/output/cleaned_channels.json`
+    ];
+    for (const url of urls) {
+      try {
+        const resp = await fetch(url);
+        if (resp.ok) { data = await resp.json(); break; }
+      } catch(e) { continue; }
+    }
+    if (!data) throw new Error('All fetch attempts failed');
+
+    renderAll(data);
+  } catch(err) {
+    console.error('Failed to load data:', err);
+    document.getElementById('metricsGrid').innerHTML =
+      `<div class="error-msg" style="grid-column:1/-1">⚠️ 数据加载失败: ${err.message}<br><br>请确保 <code>output/cleaned_channels.json</code> 存在，或已通过 GitHub Pages 部署。<br>本地测试: <code>python -m http.server 8000</code></div>`;
+  }
+}
+
+// ═══════════════════════════════════════════
+//  Render All
+// ═══════════════════════════════════════════
+function renderAll(data) {
+  const meta = data._meta || {};
+  allChannels = data.channels || [];
+
+  // Group channels by name
+  const groupMap = {};
+  allChannels.forEach(ch => {
+    const key = ch.name;
+    if (!groupMap[key]) {
+      groupMap[key] = {
+        name: ch.name,
+        category: ch.category || '其他',
+        logo: ch.logo || '',
+        epg_id: ch.epg_id || '',
+        streams: []
+      };
+    }
+    groupMap[key].streams.push(ch.url);
+  });
+  groupedChannels = Object.values(groupMap);
+
+  // Set pipeline badge
+  document.getElementById('pipelineText').textContent =
+    meta.pipeline || 'fetch→parse→dedup→dual-track→classify';
+
+  // Render sections
+  renderMetrics(meta);
+  renderChart(meta);
+  renderSubscription();
+  renderTabs();
+  renderChannels();
+  renderFooter(meta);
+}
+
+// ═══════════════════════════════════════════
+//  Metrics
+// ═══════════════════════════════════════════
+function renderMetrics(meta) {
+  const total = meta.total_channels || groupedChannels.length;
+  const cats = meta.category_stats || {};
+  const genTime = meta.generated_at ? formatTime(meta.generated_at) : '-';
+
+  const cards = [
+    { icon: '📺', value: total, label: '存活频道' },
+    { icon: '🏷️', value: Object.keys(cats).length || 4, label: '分类数' },
+    { icon: '🔗', value: allChannels.length, label: '播放流总数' },
+    { icon: '🕐', value: genTime, label: '最近更新' }
+  ];
+
+  document.getElementById('metricsGrid').innerHTML = cards.map((c, i) =>
+    `<div class="metric-card fade-in" style="animation-delay:${i * .05}s">
+      <div class="icon">${c.icon}</div>
+      <div class="value">${c.value}</div>
+      <div class="label">${c.label}</div>
+    </div>`
+  ).join('');
+}
+
+// ═══════════════════════════════════════════
+//  Chart (Pure Canvas Pie)
+// ═══════════════════════════════════════════
+function renderChart(meta) {
+  const cats = meta.category_stats || {};
+  const total = Object.values(cats).reduce((a, b) => a + b, 0) || groupedChannels.length;
+  document.getElementById('pieTotal').textContent = total;
+
+  // Legend
+  const legendHTML = CAT_ORDER.map(cat => {
+    const count = cats[cat] || 0;
+    const pct = total > 0 ? Math.round(count / total * 100) : 0;
+    const color = CAT_COLORS[cat] || '#64748b';
+    return `<div class="legend-item">
+      <div class="legend-dot" style="background:${color}"></div>
+      <span class="legend-name">${cat}</span>
+      <span class="legend-count">${count}</span>
+      <span class="legend-pct">${pct}%</span>
+    </div>`;
+  }).join('');
+  document.getElementById('chartLegend').innerHTML = legendHTML;
+
+  // Pie chart
+  const canvas = document.getElementById('pieCanvas');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const size = 180;
+  canvas.width = size * dpr;
+  canvas.height = size * dpr;
+  ctx.scale(dpr, dpr);
+
+  const cx = size / 2, cy = size / 2, r = 70, ir = 45;
+  let angle = -Math.PI / 2;
+
+  CAT_ORDER.forEach(cat => {
+    const count = cats[cat] || 0;
+    if (count === 0) return;
+    const slice = (count / total) * Math.PI * 2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, r, angle, angle + slice);
+    ctx.closePath();
+    ctx.fillStyle = CAT_COLORS[cat] || '#64748b';
+    ctx.fill();
+    // Gap
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, angle, angle + slice);
+    ctx.closePath();
+    angle += slice;
+  });
+
+  // Inner circle (donut hole)
+  ctx.beginPath();
+  ctx.arc(cx, cy, ir, 0, Math.PI * 2);
+  ctx.fillStyle = '#1a1f2e';
+  ctx.fill();
+}
+
+// ═══════════════════════════════════════════
+//  Subscription
+// ═══════════════════════════════════════════
+function renderSubscription() {
+  document.getElementById('cdnLink').textContent = CDN_URL;
+  document.getElementById('rawLink').textContent = RAW_URL;
+
+  // QR Code
+  const qrEl = document.getElementById('qrcode');
+  qrEl.innerHTML = '';
+  new QRCode(qrEl, {
+    text: CDN_URL,
+    width: 120,
+    height: 120,
+    colorDark: '#0b0e14',
+    colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.M
+  });
+}
+
+function copyLink(elId, btn) {
+  const text = document.getElementById(elId).textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✅ 已复制';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋 复制'; btn.classList.remove('copied'); }, 2000);
+  }).catch(() => {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = '✅ 已复制';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '📋 复制'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+// ═══════════════════════════════════════════
+//  Tabs
+// ═══════════════════════════════════════════
+function renderTabs() {
+  const cats = {};
+  groupedChannels.forEach(ch => {
+    cats[ch.category = ch.category || '其他'] = (cats[ch.category] || 0) + 1;
+  });
+
+  const ordered = CAT_ORDER.filter(c => cats[c] !== undefined);
+  Object.keys(cats).forEach(c => { if (!ordered.includes(c)) ordered.push(c); });
+
+  document.getElementById('tabs').innerHTML = ordered.map(cat =>
+    `<button class="tab ${cat === currentTab ? 'active' : ''}" onclick="switchTab('${cat}')">
+      ${cat}<span class="count">${cats[cat] || 0}</span>
+    </button>`
+  ).join('');
+}
+
+function switchTab(cat) {
+  currentTab = cat;
+  searchQuery = '';
+  document.getElementById('searchInput').value = '';
+  renderTabs();
+  renderChannels();
+}
+
+// ═══════════════════════════════════════════
+//  Channel Grid
+// ═══════════════════════════════════════════
+function renderChannels() {
+  let filtered = groupedChannels.filter(ch => ch.category === currentTab);
+  if (searchQuery) {
+    const q = searchQuery.toLowerCase();
+    filtered = filtered.filter(ch =>
+      ch.name.toLowerCase().includes(q) ||
+      (ch.epg_id && ch.epg_id.toLowerCase().includes(q))
+    );
+  }
+
+  if (!filtered.length) {
+    document.getElementById('channelGrid').innerHTML =
+      `<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--dim)">未找到匹配频道</div>`;
+    return;
+  }
+
+  document.getElementById('channelGrid').innerHTML = filtered.map((ch, i) => {
+    const initial = ch.name.charAt(0);
+    const logoHTML = ch.logo
+      ? `<img class="channel-logo" src="${escHtml(ch.logo)}" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="channel-logo-placeholder" style="display:none">${initial}</div>`
+      : `<div class="channel-logo-placeholder">${initial}</div>`;
+
+    const epgHTML = ch.epg_id
+      ? `<span class="epg">${escHtml(ch.epg_id)}</span>` : '';
+
+    const streamList = ch.streams.map(url =>
+      `<div class="stream-item">
+        <span class="stream-url">${escHtml(url)}</span>
+        <button class="stream-copy" onclick="event.stopPropagation();copyStream(this,'${escAttr(url)}')">复制</button>
+      </div>`
+    ).join('');
+
+    return `<div class="channel-card fade-in" style="animation-delay:${Math.min(i * .02, .5)}s" onclick="toggleCard(this)">
+      <div class="channel-card-header">
+        ${logoHTML}
+        <div class="channel-info">
+          <div class="channel-name">${escHtml(ch.name)}</div>
+          <div class="channel-meta">
+            ${epgHTML}
+            <span class="streams">${ch.streams.length} 条线路</span>
+          </div>
+        </div>
+      </div>
+      <div class="channel-card-body">
+        <div class="stream-list">${streamList}</div>
+        <div class="expand-hint">点击收起 ▲</div>
+      </div>
+      <div class="expand-hint" style="padding:0 12px 8px">点击展开线路 ▼</div>
+    </div>`;
+  }).join('');
+}
+
+function toggleCard(el) {
+  el.classList.toggle('expanded');
+}
+
+function copyStream(btn, url) {
+  navigator.clipboard.writeText(url).then(() => {
+    btn.textContent = '✅';
+    setTimeout(() => { btn.textContent = '复制'; }, 1500);
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = url;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = '✅';
+    setTimeout(() => { btn.textContent = '复制'; }, 1500);
+  });
+}
+
+// ═══════════════════════════════════════════
+//  Search
+// ═══════════════════════════════════════════
+document.getElementById('searchInput').addEventListener('input', function() {
+  searchQuery = this.value.trim();
+  renderChannels();
+});
+
+// ═══════════════════════════════════════════
+//  Footer
+// ═══════════════════════════════════════════
+function renderFooter(meta) {
+  const gen = meta.generated_at ? formatTime(meta.generated_at) : '-';
+  document.getElementById('footerMeta').textContent =
+    `Generator: ${meta.generator || 'IPTV Washer'} · 上次清洗: ${gen}`;
+}
+
+// ═══════════════════════════════════════════
+//  Utilities
+// ═══════════════════════════════════════════
+function escHtml(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+function escAttr(s) {
+  return s.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+}
+function formatTime(iso) {
+  try {
+    const d = new Date(iso);
+    const now = new Date();
+    const diff = now - d;
+    if (diff < 0) return iso;
+    const mins = Math.floor(diff / 60000);
+    if (mins < 1) return '刚刚';
+    if (mins < 60) return `${mins}分钟前`;
+    const hrs = Math.floor(mins / 60);
+    if (hrs < 24) return `${hrs}小时前`;
+    const days = Math.floor(hrs / 24);
+    if (days < 30) return `${days}天前`;
+    return d.toLocaleDateString('zh-CN');
+  } catch(e) { return iso; }
+}
+
+// ═══════════════════════════════════════════
+//  Boot
+// ═══════════════════════════════════════════
+loadData();
+</script>
+</body>
+</html>

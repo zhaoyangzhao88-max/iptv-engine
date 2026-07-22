@@ -45,6 +45,11 @@ MAX_TS_BYTES = 10240    # TS 切片验证读取量
 
 BATCH_SIZE = 100        # 分批处理大小
 
+# ── 指数退避重试配置 ──────────────────────────
+RETRY_MAX_ATTEMPTS = 3          # 最大尝试次数（首次 + 最多2次重试）
+RETRY_BACKOFF_DELAYS = [1.5, 3.0]  # 第1次失败后等1.5s，第2次失败后等3s
+RETRY_CONNECT_TIMEOUT = aiohttp.ClientTimeout(total=3)  # 单次连接+读取超时3秒
+
 # ── 双轨验证常量 ────────────────────────────────
 FLV_MAGIC = b'FLV'           # FLV 文件头魔数 (0x46 0x4C 0x56)
 TS_SYNC_BYTE = 0x47          # MPEG-TS 同步字节
@@ -211,36 +216,106 @@ async def fetch_and_parse_sources() -> list[dict]:
 
 # ── Stage 2: 三级验证引擎 ────────────────────────
 
+def _is_retryable(exc: Exception) -> bool:
+    """判断异常是否属于网络瞬时抖动，值得重试。
+
+    可重试：TimeoutError、ClientConnectorError（DNS/连接拒绝）、
+            ServerDisconnectedError、ClientPayloadError、OSError。
+    不可重试：SSLError、CertificateError（证书问题不会因重试消失）、
+            NonHttpUrlClientError（URL 格式错误）。
+    """
+    # SSL 证书错误 → 不可重试
+    if isinstance(exc, (aiohttp.ClientConnectorSSLError,
+                        aiohttp.ClientConnectorCertificateError)):
+        return False
+    # URL 格式错误 → 不可重试
+    if isinstance(exc, aiohttp.NonHttpUrlClientError):
+        return False
+    # 超时 → 可重试
+    if isinstance(exc, asyncio.TimeoutError):
+        return True
+    # 连接级错误（DNS 失败、连接拒绝等）→ 可重试
+    if isinstance(exc, aiohttp.ClientConnectorError):
+        return True
+    # 服务器断开连接 → 可重试
+    if isinstance(exc, aiohttp.ServerDisconnectedError):
+        return True
+    # 其他 aiohttp 客户端错误（如 ClientPayloadError）→ 可重试
+    if isinstance(exc, aiohttp.ClientError):
+        return True
+    # 系统级 OSError → 可重试
+    if isinstance(exc, OSError):
+        return True
+    return False
+
+
 async def validate_basic(session: aiohttp.ClientSession, sem: asyncio.Semaphore,
                           channel: dict) -> dict | None:
     """
-    第一层 + 第二层验证：
+    第一层 + 第二层验证（含指数退避重试）：
     1. HEAD 请求（200/405/403 通过，其余判死）
     2. GET 前 1024 字节 → 检查 #EXTM3U
+    网络瞬时抖动（TimeoutError/ClientConnectorError/OSError）触发退避重试。
     """
     url = channel["url"]
+    ch_name = channel.get("name", "")[:20]
     async with sem:
-        # Step 1: HEAD
-        try:
-            async with session.head(url, timeout=HEAD_TIMEOUT, headers=HEADERS,
-                                    allow_redirects=True, max_redirects=5) as resp:
-                if resp.status not in (200, 405, 403):
-                    return None
-        except Exception:
-            return None
+        # ── Step 1: HEAD（含退避重试）──
+        head_ok = False
+        last_exc = None
+        for attempt in range(RETRY_MAX_ATTEMPTS):
+            try:
+                async with session.head(url, timeout=RETRY_CONNECT_TIMEOUT, headers=HEADERS,
+                                        allow_redirects=True, max_redirects=5) as resp:
+                    if resp.status not in (200, 405, 403):
+                        return None  # 明确拒绝，不重试
+                    head_ok = True
+                    break  # HEAD 通过，进入 Step 2
+            except Exception as exc:
+                last_exc = exc
+                if not _is_retryable(exc):
+                    return None  # 不可重试异常，直接判死
+                if attempt < RETRY_MAX_ATTEMPTS - 1:
+                    delay = RETRY_BACKOFF_DELAYS[attempt]
+                    print(f"  [重试 {attempt + 1}/{RETRY_MAX_ATTEMPTS}] {ch_name} HEAD → "
+                          f"{type(exc).__name__}, {delay}s后重试")
+                    await asyncio.sleep(delay)
+        if not head_ok:
+            return None  # 重试耗尽
 
-        # Step 2: GET first 1024 bytes → #EXTM3U
-        try:
-            async with session.get(url, timeout=GET_TIMEOUT, headers=HEADERS,
-                                   allow_redirects=True, max_redirects=5) as resp:
-                if 200 <= resp.status < 300:
-                    chunk = await resp.content.read(MAX_M3U_BYTES)
-                    text = chunk.decode("utf-8", errors="ignore")
-                    if "#EXTM3U" in text:
-                        return channel
-        except Exception:
-            pass
-    return None
+        # ── Step 2: GET first 1024 bytes → #EXTM3U（含退避重试）──
+        for attempt in range(RETRY_MAX_ATTEMPTS):
+            try:
+                async with session.get(url, timeout=RETRY_CONNECT_TIMEOUT, headers=HEADERS,
+                                       allow_redirects=True, max_redirects=5) as resp:
+                    if resp.status in (404, 401, 403):
+                        return None  # 明确拒绝，不重试
+                    if 200 <= resp.status < 300:
+                        chunk = await resp.content.read(MAX_M3U_BYTES)
+                        text = chunk.decode("utf-8", errors="ignore")
+                        if "#EXTM3U" in text:
+                            if attempt > 0:
+                                print(f"  [获救 ✓] {ch_name} → 第{attempt + 1}次重试成功")
+                            return channel
+                        return None  # 无 #EXTM3U，判死
+                    # 其他状态码，宽容处理
+                    if attempt > 0:
+                        print(f"  [获救 ✓] {ch_name} → 第{attempt + 1}次重试成功")
+                    return channel
+            except Exception as exc:
+                if not _is_retryable(exc):
+                    pass  # 不可重试异常，宽容放行
+                    break
+                if attempt < RETRY_MAX_ATTEMPTS - 1:
+                    delay = RETRY_BACKOFF_DELAYS[attempt]
+                    print(f"  [重试 {attempt + 1}/{RETRY_MAX_ATTEMPTS}] {ch_name} GET → "
+                          f"{type(exc).__name__}, {delay}s后重试")
+                    await asyncio.sleep(delay)
+                else:
+                    # 重试耗尽，宽容放行
+                    break
+        # 宽容放行（原逻辑保持）
+        return channel
 
 
 async def _get_first_segment(session: aiohttp.ClientSession, url: str,
@@ -274,54 +349,75 @@ async def _validate_continuous_stream(
         session: aiohttp.ClientSession, sem: asyncio.Semaphore,
         channel: dict) -> dict | None:
     """
-    轨道 2：连续/直达流验证
+    轨道 2：连续/直达流验证（含指数退避重试）
     直接对主 URL 发起 GET，读取前 10KB，通过头部特征识别流类型：
     - FLV: 前 3 字节 == b'FLV'
     - TS:  第 1 字节 == 0x47（MPEG-TS 同步字）
     - M3U8: 包含 b'#EXTM3U'（伪装成 m3u8 的直达流）
+    网络瞬时抖动触发退避重试，403/401 直接判死。
     """
     url = channel["url"]
+    ch_name = channel.get("name", "")[:20]
     async with sem:
-        try:
-            timeout = aiohttp.ClientTimeout(total=4)
-            async with session.get(url, timeout=timeout, headers=HEADERS,
-                                   allow_redirects=True, max_redirects=5) as resp:
-                if 200 <= resp.status < 300:
-                    chunk = await resp.content.read(MAX_TS_BYTES)
-                    if len(chunk) < 100:
-                        return None  # 数据过少，判死
+        for attempt in range(RETRY_MAX_ATTEMPTS):
+            try:
+                async with session.get(url, timeout=RETRY_CONNECT_TIMEOUT, headers=HEADERS,
+                                       allow_redirects=True, max_redirects=5) as resp:
+                    if resp.status in (403, 401, 404):
+                        return None  # 明确拒绝，不重试
+                    if 200 <= resp.status < 300:
+                        chunk = await resp.content.read(MAX_TS_BYTES)
+                        if len(chunk) < 100:
+                            return None  # 数据过少，判死
 
-                    # 特征匹配
-                    if chunk[:3] == FLV_MAGIC:
-                        return channel  # FLV 连续流 ✓
-                    if chunk[0] == TS_SYNC_BYTE:
-                        return channel  # TS 连续流 ✓
-                    if M3U8_MAGIC in chunk[:512]:
-                        return channel  # M3U8/HLS 直达流 ✓
+                        # 特征匹配
+                        if chunk[:3] == FLV_MAGIC:
+                            if attempt > 0:
+                                print(f"  [获救 ✓] {ch_name} → 第{attempt + 1}次重试成功(FLV)")
+                            return channel  # FLV 连续流 ✓
+                        if chunk[0] == TS_SYNC_BYTE:
+                            if attempt > 0:
+                                print(f"  [获救 ✓] {ch_name} → 第{attempt + 1}次重试成功(TS)")
+                            return channel  # TS 连续流 ✓
+                        if M3U8_MAGIC in chunk[:512]:
+                            if attempt > 0:
+                                print(f"  [获救 ✓] {ch_name} → 第{attempt + 1}次重试成功(M3U8)")
+                            return channel  # M3U8/HLS 直达流 ✓
 
-                    # 未知格式，宽容放行
+                        # 未知格式，宽容放行
+                        if attempt > 0:
+                            print(f"  [获救 ✓] {ch_name} → 第{attempt + 1}次重试成功(未知格式)")
+                        return channel
+                    # 其他状态码，宽容放行
+                    if attempt > 0:
+                        print(f"  [获救 ✓] {ch_name} → 第{attempt + 1}次重试成功(状态{resp.status})")
                     return channel
-                elif resp.status in (403, 401):
-                    return None
+            except Exception as exc:
+                if not _is_retryable(exc):
+                    # 不可重试异常，宽容放行（原逻辑）
+                    return channel
+                if attempt < RETRY_MAX_ATTEMPTS - 1:
+                    delay = RETRY_BACKOFF_DELAYS[attempt]
+                    print(f"  [重试 {attempt + 1}/{RETRY_MAX_ATTEMPTS}] {ch_name} 连续流 → "
+                          f"{type(exc).__name__}, {delay}s后重试")
+                    await asyncio.sleep(delay)
                 else:
+                    # 重试耗尽，宽容放行
                     return channel
-        except asyncio.TimeoutError:
-            return None
-        except Exception:
-            return channel
     return None
 
 
 async def validate_deep(session: aiohttp.ClientSession, sem: asyncio.Semaphore,
                          channel: dict) -> dict | None:
     """
-    第三层深度验证 — 双轨制流验证器
+    第三层深度验证 — 双轨制流验证器（含指数退避重试）
     轨道 1: 标准 HLS/M3U8 → 解析子切片 → 下载首个 .ts 切片 10KB
     轨道 2: 连续流（FLV/TS/直达）→ 直接 GET 主 URL → 读取 10KB → 特征匹配
-    超时/403 判死，其他异常宽容放行（不误杀）
+    网络瞬时抖动触发退避重试，403/401/404 直接判死，其他异常宽容放行（不误杀）
     """
     url = channel["url"]
     url_lower = url.lower()
+    ch_name = channel.get("name", "")[:20]
 
     # ── 快速判断：URL 后缀直接暴露流类型 ──
     is_direct_stream = (
@@ -330,30 +426,72 @@ async def validate_deep(session: aiohttp.ClientSession, sem: asyncio.Semaphore,
     )
 
     if is_direct_stream:
-        # URL 明显是连续流，直接进入轨道 2
+        # URL 明显是连续流，直接进入轨道 2（内部已含重试）
         return await _validate_continuous_stream(session, sem, channel)
 
-    async with sem:
-        # ── 尝试轨道 1：标准 M3U8 分片验证 ──
-        seg_url = await _get_first_segment(session, url)
-        if seg_url is not None:
+    # ── 对整体验证流程施加退避重试（轨道1 → 降级轨道2）──
+    for attempt in range(RETRY_MAX_ATTEMPTS):
+        rescued = False
+        async with sem:
+            # ── 尝试轨道 1：标准 M3U8 分片验证 ──
             try:
-                async with session.get(seg_url, timeout=TS_SLICE_TIMEOUT,
-                                       headers=HEADERS) as resp:
-                    if resp.status == 200:
-                        await resp.content.read(MAX_TS_BYTES)
-                        return channel
-                    elif resp.status in (403, 401):
-                        return None
-                    else:
-                        return channel
-            except asyncio.TimeoutError:
-                return None
-            except Exception:
-                return channel
+                seg_url = await _get_first_segment(session, url)
+                if seg_url is not None:
+                    try:
+                        async with session.get(seg_url, timeout=RETRY_CONNECT_TIMEOUT,
+                                               headers=HEADERS) as resp:
+                            if resp.status == 200:
+                                await resp.content.read(MAX_TS_BYTES)
+                                if attempt > 0:
+                                    print(f"  [获救 ✓] {ch_name} → 第{attempt + 1}次重试成功(HLS切片)")
+                                return channel
+                            elif resp.status in (403, 401, 404):
+                                return None  # 明确拒绝
+                            else:
+                                if attempt > 0:
+                                    print(f"  [获救 ✓] {ch_name} → 第{attempt + 1}次重试成功(HLS状态{resp.status})")
+                                return channel
+                    except Exception as exc:
+                        if not _is_retryable(exc):
+                            # 不可重试异常，宽容放行
+                            return channel
+                        # 可重试异常，记录后走退避
+                        rescued = True
+                        if attempt < RETRY_MAX_ATTEMPTS - 1:
+                            delay = RETRY_BACKOFF_DELAYS[attempt]
+                            print(f"  [重试 {attempt + 1}/{RETRY_MAX_ATTEMPTS}] {ch_name} HLS切片 → "
+                                  f"{type(exc).__name__}, {delay}s后重试")
+                        # 降级到轨道 2
+                else:
+                    # 无子切片，降级轨道 2
+                    pass
 
-        # ── 轨道 1 失败（无子切片）→ 降级到轨道 2：连续流验证 ──
-        return await _validate_continuous_stream(session, sem, channel)
+            except Exception as exc:
+                # _get_first_segment 本身失败
+                if not _is_retryable(exc):
+                    pass  # 不可重试，降级轨道 2
+                else:
+                    rescued = True
+                    if attempt < RETRY_MAX_ATTEMPTS - 1:
+                        delay = RETRY_BACKOFF_DELAYS[attempt]
+                        print(f"  [重试 {attempt + 1}/{RETRY_MAX_ATTEMPTS}] {ch_name} M3U8解析 → "
+                              f"{type(exc).__name__}, {delay}s后重试")
+
+            # ── 轨道 1 失败（无子切片/切片下载失败）→ 降级到轨道 2：连续流验证 ──
+            # _validate_continuous_stream 内部已有重试，此处直接调用
+            result = await _validate_continuous_stream(session, sem, channel)
+            if result is not None:
+                if attempt > 0 and not rescued:
+                    print(f"  [获救 ✓] {ch_name} → 第{attempt + 1}次重试成功(降级连续流)")
+                return result
+            # 轨道 2 也返回 None（明确拒绝），不重试
+            return None
+
+        # 可重试且还有剩余次数 → 执行退避 sleep（在 sem 外释放并发槽）
+        if rescued and attempt < RETRY_MAX_ATTEMPTS - 1:
+            await asyncio.sleep(RETRY_BACKOFF_DELAYS[attempt])
+
+    return None
 
 
 async def run_validation(channels: list[dict]) -> list[dict]:
